@@ -7,7 +7,7 @@ public class Course extends CourseCategory {
 	private int courseDuration;
 	private String prerequisiteCourse;
 
-	public Course(int courseCode, String courseTitle, String courseCategory, String courseDescription,
+	public Course (int courseCode, String courseTitle, String courseCategory, String courseDescription,
 			int courseDuration, String prerequisiteCourse) {
 		this.courseCode = courseCode;
 		this.courseTitle = courseTitle;
@@ -15,6 +15,10 @@ public class Course extends CourseCategory {
 		this.courseDescription = courseDescription;
 		this.courseDuration = courseDuration;
 		this.prerequisiteCourse = prerequisiteCourse;
+	}
+	
+	public Course (int courseCode) {
+		this.courseCode = courseCode;
 	}
 
 	public int getCourseCode() {
