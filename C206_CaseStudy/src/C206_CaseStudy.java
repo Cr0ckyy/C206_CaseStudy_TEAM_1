@@ -58,6 +58,21 @@ public class C206_CaseStudy {
         }
     }
 	
+ // LI SHUFANG
+    public static void addCategory() {
+      var name = Helper.readString("Enter Course Category Name: ");
+      var description = Helper.readString("Enter Course Category Description: ");
+      for (var i : categoryList) {
+        if (i.getCategoryName() != name) {
+          categoryList.add(new CourseCategory(name, description));
+          System.out.println("The Course Category has been added");
+        } else {
+          System.out.println("The Category Name have been repeated, please enter again!");
+          addCategory();
+        }
+      }
+    }
+    
 	// LI SHUFANG
 	public static void viewCategory() {
 		var output = "";
@@ -125,36 +140,36 @@ public class C206_CaseStudy {
 		System.out.println("Course has been removed");
 	}
 	
-	//Qi Kai
+	// Qi Kai
 	public static void registerCS() {
-		int regiID = Helper.readInt("Enter your Course Schedule ID > ");
+		int courseCode = Helper.readInt("Enter Course code: ");
+		int courseScheduleID = Helper.readInt("Enter course Schedule ID: ");
+		int regiID = regiList.size() + 1;
+		String email = Helper.readString("Enter Email: ");
+		String regiStart = Helper.readString("Enter current Date")
+	}
+
+	public static void viewRegister() {
+		String output = "";
+		output += String.format("%-20s %-20s %-20s %-50s %-20s", "Registration ID", "Course Schedule ID",
+				"Member Email", "Status", "Registration Date & time");
+		for (Register i : regiList) {
+			output += String.format("%-20d %-20d %-20s %-50s %-20s", i.getRegiID(), i.getCSid(), i.getMemEmail(),
+					i.getStatus(), i.getRegiStart());
+		}
+		System.out.println(output);
+
+	}
+
+	public static void deleRegi() {
+		int deleRegi = Helper.readInt("Enter your registration ID: ");
 		for (int i = 0; i < regiList.size(); i++) {
-			if (regiID == regiList.get(i).getCSid()) {
-				Random rand = new Random();
-				int rand_1 = rand.nextInt(200);
-				System.out.println("Your registration ID is > " + regiList.get(i) + 1 + rand_1);
-				String memEmail = Helper.readString("Enter your email > ");
-				while (!memEmail.contains("@")) {
-					System.out.println("Invalid format!");
-				}
+			if (regiList.get(i).getRegiID() == deleRegi) {
+				regiList.remove(i);
+				System.out.println("Registration has been deleted");
 			}
 
 		}
-
-	}
-
-	{
-		System.out.println("Please enter the correct regitration ID!");
-	}
-
-	//Qi Kai
-	public static void viewRegister() {
-
-	}
-
-	//Qi Kai
-	public static void deleRegi() {
-
 	}
 
 }
