@@ -1,7 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class C206_CaseStudy {
 	
@@ -257,42 +256,57 @@ public class C206_CaseStudy {
 		System.out.println("Course Schedule has been deleted.");
 	}
 	
-	// Qi Kai
-	public static void registerCS() {
-		int courseCode = Helper.readInt("Enter Course code: ");
-		int CSid = Helper.readInt("Enter course Schedule ID: ");
-		int regiID = regiList.size() + 1;
-		String memEmail = Helper.readString("Enter Email: ");
-		boolean status = false;
-		LocalDateTime regiDate = LocalDateTime.now();
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-		String formattedDate = regiDate.format(format);
-		regiList.add(new Register(courseCode, CSid, regiID, memEmail, status, formattedDate));
+	  // Qi Kai
+	  public static void registerCS() {
+	    int courseCode = Helper.readInt("Enter Course code: ");
+	    int CSid = Helper.readInt("Enter course Schedule ID: ");
+	    int regiID = regiList.size() + 1;
+	    String memEmail = Helper.readString("Enter Email: ");
+	    boolean status = false;
+	    LocalDateTime regiDate = LocalDateTime.now();
+	    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+	    String formattedDate = regiDate.format(format);
+
+	    Register register = new Register(courseCode, CSid, regiID, memEmail, status, formattedDate);
+
+	  }
+	  
+	  public static void doRegisterCS(ArrayList<Register> regiList, Register register) {
+		  
+		    System.out.println("A confirmation E-mail has been sent to your" + register.getMemEmail() + " mailbox");
+	  }
+
+	  // Qi kai
+	  public static String viewRegister(ArrayList<Register> regiList) {
+
+	    String output = String.format("%-20s %-20s %-20s %-20s %-20s\n", "Registration ID", "Course Schedule ID",
+	        "Member Email", "Status", "Registration Date & time");
+	    output += retrieveRegiList(regiList);
+	    return output;
+	  }
+
+	  // Qikai
+	  public static String retrieveRegiList(ArrayList<Register> regiList) {
+
+	    String output = "";
+	    for (int i = 0; i < regiList.size(); i++) {
+	      output += String.format("%-20s %-20s %-20s %-20s %-20s\n", regiList.get(i).getRegiID(),
+	          regiList.get(i).getCSid(), regiList.get(i).getMemEmail(), regiList.get(i).getStatus(),
+	          regiList.get(i).getRegiDate());
+	    }
+	    return output;
+	  }
+
+	  // Qi kai
+	  public static void deleRegi() {
+	    int deleRegi = Helper.readInt("Enter your registration ID: ");
+	    for (int i = 0; i < regiList.size(); i++) {
+	      if (regiList.get(i).getRegiID() == deleRegi) {
+	        regiList.remove(i);
+	        System.out.println("Registration has been deleted");
+	      }
+
+	    }
+	  }
+
 	}
-
-	//Qi Kai
-	public static void viewRegister() {
-		String output = "";
-		output += String.format("%-20s %-20s %-20s %-50s %-20s", "Registration ID", "Course Schedule ID",
-				"Member Email", "Status", "Registration Date & time");
-		for (Register i : regiList) {
-			output += String.format("%-20d %-20d %-20s %-50s %-20s", i.getRegiID(), i.getCSid(), i.getMemEmail(),
-					i.getStatus(), i.getRegiDate());
-		}
-		System.out.println(output);
-
-	}
-
-	//Qi Kai
-	public static void deleRegi() {
-		int deleRegi = Helper.readInt("Enter your registration ID: ");
-		for (int i = 0; i < regiList.size(); i++) {
-			if (regiList.get(i).getRegiID() == deleRegi) {
-				regiList.remove(i);
-				System.out.println("Registration has been deleted");
-			}
-
-		}
-	}
-
-}
