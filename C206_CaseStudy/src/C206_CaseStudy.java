@@ -183,11 +183,11 @@ public class C206_CaseStudy {
 		if(scheduleList.size()==0) {
 			output += "There are no schedules to display";
 		}else {
-			output += String.format("%-10s %-10s %-15s %-20s %-20s %-15s %-10s", "Schedule ID",
+			output += String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s", "Schedule ID",
 					"Start Date", "Start Time", "End Date", "End Time", "Price", "Location");
 			
 			for(CourseSchedule i : scheduleList) {
-				output += String.format("%-10d %-10s %-15s %-20s %-20s %-15d %-10s", i.getCSid(), i.getStartDate(),
+				output += String.format("\n%5d %18s %11s %12s %8s %7.2f %14s", i.getCSid(), i.getStartDate(),
 						i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());
 			}
 		}
