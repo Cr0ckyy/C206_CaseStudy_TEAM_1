@@ -17,6 +17,10 @@ public class Member {
 		this.countryOfresidence = countryOfresidence;
 		this.password = password;
 	}
+	
+	public Member (String email) {
+		this.email = email;
+	}
 
 	public String getName() {
 		return name;
