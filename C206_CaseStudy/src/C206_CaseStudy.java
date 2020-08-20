@@ -51,7 +51,7 @@ public class C206_CaseStudy {
     }
 	
 	public static void addCourse() {
-		int id = Helper.readInt("Enter Course ID: ");
+		int id = courseList.size() + 1;
 		String title = Helper.readString("Enter Course Name: ");
 		String category = Helper.readString("Enter Course Category: ");
 		String description = Helper.readString("Enter Course Description (less than 50 characters): ");
