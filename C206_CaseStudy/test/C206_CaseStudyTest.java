@@ -45,6 +45,16 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that course list size is 2", 2, courseList.size());
 	}
 
+	public void viewCourseTest() {
+		assertNotNull("Test if there is a valid Course arraylist to add to", courseList);
+		
+		String output = C206_CaseStudy.viewCourse();
+		String testOutput = "";
+		assertEquals("Check that ViewCourse function works", testOutput, output);
+		
+		C206_CaseStudy.addCourse();
+	}
+	
 	@After
 	public void tearDown() throws Exception {
 		
