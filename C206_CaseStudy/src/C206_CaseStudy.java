@@ -6,12 +6,18 @@ public class C206_CaseStudy {
 
 	public static void main(String[] args) {
 		
-		
-		
 	}
 	
 	public static void addCourse() {
+		int id = Helper.readInt("Enter Course ID: ");
+		String title = Helper.readString("Enter Course Name: ");
+		String category = Helper.readString("Enter Course Category: ");
+		String description = Helper.readString("Enter Course Description (less than 50 characters): ");
+		int duration = Helper.readInt("Enter Course Duration(Days): ");
+		String prerequisite = Helper.readString("Enter Course Condition: ");
 		
+		courseList.add(new Course(id, title, category, description, duration, prerequisite));
+		System.out.println("Course has been added");
 	}
 
 	public static void viewCourse() {
@@ -23,5 +29,15 @@ public class C206_CaseStudy {
 					i.getCourseCode(), i.getCourseTitle()/*, i.getCourseCategory()*/, i.getCourseDescription(), i.getCourseDuration(), i.getPrerequisiteCourse());
 		}
 		System.out.println(output);
+	}
+	
+	public static void deleteCourse() {
+		int id = Helper.readInt("Enter Course ID: ");
+		for (int i = 0; i < courseList.size(); i++) {
+			if (courseList.get(i).getCourseCode() == id) {
+				courseList.remove(i);
+			}
+		}
+		System.out.println("Course has been removed");
 	}
 }

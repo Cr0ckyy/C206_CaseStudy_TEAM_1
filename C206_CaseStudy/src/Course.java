@@ -8,7 +8,7 @@ public class Course extends CourseCategory {
 	private String prerequisiteCourse;
 
 	public Course(int courseCode, String courseTitle, String courseCategory, String courseDescription,
-			int courseDuration, String orerequisiteCourse) {
+			int courseDuration, String prerequisiteCourse) {
 		this.courseCode = courseCode;
 		this.courseTitle = courseTitle;
 //		super(courseCategory);
