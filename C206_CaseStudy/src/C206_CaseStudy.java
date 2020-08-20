@@ -22,11 +22,9 @@ public class C206_CaseStudy {
 	}
 
 	// Hui Wen
-	public static String retreiveAllMember(ArrayList<Member> memberList) {// HUIWEN
+	public static String retreiveAllMember(ArrayList<Member> memberList) {
 		String output = "";
-
 		for (Member i : memberList) {
-
 			output += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", i.getName(), i.getGender(), i.getMobile(),
 					i.getEmail(), i.getDateOfbirth(), i.getCountryOfresidence());
 		}
@@ -34,7 +32,8 @@ public class C206_CaseStudy {
 
 	}
 
-	public static void viewAllMember(ArrayList<Member> memberList) {// HUIWEN
+	// Hui Wen
+	public static void viewAllMember(ArrayList<Member> memberList) {
 		C206_CaseStudy.setHeader("MEMBER LIST");
 		String output = String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile", "Email",
 				"DOB", "Country of Residennce");
@@ -42,7 +41,8 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static void inputMember() {// HUIWEN
+	// Hui Wen
+	public static void inputMember() {
 		String name = Helper.readString("Ënter name> ");
 		String gender = Helper.readString("Enter gender> ");
 		int moblie = Helper.readInt("Enter mobile> ");
@@ -53,17 +53,14 @@ public class C206_CaseStudy {
 
 		Member mb = new Member(name, gender, moblie, email, dob, cor, password);
 		addMember(memberList, mb);
-
 	}
 
-	public static void addMember(ArrayList<Member> memberList, Member mb) {// HUIWEN
+	// Hui Wen
+	public static void addMember(ArrayList<Member> memberList, Member mb) {
 		boolean isAdded = true;
-
 		for (int i = 0; i < memberList.size(); i++) {
-			if (memberList.get(i).getEmail() == mb.getEmail()) {
-
+			if (memberList.get(i).getEmail() == mb.getEmail())
 				isAdded = false;
-			}
 		}
 		if (isAdded == false) {
 			System.out.println("Email must be unique");
@@ -73,7 +70,8 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static boolean dodeleteMember(ArrayList<Member> memberList, String email) {// HUIWEN
+	// Hui Wen
+	public static boolean dodeleteMember(ArrayList<Member> memberList, String email) {
 
 		boolean isDeleted = false;
 
@@ -87,7 +85,8 @@ public class C206_CaseStudy {
 		return isDeleted;
 	}
 
-	public static void deletetMember(ArrayList<Member> memberList) {// HUIWEN
+	// Hui Wen
+	public static void deletetMember(ArrayList<Member> memberList) {
 
 		C206_CaseStudy.viewAllMember(memberList);
 		String email = Helper.readString("Enter the Member's email to delete> ");
@@ -100,45 +99,46 @@ public class C206_CaseStudy {
 		}
 
 	}
-	
- // LI SHUFANG
-    public static void addCategory() {
-      var name = Helper.readString("Enter Course Category Name: ");
-      var description = Helper.readString("Enter Course Category Description: ");
-      for (var i : categoryList) {
-        if (i.getCategoryName() != name) {
-          categoryList.add(new CourseCategory(name, description));
-          System.out.println("The Course Category has been added");
-        } else {
-          System.out.println("The Category Name have been repeated, please enter again!");
-          addCategory();
-        }
-      }
-    }
-    
-	// LI SHUFANG
-	public static void viewCategory() {
-		var output = "";
-		output += String.format("%-10s %-15s", "Category name", "Category description");
-		for (var i : categoryList) {
-			output += String.format("%-10d %-15s", i.getCategoryName(), i.getCategoryDescription());
-		}
-		System.out.println(output);
-	}
 
 	// LI SHUFANG
-	@SuppressWarnings("unlikely-arg-type")
-	public static void deleteCategory() {
-		var cc = Helper.readString("Enter the Course Category to delete> ");
-		for (var i : categoryList) {
-			if (i.getCategoryName().equalsIgnoreCase(cc)) {
-				courseList.remove(cc);
-			}
+	  public static void addCourseCategory(ArrayList<CourseCategory> categoryList) {
+	    System.out.println("-----------ADD COURSE CATEGORY-----------------");
+	    var courseCategoryName = Helper.readString("Enter Course Category: ");
+	    var courseCategoryDescription = Helper.readString("Enter Course Category Description: ");
+	    var newCC = new CourseCategory(courseCategoryName, courseCategoryDescription);
+	    categoryList.add(newCC);
+	  }
 
-		}
-	}
-    
-	//Ju Long
+	  // LI SHUFANG
+	  public static void deleteCourseCategory(ArrayList<CourseCategory> categoryList) {
+	    System.out.println("-----------DELETE COURSE CATEGORY-----------------");
+	    var searchCategory = Helper.readString("Enter the name of the category you want to delete: ");
+	    for (int i = 0; i < categoryList.size(); i++) {
+	      if (categoryList.get(i).getCategoryName().equalsIgnoreCase(searchCategory)) {
+	        var deletion = Helper.readString("Are you sure that you want to delete this category? (Y/N) > ");
+	        if (deletion.equalsIgnoreCase("Y")) {
+	          categoryList.remove(i);
+	        } else {
+	          System.out.println("Error in category deletion.");
+	        }
+	        return;
+	      }
+	    }
+	    System.out.println("Categories not found.");
+
+	  }
+
+	  // LI SHUFANG
+	  public static void viewCourseCategory(ArrayList<CourseCategory> categoryList) {
+	    System.out.println("-----------VIEW COURSE CATEGORY-----------------");
+	    System.out.println(String.format("%-20s, %-30s", "COURSE CATEGORY", "DESCRIPTION"));
+	    for (var i : categoryList) {
+	      System.out.println(String.format("%-20s, %-30s", i.getCategoryName(),
+	          i.getCategoryDescription()));
+	    }
+	  }
+
+	// Ju Long
 	public static void addCourse() {
 		int id = courseList.size() + 1;
 		String title = Helper.readString("Enter Course Name: ");
@@ -146,19 +146,20 @@ public class C206_CaseStudy {
 		String description = Helper.readString("Enter Course Description (less than 50 characters): ");
 		int duration = Helper.readInt("Enter Course Duration(Days): ");
 		String prerequisite = Helper.readString("Enter Course Condition: ");
-		
-		Course course = new Course(id, title, category, description, duration, prerequisite);		
+
+		Course course = new Course(id, title, category, description, duration, prerequisite);
 		doAddCourse(courseList, course);
 	}
-	
+
+	// Ju Long
 	public static void doAddCourse(ArrayList<Course> courseList, Course course) {
 		boolean isRepeated = false;
-		
+
 		for (Course i : courseList) {
-			if (i.getCourseCode() != course.getCourseCode()) 
+			if (i.getCourseCode() != course.getCourseCode())
 				isRepeated = true;
 		}
-		
+
 		if (!isRepeated) {
 			courseList.add(course);
 			System.out.println("Course has been added");
@@ -168,30 +169,38 @@ public class C206_CaseStudy {
 		}
 	}
 
-	//Ju Long
-	public static String viewCourse() {
+	// Ju Long
+	public static String viewCourse(ArrayList<Course> courseList) {
 		String output = "";
-		output += String.format("%-10s %-15s %-20s %-50s %-15d %s", 
-				"Course ID", "Course Title", "Course Category", "Course Description", "Course Duration", "Pre-requisite Course");
-		for (Course i : courseList) {
-			output += String.format("%-10d %-15s %-20s %-50s %-15s %s", 
-					i.getCourseCode(), i.getCourseTitle(), i.getCourseCategory(), i.getCourseDescription(), i.getCourseDuration(), i.getPrerequisiteCourse());
+		output += String.format("%-10s | %-15s | %-20s | %-50s | %-15s | %s\n", "Course ID", "Course Title", "Course Category",
+				"Course Description", "Course Duration", "Pre-requisite Course");
+		if (!courseList.isEmpty()) {
+			for (Course i : courseList) {
+				output += String.format("%-10d | %-15s | %-20s | %-50s | %-15d | %s\n", i.getCourseCode(), i.getCourseTitle(),
+						i.getCourseCategory(), i.getCourseDescription(), i.getCourseDuration(), i.getPrerequisiteCourse());
+			}
 		}
 		return (output);
 	}
 	
-	//Ju Long
+	// Ju Long
 	public static void deleteCourse() {
-		System.out.println(viewCourse());
+		System.out.println(viewCourse(courseList));
 		int id = Helper.readInt("Enter Course ID: ");
-		for (int i = 0; i < courseList.size(); i++) {
-			if (courseList.get(i).getCourseCode() == id) {
-				courseList.remove(i);
-			}
-		}
-		System.out.println("Course has been removed");
+		
+		doDeleteCourse(courseList, id);
 	}
 	
+	// Ju Long
+	public static void doDeleteCourse(ArrayList<Course> courseList, int courseID) {
+		for (int i = 0; i < courseList.size(); i++) {
+			if (courseList.get(i).getCourseCode() == courseID) {
+				courseList.remove(i);
+				System.out.println("Course has been removed");
+			}
+		}
+	}
+
 	//Alicia
 	public static void addCourseSchedule() {
 		String output = "";
@@ -220,13 +229,14 @@ public class C206_CaseStudy {
 				scheduleID +=1;
 			}
 		}
+		idList.add(scheduleID);
 		
 		CourseSchedule sch = new CourseSchedule(courseID, scheduleID, price, startDate, startTime, endDate, endTime, location);
 		scheduleList.add(sch);
 	}
 	
 	//Alicia
-	public static void viewCourseSchedule() {
+	public static String viewCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String output = "";
 		
 		if(scheduleList.size()==0) {
@@ -240,12 +250,12 @@ public class C206_CaseStudy {
 						i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());
 			}
 		}
-		System.out.println(output);
+		return output;
 	}
 	
 	//Alicia
 	public static void deleteCourseSchedule() {
-		viewCourseSchedule();
+		viewCourseSchedule(scheduleList);
 		int scheduleID = Helper.readInt("Enter Schedule ID: ");
 		
 		for(CourseSchedule i: scheduleList) {
@@ -256,7 +266,7 @@ public class C206_CaseStudy {
 		System.out.println("Course Schedule has been deleted.");
 	}
 	
-	  // Qi Kai
+	// Qi Kai
 	  public static void registerCS() {
 	    int courseCode = Helper.readInt("Enter Course code: ");
 	    int CSid = Helper.readInt("Enter course Schedule ID: ");
@@ -267,13 +277,8 @@ public class C206_CaseStudy {
 	    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 	    String formattedDate = regiDate.format(format);
 
-	    Register register = new Register(courseCode, CSid, regiID, memEmail, status, formattedDate);
-
-	  }
-	  
-	  public static void doRegisterCS(ArrayList<Register> regiList, Register register) {
-		  
-		    System.out.println("A confirmation E-mail has been sent to your" + register.getMemEmail() + " mailbox");
+	    regiList.add(new Register(courseCode, CSid, regiID, memEmail, status, formattedDate));
+	    System.out.println("A confirmation E-mail has been sent to your" + memEmail + " mailbox");
 	  }
 
 	  // Qi kai
@@ -298,15 +303,18 @@ public class C206_CaseStudy {
 	  }
 
 	  // Qi kai
-	  public static void deleRegi() {
+	  public static String deleRegi() {
 	    int deleRegi = Helper.readInt("Enter your registration ID: ");
+	    String output="";
 	    for (int i = 0; i < regiList.size(); i++) {
 	      if (regiList.get(i).getRegiID() == deleRegi) {
 	        regiList.remove(i);
-	        System.out.println("Registration has been deleted");
+	        output+=("Registration has been deleted");
+	        System.out.println("An Email has been sent to your mailbox");
 	      }
 
 	    }
+	    return output;
 	  }
 
 	}
