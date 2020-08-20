@@ -1,4 +1,4 @@
 
-public class CourseSchedule extends Course{
+public class CourseSchedule{
 
 }
