@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class C206_CaseStudy {
 	
 	private static ArrayList<Course> courseList = new ArrayList<Course>();
 	private static ArrayList<Member> memberList = new ArrayList<Member>();
+	private static ArrayList<Register> regiList = new ArrayList<Register>();
 
 	public static void main(String[] args) {
 		
@@ -90,4 +92,34 @@ public class C206_CaseStudy {
 		}
 		System.out.println("Course has been removed");
 	}
+	
+	public static void registerCS() {
+		int regiID = Helper.readInt("Enter your Course Schedule ID > ");
+		for (int i = 0; i < regiList.size(); i++) {
+			if (regiID == regiList.get(i).getCSid()) {
+				Random rand = new Random();
+				int rand_1 = rand.nextInt(200);
+				System.out.println("Your registration ID is > " + regiList.get(i) + 1 + rand_1);
+				String memEmail = Helper.readString("Enter your email > ");
+				while (!memEmail.contains("@")) {
+					System.out.println("Invalid format!");
+				}
+			}
+
+		}
+
+	}
+
+	{
+		System.out.println("Please enter the correct regitration ID!");
+	}
+
+	public static void viewRegister() {
+
+	}
+
+	public static void deleRegi() {
+
+	}
+
 }
