@@ -76,7 +76,7 @@ public class C206_CaseStudy {
 				"Course ID", "Course Title", "Course Category", "Course Description", "Course Duration", "Pre-requisite Course");
 		for (Course i : courseList) {
 			output += String.format("%-10d %-15s %-20s %-50s %-15s %s", 
-					i.getCourseCode(), i.getCourseTitle()/*, i.getCourseCategory()*/, i.getCourseDescription(), i.getCourseDuration(), i.getPrerequisiteCourse());
+					i.getCourseCode(), i.getCourseTitle(), i.getCourseCategory(), i.getCourseDescription(), i.getCourseDuration(), i.getPrerequisiteCourse());
 		}
 		System.out.println(output);
 	}

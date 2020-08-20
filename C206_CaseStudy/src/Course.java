@@ -1,8 +1,9 @@
 
-public class Course extends CourseCategory {
+public class Course {
 
 	private int courseCode;
 	private String courseTitle;
+	private String courseCategory;
 	private String courseDescription;
 	private int courseDuration;
 	private String prerequisiteCourse;
@@ -11,7 +12,6 @@ public class Course extends CourseCategory {
 			int courseDuration, String prerequisiteCourse) {
 		this.courseCode = courseCode;
 		this.courseTitle = courseTitle;
-//		super(courseCategory);
 		this.courseDescription = courseDescription;
 		this.courseDuration = courseDuration;
 		this.prerequisiteCourse = prerequisiteCourse;
@@ -29,9 +29,9 @@ public class Course extends CourseCategory {
 		return courseTitle;
 	}
 	
-//	public String getCourseCategory() {
-//		return super.getCourseCategory();
-//	}
+	public String getCourseCategory() {
+		return courseCategory;
+	}
 
 	public String getCourseDescription() {
 		return courseDescription;
@@ -46,4 +46,4 @@ public class Course extends CourseCategory {
 	}
 
 }
-// JU LONG
+// JU LONG 19013345
