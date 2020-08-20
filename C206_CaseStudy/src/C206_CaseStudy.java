@@ -154,6 +154,7 @@ public class C206_CaseStudy {
 		regiList.add(new Register(courseCode, CSid, regiID, memEmail, false, formattedDate));
 	}
 
+	//Qi Kai
 	public static void viewRegister() {
 		String output = "";
 		output += String.format("%-20s %-20s %-20s %-50s %-20s", "Registration ID", "Course Schedule ID",
@@ -166,6 +167,7 @@ public class C206_CaseStudy {
 
 	}
 
+	//Qi Kai
 	public static void deleRegi() {
 		int deleRegi = Helper.readInt("Enter your registration ID: ");
 		for (int i = 0; i < regiList.size(); i++) {
