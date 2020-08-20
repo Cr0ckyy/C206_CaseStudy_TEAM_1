@@ -24,6 +24,10 @@ public class Course extends CourseCategory {
 	public String getCourseTitle() {
 		return courseTitle;
 	}
+	
+//	public String getCourseCategory() {
+//		return super.getCourseCategory();
+//	}
 
 	public String getCourseDescription() {
 		return courseDescription;
