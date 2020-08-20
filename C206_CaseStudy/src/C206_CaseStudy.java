@@ -220,13 +220,14 @@ public class C206_CaseStudy {
 				scheduleID +=1;
 			}
 		}
+		idList.add(scheduleID);
 		
 		CourseSchedule sch = new CourseSchedule(courseID, scheduleID, price, startDate, startTime, endDate, endTime, location);
 		scheduleList.add(sch);
 	}
 	
 	//Alicia
-	public static void viewCourseSchedule() {
+	public static String viewCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String output = "";
 		
 		if(scheduleList.size()==0) {
@@ -240,12 +241,12 @@ public class C206_CaseStudy {
 						i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());
 			}
 		}
-		System.out.println(output);
+		return output;
 	}
 	
 	//Alicia
 	public static void deleteCourseSchedule() {
-		viewCourseSchedule();
+		viewCourseSchedule(scheduleList);
 		int scheduleID = Helper.readInt("Enter Schedule ID: ");
 		
 		for(CourseSchedule i: scheduleList) {

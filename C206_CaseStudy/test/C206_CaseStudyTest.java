@@ -15,6 +15,10 @@ public class C206_CaseStudyTest {
 	private Register regiCS2;
 	private ArrayList<Register> regiList;
 
+	private CourseSchedule schedule1;
+	private CourseSchedule schedule2;
+	private ArrayList<CourseSchedule> scheduleList;
+
 	@Before
 	public void setUp() throws Exception {
 
@@ -27,6 +31,12 @@ public class C206_CaseStudyTest {
 		regiCS1 = new Register(1, 3, 4, "123@mail.com", false, "20-08-2020 20:38");
 		regiCS2 = new Register(2, 5, 6, "321@mail.com", true, "20-08-2020 21:38");
 		regiList = new ArrayList<Register>();
+
+		// Course Schedule
+		schedule1 = new CourseSchedule(1, 1, 15.00, "12/05/2020", "12:30PM", "12/06/2020", "3:00PM", "Library");
+		schedule2 = new CourseSchedule(3, 2, 35.00, "20/07/2020", "10:00AM", "15/08/2020", "4:00PM", "Makerspace");
+//		schedule3 = new CourseSchedule(2, 3, 40.00, "20/07/2020", "10:00AM", "15/08/2020", "4:00PM", "Stadium");
+		scheduleList = new ArrayList<CourseSchedule>();
 
 	}
 
@@ -83,7 +93,50 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addCourse();
 	}
 
+//	@Test
+//	public void addCourseScheduleTest() {
+//		assertNotNull("Test if there is valid Course arraylist to add to", scheduleList);
+//		
+//		//normal
+//		scheduleList.add(schedule1);
+//		assertEquals("Test if schedule arraylist size is 1?", 1, scheduleList.size());
+//		
+//		//error
+//		scheduleList.add(schedule2);
+//	}
+
 	@Test
+	public void viewCourseScheduleTest() {
+		assertNotNull("Test if there is valid CourseSchedule arraylist to add to", scheduleList);
+
+		String allSchedules = C206_CaseStudy.viewCourseSchedule(scheduleList);
+		String output = "There are no schedules to display";
+		assertEquals("Check that the list is empty", output, allSchedules);
+		
+		//normal
+		scheduleList.add(schedule1);
+		String test1 = C206_CaseStudy.viewCourseSchedule(scheduleList);
+		output = String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s", "Schedule ID",
+				"Start Date", "Start Time", "End Date", "End Time", "Price", "Location");
+		output += String.format("\n%5d %18s %11s %12s %8s %7.2f %14s", schedule1.getCSid(), schedule1.getStartDate(),
+				schedule1.getStartTime(), schedule1.getEndDate(), schedule1.getEndTime(), schedule1.getPrice(), schedule1.getLocation());
+		assertEquals("Check that the output is correct", test1, output);
+		assertEquals("Test if scheduleList size is 1", 1, scheduleList.size());
+		
+	}
+	
+	@Test
+//	public void deleteCourseScheduleTest() {
+//		assertNotNull("Test if there is valid CourseSchedule arraylist", scheduleList);
+//		
+//		assertSame("Test that list is empty", 0, scheduleList.size());
+//		
+//		scheduleList.add(schedule1);
+//		assertSame("Test that list size is 1", 1, scheduleList.size());
+//		
+//		scheduleList.remove(0);
+//		assertSame("Test that list size is 0", 0, scheduleList.size());
+//	}
 
 	@After
 	public void tearDown() throws Exception {
