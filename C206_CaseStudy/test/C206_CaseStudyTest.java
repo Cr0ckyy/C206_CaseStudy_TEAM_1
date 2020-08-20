@@ -41,7 +41,8 @@ public class C206_CaseStudyTest {
 		
 		assertSame("Test that Course is added same as 1st item of the list", course1, courseList.get(0));
 		
-		
+		courseList.add(course2);
+		assertEquals("Test that course list size is 2", 2, courseList.size());
 	}
 
 	@After
