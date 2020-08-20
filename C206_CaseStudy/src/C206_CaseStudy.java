@@ -3,10 +3,52 @@ import java.util.ArrayList;
 public class C206_CaseStudy {
 	
 	private static ArrayList<Course> courseList = new ArrayList<Course>();
+	private static ArrayList<Member> memberList = new ArrayList<Member>();
 
 	public static void main(String[] args) {
 		
 	}
+	
+	public static void addMember() {
+        Helper.line(40,"=");
+        System.out.println("ADD NEW MEMBER");
+        Helper.line(40,"=");
+        String name = Helper.readString("Ënter name> ");
+        String gender = Helper.readString("Enter gender> ");
+        int moblie = Helper.readInt("Enter mobile> ");
+        String email = Helper.readString("Enter email> ");
+        String dob = Helper.readString("Enter date of birth (dd/mm/yy)> ");
+        String cor = Helper.readString("Enter country of residence> ");
+        String password = Helper.readString("Enter password");
+       
+        for (Member i : memberList) {
+            if (!i.getEmail().contains(email)) {
+                memberList.add(new Member(name,gender,moblie,email,dob,cor,password));
+            }else {
+                System.out.println("Email must be unique");
+            }
+        }
+       
+    }
+    public static void viewMember() {
+        String output = "";
+        output += String.format("%-15s %-10s %-10s %-20s %-10s %-10s", "Name","Gender","Mobile", "Email", "DOB", "Country of Residennce");
+       
+        for (Member i : memberList) {
+            output += String.format("%-15s %-10s %-10d %-20s %-10s %-10s",
+                    i.getName(), i.getGender(),i.getMobile(),i.getEmail(),i.getDateOfbirth(),i.getCountryOfresidence());
+        }
+        System.out.println(output);
+       
+    }
+    public static void deleteMember(){
+        String ed = Helper.readString("Enter the Member's email to delete> ");
+        for (Member i : memberList) {
+            if (i.getEmail().contentEquals(ed)) {
+                memberList.remove(i);
+            }
+        }
+    }
 	
 	public static void addCourse() {
 		int id = Helper.readInt("Enter Course ID: ");
