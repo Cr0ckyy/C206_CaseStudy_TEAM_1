@@ -9,56 +9,98 @@ public class C206_CaseStudy {
 	private static ArrayList<Course> courseList = new ArrayList<Course>();
 	private static ArrayList<Member> memberList = new ArrayList<Member>();
 	private static ArrayList<Register> regiList = new ArrayList<Register>();
+	private static ArrayList<CourseSchedule> scheduleList = new ArrayList<CourseSchedule>();
 
 	public static void main(String[] args) {
 		
 	}
-	
-	//Hui Wen
-	public static void addMember() {
-        Helper.line(40,"=");
-        System.out.println("ADD NEW MEMBER");
-        Helper.line(40,"=");
-        String name = Helper.readString("Ënter name> ");
-        String gender = Helper.readString("Enter gender> ");
-        int moblie = Helper.readInt("Enter mobile> ");
-        String email = Helper.readString("Enter email> ");
-        String dob = Helper.readString("Enter date of birth (dd/mm/yy)> ");
-        String cor = Helper.readString("Enter country of residence> ");
-        String password = Helper.readString("Enter password");
-       
-        for (Member i : memberList) {
-            if (!i.getEmail().contains(email)) {
-                memberList.add(new Member(name,gender,moblie,email,dob,cor,password));
-            }else {
-                System.out.println("Email must be unique");
-            }
-        }
-       
-    }
-	
-	//Hui Wen
-    public static void viewMember() {
-        String output = "";
-        output += String.format("%-15s %-10s %-10s %-20s %-10s %-10s", "Name","Gender","Mobile", "Email", "DOB", "Country of Residennce");
-       
-        for (Member i : memberList) {
-            output += String.format("%-15s %-10s %-10d %-20s %-10s %-10s",
-                    i.getName(), i.getGender(),i.getMobile(),i.getEmail(),i.getDateOfbirth(),i.getCountryOfresidence());
-        }
-        System.out.println(output);
-       
-    }
-    
-	//Hui Wen
-    public static void deleteMember(){
-        String ed = Helper.readString("Enter the Member's email to delete> ");
-        for (Member i : memberList) {
-            if (i.getEmail().contentEquals(ed)) {
-                memberList.remove(i);
-            }
-        }
-    }
+
+	private static void setHeader(String header) {
+		// TODO Auto-generated method stub
+		Helper.line(80, "-");
+		System.out.println(header);
+		Helper.line(80, "-");
+	}
+
+	// Hui Wen
+	public static String retreiveAllMember(ArrayList<Member> memberList) {// HUIWEN
+		String output = "";
+
+		for (Member i : memberList) {
+
+			output += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", i.getName(), i.getGender(), i.getMobile(),
+					i.getEmail(), i.getDateOfbirth(), i.getCountryOfresidence());
+		}
+		return output;
+
+	}
+
+	public static void viewAllMember(ArrayList<Member> memberList) {// HUIWEN
+		C206_CaseStudy.setHeader("MEMBER LIST");
+		String output = String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile", "Email",
+				"DOB", "Country of Residennce");
+		output += retreiveAllMember(memberList);
+		System.out.println(output);
+	}
+
+	public static void inputMember() {// HUIWEN
+		String name = Helper.readString("Ënter name> ");
+		String gender = Helper.readString("Enter gender> ");
+		int moblie = Helper.readInt("Enter mobile> ");
+		String email = Helper.readString("Enter email> ");
+		String dob = Helper.readString("Enter date of birth (dd/mm/yyyy)> ");
+		String cor = Helper.readString("Enter country of residence> ");
+		String password = Helper.readString("Enter password> ");
+
+		Member mb = new Member(name, gender, moblie, email, dob, cor, password);
+		addMember(memberList, mb);
+
+	}
+
+	public static void addMember(ArrayList<Member> memberList, Member mb) {// HUIWEN
+		boolean isAdded = true;
+
+		for (int i = 0; i < memberList.size(); i++) {
+			if (memberList.get(i).getEmail() == mb.getEmail()) {
+
+				isAdded = false;
+			}
+		}
+		if (isAdded == false) {
+			System.out.println("Email must be unique");
+		} else {
+			memberList.add(mb);
+			System.out.println("Member added");
+		}
+	}
+
+	public static boolean dodeleteMember(ArrayList<Member> memberList, String email) {// HUIWEN
+
+		boolean isDeleted = false;
+
+		for (int i = 0; i < memberList.size(); i++) {
+			String EmailAddress = memberList.get(i).getEmail();
+			if (email.contentEquals(EmailAddress)) {
+				memberList.remove(i);
+				isDeleted = true;
+			}
+		}
+		return isDeleted;
+	}
+
+	public static void deletetMember(ArrayList<Member> memberList) {// HUIWEN
+
+		C206_CaseStudy.viewAllMember(memberList);
+		String email = Helper.readString("Enter the Member's email to delete> ");
+		boolean isDeleted = dodeleteMember(memberList, email);
+
+		if (isDeleted == false) {
+			System.out.println("Invalid email");
+		} else {
+			System.out.println("Member " + email + "  deleted");
+		}
+
+	}
 	
  // LI SHUFANG
     public static void addCategory() {
@@ -140,6 +182,70 @@ public class C206_CaseStudy {
 			}
 		}
 		System.out.println("Course has been removed");
+	}
+	
+	//Alicia
+	public static void addCourseSchedule() {
+		String output = "";
+		output += String.format("%-10s %-15s", "Course ID", "Course Title");
+		
+		for(Course i : courseList) {
+			output += String.format("%-10d %-15s", i.getCourseCode(), i.getCourseTitle());
+		}
+		System.out.println(output);
+		
+		int courseID = Helper.readInt("Enter Course ID: ");
+		double price = Helper.readDouble("Enter Price: ");
+		String startDate = Helper.readString("Enter Start Date(DD/MM/YYYY): ");
+		String startTime = Helper.readString("Enter Start Time(HH:MM)AM/PM: ");
+		String endDate = Helper.readString("Enter End Date(DD/MM/YYYY): ");
+		String endTime = Helper.readString("Enter End Time(HH:MM)AM/PM: ");
+		String location = Helper.readString("Enter Location: ");
+		
+		ArrayList<Integer> idList = new ArrayList<Integer>();
+		int scheduleID = 0;
+		
+		if(idList.size()==0) {
+			scheduleID = idList.size()+1;
+		}else {
+			while(idList.contains(scheduleID)) {
+				scheduleID +=1;
+			}
+		}
+		
+		CourseSchedule sch = new CourseSchedule(courseID, scheduleID, price, startDate, startTime, endDate, endTime, location);
+		scheduleList.add(sch);
+	}
+	
+	//Alicia
+	public static void viewCourseSchedule() {
+		String output = "";
+		
+		if(scheduleList.size()==0) {
+			output += "There are no schedules to display";
+		}else {
+			output += String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s", "Schedule ID",
+					"Start Date", "Start Time", "End Date", "End Time", "Price", "Location");
+			
+			for(CourseSchedule i : scheduleList) {
+				output += String.format("\n%5d %18s %11s %12s %8s %7.2f %14s", i.getCSid(), i.getStartDate(),
+						i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());
+			}
+		}
+		System.out.println(output);
+	}
+	
+	//Alicia
+	public static void deleteCourseSchedule() {
+		viewCourseSchedule();
+		int scheduleID = Helper.readInt("Enter Schedule ID: ");
+		
+		for(CourseSchedule i: scheduleList) {
+			if(i.getCSid()==scheduleID) {
+				scheduleList.remove(i);
+			}
+		}
+		System.out.println("Course Schedule has been deleted.");
 	}
 	
 	// Qi Kai

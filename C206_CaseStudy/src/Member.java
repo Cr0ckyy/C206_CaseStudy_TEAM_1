@@ -1,4 +1,4 @@
-public class Member {
+public class Member { // HUIWEN
 	private String name;
 	private String gender;
 	private int mobile;
@@ -16,10 +16,6 @@ public class Member {
 		this.dateOfbirth = dateOfbirth;
 		this.countryOfresidence = countryOfresidence;
 		this.password = password;
-	}
-	
-	public Member (String email) {
-		this.email = email;
 	}
 
 	public String getName() {
@@ -77,5 +73,5 @@ public class Member {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 }
