@@ -72,7 +72,7 @@ public class C206_CaseStudy {
 		
 	}
 
-	public static void viewCourse() {
+	public static String viewCourse() {
 		String output = "";
 		output += String.format("%-10s %-15s %-20s %-50s %-15d %s", 
 				"Course ID", "Course Title", "Course Category", "Course Description", "Course Duration", "Pre-requisite Course");
@@ -80,7 +80,7 @@ public class C206_CaseStudy {
 			output += String.format("%-10d %-15s %-20s %-50s %-15s %s", 
 					i.getCourseCode(), i.getCourseTitle(), i.getCourseCategory(), i.getCourseDescription(), i.getCourseDuration(), i.getPrerequisiteCourse());
 		}
-		System.out.println(output);
+		return (output);
 	}
 	
 	public static void deleteCourse() {
