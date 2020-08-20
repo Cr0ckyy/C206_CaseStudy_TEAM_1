@@ -148,16 +148,25 @@ public class C206_CaseStudy {
 		int duration = Helper.readInt("Enter Course Duration(Days): ");
 		String prerequisite = Helper.readString("Enter Course Condition: ");
 		
+		Course course = new Course(id, title, category, description, duration, prerequisite);		
+		doAddCourse(courseList, course);
+	}
+	
+	public static void doAddCourse(ArrayList<Course> courseList, Course course) {
+		boolean isRepeated = false;
+		
 		for (Course i : courseList) {
-			if (i.getCourseCode() != id) {
-				courseList.add(new Course(id, title, category, description, duration, prerequisite));
-				System.out.println("Course has been added");
-			} else {
-				System.out.println("The Course Code have been repeated, please enter again!");
-				addCourse();
-			}
+			if (i.getCourseCode() != course.getCourseCode()) 
+				isRepeated = true;
 		}
 		
+		if (!isRepeated) {
+			courseList.add(course);
+			System.out.println("Course has been added");
+		} else {
+			System.out.println("The Course Code have been repeated, please enter again!");
+			addCourse();
+		}
 	}
 
 	//Ju Long
@@ -254,10 +263,11 @@ public class C206_CaseStudy {
 		int CSid = Helper.readInt("Enter course Schedule ID: ");
 		int regiID = regiList.size() + 1;
 		String memEmail = Helper.readString("Enter Email: ");
+		boolean status = false;
 		LocalDateTime regiDate = LocalDateTime.now();
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 		String formattedDate = regiDate.format(format);
-		regiList.add(new Register(courseCode, CSid, regiID, memEmail, false, formattedDate));
+		regiList.add(new Register(courseCode, CSid, regiID, memEmail, status, formattedDate));
 	}
 
 	//Qi Kai
