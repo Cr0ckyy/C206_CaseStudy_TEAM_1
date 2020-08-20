@@ -3,17 +3,26 @@ import java.util.*;
 public class CourseSchedule extends Course{
 	private int CSid;
 	private double price;
-	private Date startDateTime;
-	private Date endDateTime;
+	private String startDate;
+	private String startTime;
+	private String endDate;
+	private String endTime;
 	private String location;
 
-	public CourseSchedule(int courseCode, int CSid, double price, Date startDateTime, Date endDateTime, String location) {
+	public CourseSchedule(int courseCode, int CSid, double price, String startDate, String startTime, String endDate, String endTime, String location) {
 		super(courseCode);
 		this.CSid = CSid;
 		this.price = price;
-		this.startDateTime = startDateTime;
-		this.endDateTime = endDateTime;
+		this.startDate = startDate;
+		this.startTime = startTime;
+		this.endDate = endDate;
+		this.endTime = endTime;
 		this.location = location;
+	}
+	
+	public CourseSchedule(int courseCode, int CSid) {
+		super(courseCode);
+		this.CSid = CSid;
 	}
 
 	public int getCSid() {
@@ -28,20 +37,38 @@ public class CourseSchedule extends Course{
 		this.price = price;
 	}
 
-	public Date getStartDateTime() {
-		return startDateTime;
+	public String getStartDate() {
+		return startDate;
 	}
 	
-	public void setStartDateTime(Date startDateTime) {
-		this.startDateTime = startDateTime;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	
+	
+
+	public String getStartTime() {
+		return startTime;
 	}
 
-	public Date getEndDateTime() {
-		return endDateTime;
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 
-	public void setEndDateTime(Date endDateTime) {
-		this.endDateTime = endDateTime;
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
 
 	public String getLocation() {
@@ -51,6 +78,7 @@ public class CourseSchedule extends Course{
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
 	
 	
 }
