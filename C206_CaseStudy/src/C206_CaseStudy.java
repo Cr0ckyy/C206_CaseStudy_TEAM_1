@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -143,10 +145,13 @@ public class C206_CaseStudy {
 	// Qi Kai
 	public static void registerCS() {
 		int courseCode = Helper.readInt("Enter Course code: ");
-		int courseScheduleID = Helper.readInt("Enter course Schedule ID: ");
+		int CSid = Helper.readInt("Enter course Schedule ID: ");
 		int regiID = regiList.size() + 1;
-		String email = Helper.readString("Enter Email: ");
-		String regiStart = Helper.readString("Enter current Date")
+		String memEmail = Helper.readString("Enter Email: ");
+		LocalDateTime regiDate = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+		String formattedDate = regiDate.format(format);
+		regiList.add(new Register(courseCode, CSid, regiID, memEmail, false, formattedDate));
 	}
 
 	public static void viewRegister() {
@@ -155,7 +160,7 @@ public class C206_CaseStudy {
 				"Member Email", "Status", "Registration Date & time");
 		for (Register i : regiList) {
 			output += String.format("%-20d %-20d %-20s %-50s %-20s", i.getRegiID(), i.getCSid(), i.getMemEmail(),
-					i.getStatus(), i.getRegiStart());
+					i.getStatus(), i.getRegiDate());
 		}
 		System.out.println(output);
 

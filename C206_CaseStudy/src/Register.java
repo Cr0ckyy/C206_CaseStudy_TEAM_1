@@ -1,17 +1,18 @@
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Register extends CourseSchedule {
   private int regiID;
   private boolean status;
-  private String regiStart;
+  private String regiDate;
   public String memEmail;
 
-  public Register(int courseCode, int CSid, int regiID, String memEmail, boolean status, String regiStart) {
+  public Register(int courseCode, int CSid, int regiID, String memEmail, boolean status, String regiDate) {
     super(courseCode, CSid);
     this.regiID = regiID;
     this.memEmail = memEmail;
     this.status = false;
-    this.regiStart = regiStart;
+    this.regiDate = regiDate;
   }
 
 	public int getRegiID() {
@@ -26,8 +27,8 @@ public class Register extends CourseSchedule {
 		}
 	}
 
-	public String getRegiStart() {
-		return regiStart;
+	public String getRegiDate() {
+		return regiDate;
 	}
 
 	public String getMemEmail() {
@@ -42,8 +43,8 @@ public class Register extends CourseSchedule {
 		this.status = status;
 	}
 	
-	public void setRegiStart(String regiStart) {
-		this.regiStart = regiStart;
+	public void setRegiStart(String regiDate) {
+		this.regiDate = regiDate;
 	}
 
 	public void setMemEmail(String memEmail) {
