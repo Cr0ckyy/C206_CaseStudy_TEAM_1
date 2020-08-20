@@ -9,6 +9,7 @@ public class C206_CaseStudy {
 	private static ArrayList<Course> courseList = new ArrayList<Course>();
 	private static ArrayList<Member> memberList = new ArrayList<Member>();
 	private static ArrayList<Register> regiList = new ArrayList<Register>();
+	private static ArrayList<CourseSchedule> scheduleList = new ArrayList<CourseSchedule>();
 
 	public static void main(String[] args) {
 		
@@ -140,6 +141,62 @@ public class C206_CaseStudy {
 			}
 		}
 		System.out.println("Course has been removed");
+	}
+	
+	//Alicia
+	public static void addCourseSchedule() {
+		String output = "";
+		output += String.format("%-10s %-15s", "Course ID", "Course Title");
+		
+		for(Course i : courseList) {
+			output += String.format("%-10d %-15s", i.getCourseCode(), i.getCourseTitle());
+		}
+		System.out.println(output);
+		
+		int courseID = Helper.readInt("Enter Course ID: ");
+		double price = Helper.readDouble("Enter Price: ");
+		String startDate = Helper.readString("Enter Start Date(DD/MM/YYYY): ");
+		String startTime = Helper.readString("Enter Start Time(HH:MM)AM/PM: ");
+		String endDate = Helper.readString("Enter End Date(DD/MM/YYYY): ");
+		String endTime = Helper.readString("Enter End Time(HH:MM)AM/PM: ");
+		String location = Helper.readString("Enter Location: ");
+		
+		ArrayList<Integer> idList = new ArrayList<Integer>();
+		int scheduleID = 0;
+		
+		if(idList.size()==0) {
+			scheduleID = idList.size()+1;
+		}else {
+			while(idList.contains(scheduleID)) {
+				scheduleID +=1;
+			}
+		}
+		
+		CourseSchedule sch = new CourseSchedule(courseID, scheduleID, price, startDate, startTime, endDate, endTime, location);
+		scheduleList.add(sch);
+	}
+	
+	//Alicia
+	public static void viewCourseSchedule() {
+		String output = "";
+		
+		if(scheduleList.size()==0) {
+			output += "There are no schedules to display";
+		}else {
+			output += String.format("%-10s %-10s %-15s %-20s %-20s %-15s %-10s", "Schedule ID",
+					"Start Date", "Start Time", "End Date", "End Time", "Price", "Location");
+			
+			for(CourseSchedule i : scheduleList) {
+				output += String.format("%-10d %-10s %-15s %-20s %-20s %-15d %-10s", i.getCSid(), i.getStartDate(),
+						i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());
+			}
+		}
+		System.out.println(output);
+	}
+	
+	//Alicia
+	public static void deleteCourseSchedule() {
+		
 	}
 	
 	// Qi Kai
