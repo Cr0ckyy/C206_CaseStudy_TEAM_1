@@ -16,8 +16,16 @@ public class C206_CaseStudy {
 		int duration = Helper.readInt("Enter Course Duration(Days): ");
 		String prerequisite = Helper.readString("Enter Course Condition: ");
 		
-		courseList.add(new Course(id, title, category, description, duration, prerequisite));
-		System.out.println("Course has been added");
+		for (Course i : courseList) {
+			if (i.getCourseCode() != id) {
+				courseList.add(new Course(id, title, category, description, duration, prerequisite));
+				System.out.println("Course has been added");
+			} else {
+				System.out.println("The Course Code have been repeated, please enter again!");
+				addCourse();
+			}
+		}
+		
 	}
 
 	public static void viewCourse() {
