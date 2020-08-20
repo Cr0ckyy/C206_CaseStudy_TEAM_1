@@ -1,13 +1,14 @@
 import java.util.*;
 
-public class CourseSchedule{
+public class CourseSchedule extends Course{
 	private int CSid;
 	private double price;
 	private Date startDateTime;
 	private Date endDateTime;
 	private String location;
 
-	public CourseSchedule(int CSid, double price, Date startDateTime, Date endDateTime, String location) {
+	public CourseSchedule(int courseCode, int CSid, double price, Date startDateTime, Date endDateTime, String location) {
+		super(courseCode);
 		this.CSid = CSid;
 		this.price = price;
 		this.startDateTime = startDateTime;
