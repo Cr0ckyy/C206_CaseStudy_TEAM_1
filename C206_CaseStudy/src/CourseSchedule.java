@@ -50,7 +50,5 @@ public class CourseSchedule{
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	
-	
 }
 //Lim Mae Yee Alicia
