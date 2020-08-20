@@ -196,7 +196,15 @@ public class C206_CaseStudy {
 	
 	//Alicia
 	public static void deleteCourseSchedule() {
+		viewCourseSchedule();
+		int scheduleID = Helper.readInt("Enter Schedule ID: ");
 		
+		for(CourseSchedule i: scheduleList) {
+			if(i.getCSid()==scheduleID) {
+				scheduleList.remove(i);
+			}
+		}
+		System.out.println("Course Schedule has been deleted.");
 	}
 	
 	// Qi Kai
