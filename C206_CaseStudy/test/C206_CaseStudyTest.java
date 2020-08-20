@@ -50,7 +50,6 @@ public class C206_CaseStudyTest {
 		// Course Schedule
 		schedule1 = new CourseSchedule(1, 1, 15.00, "12/05/2020", "12:30PM", "12/06/2020", "3:00PM", "Library");
 		schedule2 = new CourseSchedule(3, 2, 35.00, "20/07/2020", "10:00AM", "15/08/2020", "4:00PM", "Makerspace");
-//		schedule3 = new CourseSchedule(2, 3, 40.00, "20/07/2020", "10:00AM", "15/08/2020", "4:00PM", "Stadium");
 		scheduleList = new ArrayList<CourseSchedule>();
 
 	}
@@ -251,18 +250,17 @@ public class C206_CaseStudyTest {
 
 	}
 
-//	@Test
-//	public void deleteCourseScheduleTest() {
-//		assertNotNull("Test if there is valid CourseSchedule arraylist", scheduleList);
-//		
-//		assertSame("Test that list is empty", 0, scheduleList.size());
-//		
-//		scheduleList.add(schedule1);
-//		assertSame("Test that list size is 1", 1, scheduleList.size());
-//		
-//		scheduleList.remove(0);
-//		assertSame("Test that list size is 0", 0, scheduleList.size());
-//	}
+	@Test
+	public void deleteCourseScheduleTest() {
+		assertNotNull("Test if there is valid CourseSchedule arraylist", scheduleList);
+		
+		assertSame("Test that list is empty", 0, scheduleList.size());
+		
+		scheduleList.add(schedule1);
+		assertSame("Test that list size is 1", 1, scheduleList.size());
+		
+		assertNotSame("Test that correct schedule index is returned", 0, C206_CaseStudy.doDeleteCourseSchedule(scheduleList, 1));
+	}
 
 	// Register
 	// Qikai 5.1

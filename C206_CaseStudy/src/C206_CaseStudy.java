@@ -257,13 +257,28 @@ public class C206_CaseStudy {
 	public static void deleteCourseSchedule() {
 		viewCourseSchedule(scheduleList);
 		int scheduleID = Helper.readInt("Enter Schedule ID: ");
+		int delete = doDeleteCourseSchedule(scheduleList, scheduleID);
 		
-		for(CourseSchedule i: scheduleList) {
-			if(i.getCSid()==scheduleID) {
-				scheduleList.remove(i);
+		if(delete!=0) {
+			scheduleList.remove(delete);
+			System.out.println("Course Schedule has been deleted.");
+		}
+		
+		
+	}
+	
+	//Alicia
+	public static int doDeleteCourseSchedule(ArrayList<CourseSchedule> scheduleList, int scheduleID) {
+		
+		int deleteIdx = 0;
+		
+		for(int i=0;i<scheduleList.size();i++) {
+			if(scheduleList.get(i).getCSid()==scheduleID) {
+				deleteIdx = i;
 			}
 		}
-		System.out.println("Course Schedule has been deleted.");
+		
+		return deleteIdx;
 	}
 	
 	// Qi Kai
