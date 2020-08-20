@@ -82,6 +82,7 @@ public class C206_CaseStudyTest {
 	    assertEquals("Test if the size of the Arraylist category is 0?", 0, categoryList.size());
 
 	  }
+	  
 	  // SHUFANG
 	  @Test
 	  public void viewCourseCategory() {
