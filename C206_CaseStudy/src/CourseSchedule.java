@@ -44,8 +44,6 @@ public class CourseSchedule extends Course{
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	
-	
 
 	public String getStartTime() {
 		return startTime;
