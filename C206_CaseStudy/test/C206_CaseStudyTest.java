@@ -30,24 +30,25 @@ public class C206_CaseStudyTest {
 	@Before
 	public void setUp() throws Exception {
 
-		// Member
+		// Member, Hui Wen
 		m1 = new Member("Lily", "Female", 81234567, "lily123@email.com", "14/03/1998", "Singapore", "ly4567889");
 		m2 = new Member("Sally", "Female", 92345678, "sally456@email.com", "12/04/1994", "Singapore", "sy5678890");
 		m3 = new Member("Jerry", "Male", 94567890, "sally456@email.com", "24/03/1994", "Singapore", "jr1234556");
-
 		memberList = new ArrayList<Member>();
 
-		// Course
+		
+		
+		// Course, Ju Long
 		course1 = new Course(1, "course1", "Sport", "its good", 30, "2 people min");
 		course2 = new Course(2, "course1", "Sport", "its good", 30, "2 people min");
 		courseList = new ArrayList<Course>();
 
-		// Register for course schedule
+		// Register for course schedule, Qi Kai
 		regiCS1 = new Register(1, 3, 4, "123@mail.com", false, "20-08-2020 20:38");
 		regiCS2 = new Register(2, 5, 6, "321@mail.com", true, "20-08-2020 21:38");
 		regiList = new ArrayList<Register>();
 
-		// Course Schedule
+		// Course Schedule, Alicia
 		schedule1 = new CourseSchedule(1, 1, 15.00, "12/05/2020", "12:30PM", "12/06/2020", "3:00PM", "Library");
 		schedule2 = new CourseSchedule(3, 2, 35.00, "20/07/2020", "10:00AM", "15/08/2020", "4:00PM", "Makerspace");
 		scheduleList = new ArrayList<CourseSchedule>();
@@ -59,6 +60,78 @@ public class C206_CaseStudyTest {
 		// fail("Not yet implemented");
 		assertTrue("C206_CaseStudy_SampleTest ", true);
 	}
+	
+	// Member
+		@Test
+		public void addMemberTest() { // HUIWEN
+			// Member list is not null, so that can add a new item - boundary
+			assertNotNull("Check if there is valid member arraylist to add to", memberList);
+
+			// Given an empty list, after adding 1 member, the size of the list is 1 -
+			// normal
+			// The item just added is as same as the first item of the list
+			C206_CaseStudy.addMember(memberList, m1);
+			assertEquals("Check that Camcorder arraylist size is 1", 1, memberList.size());
+			assertSame("Check that Camcorder is added", m1, memberList.get(0));
+
+			// Add another member. test The size of the list is 2? -normal
+			// The member just added is as same as the second member of the list
+			C206_CaseStudy.addMember(memberList, m2);
+			assertEquals("Check that Camcorder arraylist size is 2", 2, memberList.size());
+			assertSame("Check that Camcorder is added", m2, memberList.get(1));
+
+			// Add another member. Test that email that is not unique cannot be added
+			C206_CaseStudy.addMember(memberList, m3);
+			String testoutput = "Email must be unique";
+			assertEquals("Test that member email that is not unique is NOT ok to add", testoutput);
+		}
+
+		@Test
+		public void retrieveAllMemberTest() {// HUIWEN
+
+			// Test if Member list is not null but empty - boundary
+			assertNotNull("Test if there is valid member arraylist to retrieve item", memberList);
+
+			// test if the list of members retrieved from the Member is empty - boundary
+			String allMember = C206_CaseStudy.retreiveAllMember(memberList);
+			String testOutput = "";
+			assertEquals("Check that ViewAllMemberlist", testOutput, allMember);
+
+			// Given an empty list, after adding 2 members, test if the size of the list is
+			// 2 - normal
+			C206_CaseStudy.addMember(memberList, m1);
+			C206_CaseStudy.addMember(memberList, m2);
+			assertEquals("Test that member arraylist size is 2", 2, memberList.size());
+
+			// test if the expected output string same as the list of members retrieved from
+			// the case study
+			allMember = C206_CaseStudy.retreiveAllMember(memberList);
+			testOutput = String.format("%-15s %-10s %-10d %-20s %-10s %-10s", "Lily", "Female", 81234567,
+					"lily123@email.com", "14/03/1998", "Singapore", "ly4567889");
+			testOutput += String.format("%-15s %-10s %-10d %-20s %-10s %-10s", "Sally", "Female", 92345678,
+					"sally456@email.com", "14/03/1994", "Singapore", "sy5678890");
+
+			assertEquals("Test that ViewAllMemberlist", testOutput, allMember);
+		}
+
+		@Test
+		public void doDeleteMemberTest() { // HUIWEN
+			// Test if Member list is not null but empty - boundary
+			assertNotNull("test if there is valid member arraylist to delete from", memberList);
+
+			// given an empty list, after adding 1 member, test if able to delete - normal
+			C206_CaseStudy.addMember(memberList, m1);
+			Boolean ok = C206_CaseStudy.dodeleteMember(memberList, "lily123@email.com");
+			assertTrue("Test if an existing member is ok to delete?", ok);
+
+			// test if that the same member cannot be deleted again - error
+			ok = C206_CaseStudy.dodeleteMember(memberList, "lily123@email.com");
+			assertFalse("Test if an same member is NOT ok to delete again?", ok);
+
+			// test if that the non-existing member cannot be deleted again - error
+			ok = C206_CaseStudy.dodeleteMember(memberList, "sally456@email.com");
+			assertFalse("Test if an non-existing member is NOT ok to delete again?", ok);
+		}
 	
 	//CourseCategory
 	// SHUFANG
@@ -93,78 +166,7 @@ public class C206_CaseStudyTest {
 //	        + "sport                , football practice                \r\n" + "");
 	  }
 
-	// Member
-	@Test
-	public void addMemberTest() { // HUIWEN
-		// Member list is not null, so that can add a new item - boundary
-		assertNotNull("Check if there is valid member arraylist to add to", memberList);
-
-		// Given an empty list, after adding 1 member, the size of the list is 1 -
-		// normal
-		// The item just added is as same as the first item of the list
-		C206_CaseStudy.addMember(memberList, m1);
-		assertEquals("Check that Camcorder arraylist size is 1", 1, memberList.size());
-		assertSame("Check that Camcorder is added", m1, memberList.get(0));
-
-		// Add another member. test The size of the list is 2? -normal
-		// The member just added is as same as the second member of the list
-		C206_CaseStudy.addMember(memberList, m2);
-		assertEquals("Check that Camcorder arraylist size is 2", 2, memberList.size());
-		assertSame("Check that Camcorder is added", m2, memberList.get(1));
-
-		// Add another member. Test that email that is not unique cannot be added
-		C206_CaseStudy.addMember(memberList, m3);
-		String testoutput = "Email must be unique";
-		assertEquals("Test that member email that is not unique is NOT ok to add", testoutput);
-	}
-
-	@Test
-	public void retrieveAllMemberTest() {// HUIWEN
-
-		// Test if Member list is not null but empty - boundary
-		assertNotNull("Test if there is valid member arraylist to retrieve item", memberList);
-
-		// test if the list of members retrieved from the Member is empty - boundary
-		String allMember = C206_CaseStudy.retreiveAllMember(memberList);
-		String testOutput = "";
-		assertEquals("Check that ViewAllMemberlist", testOutput, allMember);
-
-		// Given an empty list, after adding 2 members, test if the size of the list is
-		// 2 - normal
-		C206_CaseStudy.addMember(memberList, m1);
-		C206_CaseStudy.addMember(memberList, m2);
-		assertEquals("Test that member arraylist size is 2", 2, memberList.size());
-
-		// test if the expected output string same as the list of members retrieved from
-		// the case study
-		allMember = C206_CaseStudy.retreiveAllMember(memberList);
-		testOutput = String.format("%-15s %-10s %-10d %-20s %-10s %-10s", "Lily", "Female", 81234567,
-				"lily123@email.com", "14/03/1998", "Singapore", "ly4567889");
-		testOutput += String.format("%-15s %-10s %-10d %-20s %-10s %-10s", "Sally", "Female", 92345678,
-				"sally456@email.com", "14/03/1994", "Singapore", "sy5678890");
-
-		assertEquals("Test that ViewAllMemberlist", testOutput, allMember);
-	}
-
-	@Test
-	public void doDeleteMemberTest() { // HUIWEN
-		// Test if Member list is not null but empty - boundary
-		assertNotNull("test if there is valid member arraylist to delete from", memberList);
-
-		// given an empty list, after adding 1 member, test if able to delete - normal
-		C206_CaseStudy.addMember(memberList, m1);
-		Boolean ok = C206_CaseStudy.dodeleteMember(memberList, "lily123@email.com");
-		assertTrue("Test if an existing member is ok to delete?", ok);
-
-		// test if that the same member cannot be deleted again - error
-		ok = C206_CaseStudy.dodeleteMember(memberList, "lily123@email.com");
-		assertFalse("Test if an same member is NOT ok to delete again?", ok);
-
-		// test if that the non-existing member cannot be deleted again - error
-		ok = C206_CaseStudy.dodeleteMember(memberList, "sally456@email.com");
-		assertFalse("Test if an non-existing member is NOT ok to delete again?", ok);
-	}
-
+	
 	// Course
 	@Test
 	public void addCourseTest() {

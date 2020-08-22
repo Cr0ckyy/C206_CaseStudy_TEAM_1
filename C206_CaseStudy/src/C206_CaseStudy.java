@@ -4,23 +4,120 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 	
+	private static ArrayList<Member> memberList = new ArrayList<Member>();
 	private static ArrayList<CourseCategory> categoryList = new ArrayList<CourseCategory>();
 	private static ArrayList<Course> courseList = new ArrayList<Course>();
-	private static ArrayList<Member> memberList = new ArrayList<Member>();
-	private static ArrayList<Register> regiList = new ArrayList<Register>();
 	private static ArrayList<CourseSchedule> scheduleList = new ArrayList<CourseSchedule>();
+	private static ArrayList<Register> regiList = new ArrayList<Register>();
+	
+	private static final int LINES = 40;
 
 	public static void main(String[] args) {
 		
+		int option = 0;
+		
+		while (option != -1){
+			menu(option);
+			option = Helper.readInt("Enter an Option: ");
+			menu(option);
+			if (option == -1) break;
+			option = 0;
+		}
 	}
 
+	private static void menu(int option) {
+		if(option == 0) {
+			Helper.line(40, "=");
+			System.out.println("Course Management System");
+			Helper.line(40, "=");
+			System.out.println();
+			System.out.println("Option 1: Member");
+			System.out.println("Option 2: Course Category");
+			System.out.println("Option 3: Course");
+			System.out.println("Option 4: Course Schedule");
+			System.out.println("Option 5: Register for Course");
+			System.out.println();
+		} else if (option == 1) {
+			Helper.line(LINES, "-");
+			System.out.println("Member");
+			Helper.line(LINES, "-");
+			System.out.println();
+			System.out.println("Choice 1: Add Member");
+			System.out.println("Choice 2: View Member");
+			System.out.println("Choice 3: Update Member");
+			System.out.println("Choice 4: Search Member");
+			System.out.println("Choice 5: List Upcoming Course");
+			System.out.println("Choice 6: Delete Member");
+			System.out.println();
+		} else if (option == 2) {
+			Helper.line(LINES, "-");
+			System.out.println("Course Category");
+			Helper.line(LINES, "-");
+			System.out.println();
+			System.out.println("Choice 1: Add Category");
+			System.out.println("Choice 2: View Category");
+			System.out.println("Choice 3: Update Category");
+			System.out.println("Choice 4: Search Category");
+			System.out.println("Choice 5: List Category that have Course");
+			System.out.println("Choice 6: Delete Course");
+			System.out.println();
+		} else if (option == 3) {
+			Helper.line(LINES, "-");
+			System.out.println("Course");
+			Helper.line(LINES, "-");
+			System.out.println();
+			System.out.println("Choice 1: Add Course");
+			System.out.println("Choice 2: View Course");
+			System.out.println("Choice 3: Update Course");
+			System.out.println("Choice 4: Search Course");
+			System.out.println("Choice 5: List a Course's Schedule");
+			System.out.println("Choice 6: Delete Course");
+			System.out.println();
+		} else if (option == 4) {
+			Helper.line(LINES, "-");
+			System.out.println("Course Schedule");
+			Helper.line(LINES, "-");
+			System.out.println();
+			System.out.println("Choice 1: Add Schedule");
+			System.out.println("Choice 2: View Schedule");
+			System.out.println("Choice 3: Update Schedule");
+			System.out.println("Choice 4: Search Schedule");
+			System.out.println("Choice 5: List all Member that Register for the Schedule");
+			System.out.println("Choice 6: Delete Schedule");
+			System.out.println();
+		} else if (option == 5) {
+			Helper.line(LINES, "-");
+			System.out.println("Course Registration");
+			Helper.line(LINES, "-");
+			System.out.println();
+			System.out.println("Choice 1: Add Registration");
+			System.out.println("Choice 2: View Registration");
+			System.out.println("Choice 3: Update Registration");
+			System.out.println("Choice 4: Search Registration");
+			System.out.println("Choice 5: List all Schedule for a Member");
+			System.out.println("Choice 6: Delete Registration");
+			System.out.println();
+		} else if (option == -1) {
+			System.out.println("Have a nice day!");
+		}
+	}
+	
 	private static void setHeader(String header) {
 		// TODO Auto-generated method stub
-		Helper.line(80, "-");
+		Helper.line(LINES, "-");
 		System.out.println(header);
-		Helper.line(80, "-");
+		Helper.line(LINES, "-");
 	}
 
+	// Hui Wen
+	public static void viewAllMember() {
+		C206_CaseStudy.setHeader("MEMBER LIST");
+		String output = String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile", "Email",
+				"DOB", "Country of Residennce");
+		output += retreiveAllMember(memberList);
+		System.out.println(output);
+	}
+	
 	// Hui Wen
 	public static String retreiveAllMember(ArrayList<Member> memberList) {
 		String output = "";
@@ -29,16 +126,6 @@ public class C206_CaseStudy {
 					i.getEmail(), i.getDateOfbirth(), i.getCountryOfresidence());
 		}
 		return output;
-
-	}
-
-	// Hui Wen
-	public static void viewAllMember(ArrayList<Member> memberList) {
-		C206_CaseStudy.setHeader("MEMBER LIST");
-		String output = String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile", "Email",
-				"DOB", "Country of Residennce");
-		output += retreiveAllMember(memberList);
-		System.out.println(output);
 	}
 
 	// Hui Wen
@@ -57,19 +144,35 @@ public class C206_CaseStudy {
 
 	// Hui Wen
 	public static void addMember(ArrayList<Member> memberList, Member mb) {
-		boolean isAdded = true;
+		boolean isAdded = false;
 		for (int i = 0; i < memberList.size(); i++) {
 			if (memberList.get(i).getEmail() == mb.getEmail())
-				isAdded = false;
+				isAdded = true;
 		}
-		if (isAdded == false) {
+		if (isAdded) {
 			System.out.println("Email must be unique");
+			System.out.println();
+			inputMember();
 		} else {
 			memberList.add(mb);
 			System.out.println("Member added");
 		}
 	}
 
+	// Hui Wen
+	public static void deletetMember() {
+
+		viewAllMember();
+		String email = Helper.readString("Enter the Member's email to delete> ");
+		boolean isDeleted = dodeleteMember(memberList, email);
+
+		if (isDeleted == false) {
+			System.out.println("Invalid email");
+		} else {
+			System.out.println("Member " + email + "  deleted");
+		}
+	}
+	
 	// Hui Wen
 	public static boolean dodeleteMember(ArrayList<Member> memberList, String email) {
 
@@ -85,59 +188,65 @@ public class C206_CaseStudy {
 		return isDeleted;
 	}
 
-	// Hui Wen
-	public static void deletetMember(ArrayList<Member> memberList) {
-
-		C206_CaseStudy.viewAllMember(memberList);
-		String email = Helper.readString("Enter the Member's email to delete> ");
-		boolean isDeleted = dodeleteMember(memberList, email);
-
-		if (isDeleted == false) {
-			System.out.println("Invalid email");
-		} else {
-			System.out.println("Member " + email + "  deleted");
+	// LI SHUFANG
+	public static void addCourseCategory() {
+		System.out.println("-----------ADD COURSE CATEGORY-----------------");
+		var courseCategoryName = Helper.readString("Enter Course Category: ");
+		var courseCategoryDescription = Helper.readString("Enter Course Category Description: ");
+		var newCC = new CourseCategory(courseCategoryName, courseCategoryDescription);
+		doAddCategory(categoryList, newCC);
+	}
+	
+	//LI SHUFANG
+	public static void doAddCategory(ArrayList<CourseCategory> categoryList, CourseCategory category) {
+		boolean isunique = true;
+		for (CourseCategory i : categoryList) {
+			if (i.getCategoryName() == category.getCategoryName()) {
+				isunique = false;
+			}
 		}
-
+		
+		if (isunique) {
+			categoryList.add(category);
+			System.out.println("Category added");
+		} else {
+			System.out.println("Name must be unique");
+		}
 	}
 
 	// LI SHUFANG
-	  public static void addCourseCategory(ArrayList<CourseCategory> categoryList) {
-	    System.out.println("-----------ADD COURSE CATEGORY-----------------");
-	    var courseCategoryName = Helper.readString("Enter Course Category: ");
-	    var courseCategoryDescription = Helper.readString("Enter Course Category Description: ");
-	    var newCC = new CourseCategory(courseCategoryName, courseCategoryDescription);
-	    categoryList.add(newCC);
-	  }
+	public static void viewCourseCategory(ArrayList<CourseCategory> categoryList) {
+		System.out.println("-----------VIEW COURSE CATEGORY-----------------");
+		System.out.println(String.format("%-20s, %-30s", "COURSE CATEGORY", "DESCRIPTION"));
+		for (var i : categoryList) {
+			System.out.println(String.format("%-20s, %-30s", i.getCategoryName(), i.getCategoryDescription()));
+		}
+	}
+	
+	// LI SHUFANG
+	public static void deleteCourseCategory() {
+		System.out.println("-----------DELETE COURSE CATEGORY-----------------");
+		var searchCategory = Helper.readString("Enter the name of the category you want to delete: ");
+		doDeleteCourseCategory(categoryList, searchCategory);
+	}
+	
+	// LI SHUFANG
+	public static void doDeleteCourseCategory(ArrayList<CourseCategory> categoryList, String categoryName) {
+		
+		for (int i = 0; i < categoryList.size(); i++) {
+			if (categoryList.get(i).getCategoryName().equalsIgnoreCase(categoryName)) {
+				var deletion = Helper.readString("Are you sure that you want to delete this category? (Y/N) > ");
+				if (deletion.equalsIgnoreCase("Y")) {
+					categoryList.remove(i);
+					System.out.println("Category have been deleted");
+				} else {
+					System.out.println("Error in category deletion.");
+				}
+			}
+		}
 
-	  // LI SHUFANG
-	  public static void deleteCourseCategory(ArrayList<CourseCategory> categoryList) {
-	    System.out.println("-----------DELETE COURSE CATEGORY-----------------");
-	    var searchCategory = Helper.readString("Enter the name of the category you want to delete: ");
-	    for (int i = 0; i < categoryList.size(); i++) {
-	      if (categoryList.get(i).getCategoryName().equalsIgnoreCase(searchCategory)) {
-	        var deletion = Helper.readString("Are you sure that you want to delete this category? (Y/N) > ");
-	        if (deletion.equalsIgnoreCase("Y")) {
-	          categoryList.remove(i);
-	        } else {
-	          System.out.println("Error in category deletion.");
-	        }
-	        return;
-	      }
-	    }
-	    System.out.println("Categories not found.");
-
-	  }
-
-	  // LI SHUFANG
-	  public static void viewCourseCategory(ArrayList<CourseCategory> categoryList) {
-	    System.out.println("-----------VIEW COURSE CATEGORY-----------------");
-	    System.out.println(String.format("%-20s, %-30s", "COURSE CATEGORY", "DESCRIPTION"));
-	    for (var i : categoryList) {
-	      System.out.println(String.format("%-20s, %-30s", i.getCategoryName(),
-	          i.getCategoryDescription()));
-	    }
-	  }
-
+	}
+	
 	// Ju Long
 	public static void addCourse() {
 		int id = courseList.size() + 1;
