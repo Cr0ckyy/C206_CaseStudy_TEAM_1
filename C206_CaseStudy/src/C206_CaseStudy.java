@@ -1,3 +1,4 @@
+import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class C206_CaseStudy {
 
 			menu(option);
 			option = Helper.readInt("Enter an Option (-1 to escape): ");
+			System.out.println();
 			menu(option);
 
 			if (option == -1)
@@ -51,6 +53,7 @@ public class C206_CaseStudy {
 			// Member
 			else if (option == 1) {
 				choice = Helper.readInt("Enter a Choice: ");
+				System.out.println();
 				switch (choice) {
 				case 1:
 					inputMember();
@@ -78,6 +81,7 @@ public class C206_CaseStudy {
 			// CourseCategory
 			else if (option == 2) {
 				choice = Helper.readInt("Enter a Choice: ");
+				System.out.println();
 				switch (choice) {
 				case 1:
 					addCourseCategory();
@@ -105,6 +109,7 @@ public class C206_CaseStudy {
 			// Course
 			else if (option == 3) {
 				choice = Helper.readInt("Enter a Choice: ");
+				System.out.println();
 				switch (choice) {
 				case 1:
 					addCourse();
@@ -132,6 +137,7 @@ public class C206_CaseStudy {
 			// Course Schedule
 			else if (option == 4) {
 				choice = Helper.readInt("Enter a Choice: ");
+				System.out.println();
 				switch (choice) {
 				case 1:
 					addCourseSchedule();
@@ -158,12 +164,13 @@ public class C206_CaseStudy {
 			// Regsitration
 			else if (option == 5) {
 				choice = Helper.readInt("Enter a Choice: ");
+				System.out.println();
 				switch (choice) {
 				case 1:
 					registerCS();
 					break;
 				case 2:
-					viewRegister(regiList);
+					viewRegister();
 					break;
 				case 3:
 					// updateCourseSchedule();
@@ -276,6 +283,7 @@ public class C206_CaseStudy {
 				"DOB", "Country of Residennce");
 		output += retreiveAllMember(memberList);
 		System.out.println(output);
+		System.out.println();
 	}
 
 	// Hui Wen
@@ -301,6 +309,7 @@ public class C206_CaseStudy {
 
 		Member mb = new Member(name, gender, moblie, email, dob, cor, password);
 		addMember(memberList, mb);
+		System.out.println();
 	}
 
 	// Hui Wen
@@ -332,6 +341,7 @@ public class C206_CaseStudy {
 		} else {
 			System.out.println("Member " + email + "  deleted");
 		}
+		System.out.println();
 	}
 
 	// Hui Wen
@@ -356,6 +366,7 @@ public class C206_CaseStudy {
 		var courseCategoryDescription = Helper.readString("Enter Course Category Description: ");
 		var newCC = new CourseCategory(courseCategoryName, courseCategoryDescription);
 		doAddCategory(categoryList, newCC);
+		System.out.println();
 	}
 
 	// LI SHUFANG
@@ -380,6 +391,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("VIEW CATEGORY");
 		System.out.println(String.format("%-50s, %s", "COURSE CATEGORY", "DESCRIPTION"));
 		System.out.println(doViewCourseCategory(categoryList));
+		System.out.println();
 	}
 
 	// LI SHUFANG
@@ -396,6 +408,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("DELETE CATEGORY");
 		var searchCategory = Helper.readString("Enter the name of the category you want to delete: ");
 		doDeleteCourseCategory(categoryList, searchCategory);
+		System.out.println();
 	}
 
 	// LI SHUFANG
@@ -427,6 +440,7 @@ public class C206_CaseStudy {
 
 		Course course = new Course(id, title, category, description, duration, prerequisite);
 		doAddCourse(courseList, course);
+		System.out.println();
 	}
 
 	// Ju Long
@@ -455,6 +469,7 @@ public class C206_CaseStudy {
 				"Course Description", "Course Duration", "Pre-requisite Course");
 		output += doViewCourse(courseList);
 		System.out.println(output);
+		System.out.println();
 	}
 
 	// Ju Long
@@ -476,6 +491,7 @@ public class C206_CaseStudy {
 		int id = Helper.readInt("Enter Course ID: ");
 
 		doDeleteCourse(courseList, id);
+		System.out.println();
 	}
 
 	// Ju Long
@@ -511,6 +527,7 @@ public class C206_CaseStudy {
 		CourseSchedule sch = new CourseSchedule(courseID, scheduleList.size() + 1, price, startDate, startTime, endDate,
 				endTime, location);
 		doAddCourseSchedule(scheduleList, sch);
+		System.out.println();
 	}
 
 	public static String doAddCourseSchedule(ArrayList<CourseSchedule> scheduleList, CourseSchedule schedule) {
@@ -540,6 +557,7 @@ public class C206_CaseStudy {
 		}
 		output += doViewCourseSchedule(scheduleList);
 		System.out.println(output);
+		System.out.println();
 	}
 
 	// Alicia
@@ -570,6 +588,7 @@ public class C206_CaseStudy {
 			scheduleID = -1;
 		}
 		doDeleteCourseSchedule(scheduleList, scheduleID);
+		System.out.println();
 	}
 
 	// Alicia
@@ -614,17 +633,37 @@ public class C206_CaseStudy {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 		String formattedDate = regiDate.format(format);
 
-		regiList.add(new Register(courseCode, CSid, regiID, memEmail, status, formattedDate));
-		System.out.println("A confirmation E-mail has been sent to your" + memEmail + " mailbox");
+		Register register = new Register(courseCode, CSid, regiID, memEmail, status, formattedDate);
+		doRegisterCS(regiList, register, memberList);
+		
+		System.out.println();
+	}
+	
+	// Qi Kai
+	public static void doRegisterCS(ArrayList<Register> regiList, Register register, ArrayList<Member> memberList) {
+		boolean isThere = false;
+		for (Member i : memberList) {
+			if (i.getEmail().equals(register.getMemEmail())) {
+				isThere = true;
+			}
+		}
+		if (isThere) {
+			regiList.add(register);
+			System.out.println("Registration have been added");
+		} else {
+			System.out.println("Email entered is not available in the Member list");
+		}
 	}
 
 	// Qi kai
-	public static String viewRegister(ArrayList<Register> regiList) {
+	public static void viewRegister() {
 		C206_CaseStudy.setHeader("VIEW ALL REGISTER");
 		String output = String.format("%-20s %-20s %-20s %-20s %-20s\n", "Registration ID", "Course Schedule ID",
 				"Member Email", "Status", "Registration Date & time");
 		output += retrieveRegiList(regiList);
-		return output;
+		
+		System.out.println(output);
+		System.out.println();
 	}
 
 	// Qikai
@@ -640,17 +679,23 @@ public class C206_CaseStudy {
 	}
 
 	// Qi kai
-	public static String deleRegi() {
+	public static void deleRegi() {
 		C206_CaseStudy.setHeader("DELETE REGISTRATION");
 		int deleRegi = Helper.readInt("Enter your registration ID: ");
+
+		doDeleRegi(regiList, deleRegi);
+		System.out.println();
+	}
+	
+	// Qi kai
+	public static String doDeleRegi(ArrayList<Register> regiList, int deleRegi) {
 		String output = "";
 		for (int i = 0; i < regiList.size(); i++) {
 			if (regiList.get(i).getRegiID() == deleRegi) {
 				regiList.remove(i);
 				output += ("Registration has been deleted");
-				System.out.println("An Email has been sent to your mailbox");
+				output += ("An Email has been sent to your mailbox");
 			}
-
 		}
 		return output;
 	}

@@ -314,7 +314,7 @@ public class C206_CaseStudyTest {
 	public void viewEntryStatus() {
 		// The system shows the entry status for the Members chosen as Pending
 		// even the Member has not yet to make the payment (Boundary)
-		assertNotNull("Test if the entry status for the Member as 'pending'", C206_CaseStudy.viewRegister(regiList));
+		assertNotNull("Test if the entry status for the Member as 'pending'", C206_CaseStudy.retrieveRegiList(regiList));
 		// System display all entry status as cancelled (Error)
 		for (int i = 0; i < regiList.size(); i++) {
 			assertFalse("Test if the entry status as cancelled" + regiList.get(i).getStatus(), false);
@@ -354,7 +354,7 @@ public class C206_CaseStudyTest {
 		// The course will no longer showing up the name and details
 		// from the member registered course with a cancellation E-mail sent
 		// out.(Normal)
-		assertEquals("Test if the member has cancel the course", C206_CaseStudy.deleRegi());
+		assertEquals("Test if the member has cancel the course", C206_CaseStudy.doDeleRegi(regiList, 0));
 		for (int i = 0; i < regiList.size(); i++) {
 			// The Member is still inside the registered course after the Member
 			// has confirm the cancellation of the course(Error)
@@ -362,7 +362,7 @@ public class C206_CaseStudyTest {
 		}
 		// Member has successfully cancelled the registered form,
 		// but no cancellation E-mail received (Boundary)
-		assertNotNull("Test if the member has received the cancellation E-mail", C206_CaseStudy.deleRegi());
+		assertNotNull("Test if the member has received the cancellation E-mail", C206_CaseStudy.doDeleRegi(regiList, 1));
 	}
 
 	// Qikai 5.5
