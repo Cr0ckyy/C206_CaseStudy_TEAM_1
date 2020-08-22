@@ -25,6 +25,7 @@ public class C206_CaseStudyTest {
 
 	private CourseSchedule schedule1;
 	private CourseSchedule schedule2;
+	private CourseSchedule schedule3;
 	private ArrayList<CourseSchedule> scheduleList;
 
 	@Before
@@ -49,6 +50,7 @@ public class C206_CaseStudyTest {
 		// Course Schedule, Alicia
 		schedule1 = new CourseSchedule(1, 1, 15.00, "12/05/2020", "12:30PM", "12/06/2020", "3:00PM", "Library");
 		schedule2 = new CourseSchedule(3, 2, 35.00, "20/07/2020", "10:00AM", "15/08/2020", "4:00PM", "Makerspace");
+		schedule3 = new CourseSchedule(2, 2, 56.00, "12/08/2020", "12:00PM", "20/12/2020", "5:00PM", "Library");
 		scheduleList = new ArrayList<CourseSchedule>();
 
 	}
@@ -221,11 +223,12 @@ public class C206_CaseStudyTest {
 		assertNotNull("Test if there is valid Course arraylist to add to", scheduleList);
 
 		// normal
-		scheduleList.add(schedule1);
+		C206_CaseStudy.doAddCourseSchedule(scheduleList, schedule2);
 		assertEquals("Test if schedule arraylist size is 1?", 1, scheduleList.size());
 
-		// error
-		scheduleList.add(schedule2);
+		// Adding schedule with duplicate schedule id(error)
+		String test1 = C206_CaseStudy.doAddCourseSchedule(scheduleList, schedule3);
+		assertEquals("Test if correct error message is displayed", test1, "The Schedule id is being repeated. Please try again.");
 	}
 
 	// Alicia
