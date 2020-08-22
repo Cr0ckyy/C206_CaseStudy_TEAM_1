@@ -240,13 +240,13 @@ public class C206_CaseStudy {
 		String output = "";
 		
 		if(scheduleList.size()==0) {
-			output += "There are no schedules to display";
+			output = "There are no schedules to display";
 		}else {
-			output += String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s", "Schedule ID",
+			output = String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s", "Schedule ID",
 					"Start Date", "Start Time", "End Date", "End Time", "Price", "Location");
 			
 			for(CourseSchedule i : scheduleList) {
-				output += String.format("\n%5d %18s %11s %12s %8s %7.2f %14s", i.getCSid(), i.getStartDate(),
+				output += String.format("%5d %18s %11s %12s %8s %7.2f %14s", i.getCSid(), i.getStartDate(),
 						i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());
 			}
 		}
@@ -254,23 +254,30 @@ public class C206_CaseStudy {
 	}
 	
 	//Alicia
-	public static void deleteCourseSchedule() {
-		viewCourseSchedule(scheduleList);
-		int scheduleID = Helper.readInt("Enter Schedule ID: ");
-		int delete = doDeleteCourseSchedule(scheduleList, scheduleID);
+	public static String deleteCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
+		String output = "";
 		
-		if(delete!=0) {
-			scheduleList.remove(delete);
-			System.out.println("Course Schedule has been deleted.");
+		if(scheduleList.size()==0) {
+			output = "There are no Course Schedules to delete";
+		}else {
+			viewCourseSchedule(scheduleList);
+			int scheduleID = Helper.readInt("Enter Schedule ID: ");
+			int delete = doDeleteCourseSchedule(scheduleList, scheduleID);
+			
+			if(delete!=-1) {
+				scheduleList.remove(delete);
+				output = "Course Schedule has been deleted";
+			}
 		}
 		
+		return output;
 		
 	}
 	
 	//Alicia
 	public static int doDeleteCourseSchedule(ArrayList<CourseSchedule> scheduleList, int scheduleID) {
 		
-		int deleteIdx = 0;
+		int deleteIdx = -1;
 		
 		for(int i=0;i<scheduleList.size();i++) {
 			if(scheduleList.get(i).getCSid()==scheduleID) {
