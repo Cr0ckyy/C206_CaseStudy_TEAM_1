@@ -86,10 +86,10 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that Camcorder arraylist size is 2", 2, memberList.size());
 		assertSame("Check that Camcorder is added", m2, memberList.get(1));
 
-		// Add another member. Test that email that is not unique cannot be added
-		C206_CaseStudy.addMember(memberList, m3);
-		String testoutput = "Email must be unique";
-		assertEquals("Test that member email that is not unique is NOT ok to add",testoutput);
+		   // Add another member. Test that email that is not unique cannot be added
+        String addMember = C206_CaseStudy.addMember(memberList, m3);
+        String testoutput = "Email must be unique";
+        assertEquals("Test that member email that is not unique is NOT ok to add",addMember, testoutput);
 	}
 
 	@Test
@@ -112,10 +112,10 @@ public class C206_CaseStudyTest {
 		// test if the expected output string same as the list of members retrieved from
 		// the case study
 		allMember = C206_CaseStudy.retreiveAllMember(memberList);
-		testOutput = String.format("%-15s %-10s %-10d %-20s %-10s %-10s", "Lily", "Female", 81234567,
+		testOutput = String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", "Lily", "Female", 81234567,
 				"lily123@email.com", "14/03/1998", "Singapore", "ly4567889");
-		testOutput += String.format("%-15s %-10s %-10d %-20s %-10s %-10s", "Sally", "Female", 92345678,
-				"sally456@email.com", "14/03/1994", "Singapore", "sy5678890");
+		testOutput += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", "Sally", "Female", 92345678,
+				"sally456@email.com", "12/04/1994", "Singapore", "sy5678890");
 
 		assertEquals("Test that ViewAllMemberlist", testOutput, allMember);
 	}
@@ -147,7 +147,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test if the size of the arraylist category is 0?", 0, categoryList.size());
 		categoryList.add(cc1);
 		assertEquals("Test if the size of the Arraylist category is 1?", 1, categoryList.size());
-		assertEquals("Test if this Category Name is called sport?", "football practice",
+		assertEquals("Test if this Category Name is called sport?", "Sport",
 				categoryList.get(0).getCategoryName());
 	}
 

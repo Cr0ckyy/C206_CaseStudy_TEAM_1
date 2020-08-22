@@ -308,26 +308,28 @@ public class C206_CaseStudy {
 		String password = Helper.readString("Enter password> ");
 
 		Member mb = new Member(name, gender, moblie, email, dob, cor, password);
-		addMember(memberList, mb);
-		System.out.println();
+		
+		System.out.println(addMember(memberList, mb));
+		
+		
 	}
 
 	// Hui Wen
-	public static void addMember(ArrayList<Member> memberList, Member mb) {
-		boolean isAdded = false;
-		for (int i = 0; i < memberList.size(); i++) {
-			if (memberList.get(i).getEmail() == mb.getEmail())
-				isAdded = true;
-		}
-		if (isAdded) {
-			System.out.println("Email must be unique");
-			System.out.println();
-			inputMember();
-		} else {
-			memberList.add(mb);
-			System.out.println("Member added");
-		}
-	}
+	public static String addMember(ArrayList<Member> memberList, Member mb) {
+        boolean isAdded = false;
+        for (int i = 0; i < memberList.size(); i++) {
+            if (memberList.get(i).getEmail() == mb.getEmail())
+                isAdded = true;
+        }
+        if ( isAdded) {
+            return ("Email must be unique");
+           
+           
+        } else {
+            memberList.add(mb);
+            return ("Member added");
+        }
+    }
 
 	// Hui Wen
 	public static void deleteMember() {
