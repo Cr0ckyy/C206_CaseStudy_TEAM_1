@@ -159,7 +159,7 @@ public class C206_CaseStudyTest {
 	public void viewCourseCategory() {
 		assertNotNull("Test if there is a valid category in the Arraylist", categoryList);
 		categoryList.add(new CourseCategory("sport", "football practice"));
-		C206_CaseStudy.viewCourseCategory(categoryList);
+		C206_CaseStudy.doViewCourseCategory(categoryList);
 //	    assertEquals("-----------VIEW COURSE CATEGORY-----------------\r\n"
 //	        + "CATEGORY NAME      , CATEGORY DESCRIPTION                   \r\n"
 //	        + "sport                , football practice                \r\n" + "");
@@ -189,17 +189,15 @@ public class C206_CaseStudyTest {
 		assertNotNull("Test if there is a valid Course arraylist to add to", courseList);
 
 		// check whether it will display only the title
-		String output1 = C206_CaseStudy.viewCourse(courseList);
-		String testOutput = String.format("%-10s | %-15s | %-20s | %-50s | %-15s | %s\n", "Course ID", "Course Title",
-				"Course Category", "Course Description", "Course Duration", "Pre-requisite Course");
+		String output1 = C206_CaseStudy.doViewCourse(courseList);
+		String testOutput = "";
 		assertEquals("Test that ViewCourse function works", testOutput, output1);
 
 		// check whether it will display the items it added
 		courseList.add(course1);
-		String output2 = C206_CaseStudy.viewCourse(courseList);
-		String testoutput = String.format("%-10s | %-15s | %-20s | %-50s | %-15s | %s\n", "Course ID", "Course Title",
-				"Course Category", "Course Description", "Course Duration", "Pre-requisite Course");
-		testoutput += String.format("%-10d | %-15s | %-20s | %-50s | %-15d | %s\n", 1, "course1", "Sport", "its good",
+		String output2 = C206_CaseStudy.doViewCourse(courseList);
+		String testoutput = "";
+		testoutput += String.format("%-10d %-30s %-20s %-50s %-15d Days %s\n", 1, "course1", "Sport", "its good",
 				30, "2 people min");
 		assertEquals("Test that ViewCourse function works after adding", testoutput, output2);
 	}
@@ -237,7 +235,7 @@ public class C206_CaseStudyTest {
 
 		// If there are no existing schedules to view (error)
 		assertSame("Check that list size is 0", 0, scheduleList.size());
-		String allSchedules = C206_CaseStudy.viewCourseSchedule(scheduleList);
+		String allSchedules = C206_CaseStudy.doViewCourseSchedule(scheduleList);
 		String output = "There are no schedules to display";
 		assertEquals("Test that the correct error message is displayed", output, allSchedules);
 
@@ -246,18 +244,13 @@ public class C206_CaseStudyTest {
 		scheduleList.add(schedule2);
 		assertSame("Test if scheduleList size is 2", 2, scheduleList.size());
 
-		String test1 = C206_CaseStudy.viewCourseSchedule(scheduleList);
-		output = String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s", "Schedule ID", "Start Date", "Start Time",
-				"End Date", "End Time", "Price", "Location");
-
-		for (int i = 0; i < scheduleList.size(); i++) {
-			output += String.format("%5d %18s %11s %12s %8s %7.2f %14s", scheduleList.get(i).getCSid(),
-					scheduleList.get(i).getStartDate(), scheduleList.get(i).getStartTime(),
-					scheduleList.get(i).getEndDate(), scheduleList.get(i).getEndTime(), scheduleList.get(i).getPrice(),
-					scheduleList.get(i).getLocation());
+		String test1 = C206_CaseStudy.doViewCourseSchedule(scheduleList);
+		output = "";
+		for (CourseSchedule i : scheduleList) {
+			output += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", 
+					i.getCSid(), i.getStartDate(), i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());
 		}
 		assertEquals("Check that the output is correct", test1, output);
-
 	}
 
 	// Alicia
