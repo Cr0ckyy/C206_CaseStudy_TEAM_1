@@ -208,7 +208,7 @@ public class C206_CaseStudyTest {
 		courseList.add(course1);
 		String output2 = C206_CaseStudy.doViewCourse(courseList);
 		String testoutput = "";
-		testoutput += String.format("%-10d %-30s %-20s %-50s %-15d Days %s\n", 1, "course1", "Sport", "its good",
+		testoutput += String.format("%-10d %-30s %-20s %-50s %-15d %s\n", 1, "course1", "Sport", "its good",
 				30, "2 people min");
 		assertEquals("Test that ViewCourse function works after adding", testoutput, output2);
 	}
@@ -360,10 +360,12 @@ public class C206_CaseStudyTest {
 	// Qikai 5.4
 	@Test
 	public void cancelCS() {
+		regiList.add(regiCS1);
 		// The course will no longer showing up the name and details
 		// from the member registered course with a cancellation E-mail sent
 		// out.(Normal)
-		assertEquals("Test if the member has cancel the course", C206_CaseStudy.doDeleRegi(regiList, 0));
+		
+		assertNull("Test if the member has cancel the course", C206_CaseStudy.doDeleRegi(regiList, 1));
 		for (int i = 0; i < regiList.size(); i++) {
 			// The Member is still inside the registered course after the Member
 			// has confirm the cancellation of the course(Error)

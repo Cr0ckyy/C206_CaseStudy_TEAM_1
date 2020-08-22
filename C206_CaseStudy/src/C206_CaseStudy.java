@@ -438,13 +438,14 @@ public class C206_CaseStudy {
 		String prerequisite = Helper.readString("Enter Course Condition: ");
 
 		Course course = new Course(id, title, category, description, duration, prerequisite);
-		doAddCourse(courseList, course, categoryList);
+		System.out.println(doAddCourse(courseList, course, categoryList));;
 		System.out.println();
 	}
 
 	// Ju Long
-	public static void doAddCourse(ArrayList<Course> courseList, Course course, ArrayList<CourseCategory> categoryList) {
+	public static String doAddCourse(ArrayList<Course> courseList, Course course, ArrayList<CourseCategory> categoryList) {
 		boolean isRepeated = false;
+		String output = "";
 		
 		for (CourseCategory i : categoryList) {
 			if (i.getCategoryName() == course.getCourseCategory()) {
@@ -454,9 +455,10 @@ public class C206_CaseStudy {
 
 		if (isRepeated) {
 			courseList.add(course);
-			System.out.println("Course has been added");
+			output += ("Course has been added");
 		} else
-			System.out.println("The Category Name is not contained in Category list!");
+			output += ("The Category Name is not contained in Category list!");
+		return output;
 	}
 
 	// Ju Long
@@ -475,9 +477,8 @@ public class C206_CaseStudy {
 		String output = "";
 		if (!courseList.isEmpty()) {
 			for (Course i : courseList) {
-				output += String.format("%-10d %-30s %-20s %-50s %-15d Days %s\n", i.getCourseCode(),
-						i.getCourseTitle(), i.getCourseCategory(), i.getCourseDescription(), i.getCourseDuration(),
-						i.getPrerequisiteCourse());
+				output += String.format("%-10d %-30s %-20s %-50s %-15d %s\n", 
+						i.getCourseCode(), i.getCourseTitle(), i.getCourseCategory(), i.getCourseDescription(), i.getCourseDuration(), i.getPrerequisiteCourse());
 			}
 		}
 		return output;
@@ -488,19 +489,22 @@ public class C206_CaseStudy {
 		viewCourse();
 		int id = Helper.readInt("Enter Course ID: ");
 
-		doDeleteCourse(courseList, id);
+		System.out.println(doDeleteCourse(courseList, id));
 		System.out.println();
 	}
 
 	// Ju Long
-	public static void doDeleteCourse(ArrayList<Course> courseList, int courseID) {
+	public static String doDeleteCourse(ArrayList<Course> courseList, int courseID) {
+		String output = "";
 		for (int i = 0; i < courseList.size(); i++) {
 			if (courseList.get(i).getCourseCode() == courseID) {
 				courseList.remove(i);
-				System.out.println("Course has been removed");
-				break;
+				output += "Course has been removed";
+			} else {
+				output += "Error remove course";
 			}
 		}
+		return output;
 	}
 
 	// Alicia
@@ -681,7 +685,7 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("DELETE REGISTRATION");
 		int deleRegi = Helper.readInt("Enter your registration ID: ");
 
-		doDeleRegi(regiList, deleRegi);
+		System.out.println(doDeleRegi(regiList, deleRegi));
 		System.out.println();
 	}
 	
@@ -691,7 +695,7 @@ public class C206_CaseStudy {
 		for (int i = 0; i < regiList.size(); i++) {
 			if (regiList.get(i).getRegiID() == deleRegi) {
 				regiList.remove(i);
-				output += ("Registration has been deleted");
+				output += ("Registration has been deleted\n");
 				output += ("An Email has been sent to your mailbox");
 			}
 		}
