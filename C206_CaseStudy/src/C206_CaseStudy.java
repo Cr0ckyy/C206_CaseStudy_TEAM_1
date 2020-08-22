@@ -322,7 +322,7 @@ public class C206_CaseStudy {
 		if (isAdded) {
 			System.out.println("Email must be unique");
 			System.out.println();
-//			inputMember();
+			inputMember();
 		} else {
 			memberList.add(mb);
 			System.out.println("Member added");

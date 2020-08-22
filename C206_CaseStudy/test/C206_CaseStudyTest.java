@@ -89,7 +89,7 @@ public class C206_CaseStudyTest {
 		// Add another member. Test that email that is not unique cannot be added
 		C206_CaseStudy.addMember(memberList, m3);
 		String testoutput = "Email must be unique";
-		assertEquals("Test that member email that is not unique is NOT ok to add", testoutput);
+		assertEquals("Test that member email that is not unique is NOT ok to add",testoutput);
 	}
 
 	@Test
@@ -184,7 +184,7 @@ public class C206_CaseStudyTest {
 
 		// check if its added
 		courseList.add(course1);
-		assertNotEquals("Test if that Course arraylist size is 1", 1, courseList.size());
+		assertEquals("Test if that Course arraylist size is 1", 1, courseList.size());
 
 		// check whether is the value the same as added just now
 		assertSame("Test that Course is added same as 1st item of the list", course1, courseList.get(0));
