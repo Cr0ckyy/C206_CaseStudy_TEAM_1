@@ -12,7 +12,8 @@ public class C206_CaseStudyTest {
 	private Member m3;
 	private ArrayList<Member> memberList;
 
-	private ArrayList<CourseCategory> coursesCat;
+	private CourseCategory cc1;
+	private CourseCategory cc2;
 	private ArrayList<CourseCategory> categoryList;
 
 	private Course course1;
@@ -36,6 +37,11 @@ public class C206_CaseStudyTest {
 		m2 = new Member("Sally", "Female", 92345678, "sally456@email.com", "12/04/1994", "Singapore", "sy5678890");
 		m3 = new Member("Jerry", "Male", 94567890, "sally456@email.com", "24/03/1994", "Singapore", "jr1234556");
 		memberList = new ArrayList<Member>();
+		
+		//Course Category, Shu Fang
+		cc1 = new CourseCategory("Sport", "Physical Exercise");
+		cc2 = new CourseCategory("IT", "Computer");
+		categoryList = new ArrayList<CourseCategory>();
 
 		// Course, Ju Long
 		course1 = new Course(1, "course1", "Sport", "its good", 30, "2 people min");
@@ -139,7 +145,7 @@ public class C206_CaseStudyTest {
 	public void addCourseCategory() {
 		assertNotNull("Test whether there is a valid Arraylist category to add to ", categoryList);
 		assertEquals("Test if the size of the arraylist category is 0?", 0, categoryList.size());
-		categoryList.add(new CourseCategory("sport", "football practice"));
+		categoryList.add(cc1);
 		assertEquals("Test if the size of the Arraylist category is 1?", 1, categoryList.size());
 		assertEquals("Test if this Category Name is called sport?", "football practice",
 				categoryList.get(0).getCategoryName());
@@ -149,7 +155,7 @@ public class C206_CaseStudyTest {
 	@Test
 	public void deleteCourseCategory() {
 		assertNotNull("Test if there is a valid category Arraylist to be added to", categoryList);
-		coursesCat.add(new CourseCategory("sport", "football practice"));
+		categoryList.add(cc1);
 		assertEquals("Test if the size of the Arraylist category is 1?", 1, categoryList.size());
 		categoryList.remove(0);
 		assertEquals("Test if the size of the Arraylist category is 0?", 0, categoryList.size());
@@ -160,11 +166,14 @@ public class C206_CaseStudyTest {
 	@Test
 	public void viewCourseCategory() {
 		assertNotNull("Test if there is a valid category in the Arraylist", categoryList);
-		categoryList.add(new CourseCategory("sport", "football practice"));
-		C206_CaseStudy.doViewCourseCategory(categoryList);
-//	    assertEquals("-----------VIEW COURSE CATEGORY-----------------\r\n"
-//	        + "CATEGORY NAME      , CATEGORY DESCRIPTION                   \r\n"
-//	        + "sport                , football practice                \r\n" + "");
+		categoryList.add(cc1);
+		categoryList.add(cc2);
+		String output = C206_CaseStudy.doViewCourseCategory(categoryList);
+		String testoutput = "";
+		for (CourseCategory i : categoryList) {
+			testoutput += String.format("%-50s %s", i.getCategoryName(), i.getCategoryDescription());
+		}
+	    assertEquals("Test if it equals to what was added", testoutput, output);
 	}
 
 	// Course
