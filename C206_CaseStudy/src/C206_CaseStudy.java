@@ -13,27 +13,27 @@ public class C206_CaseStudy {
 	private static final int LINES = 40;
 
 	public static void main(String[] args) {
-		//adding info into list
+		// adding info into list
 		memberList.add(new Member("John", "Male", 12345678, "john123@gmail.com", "23/08/1999", "Singapore", "password"));
 		memberList.add(new Member("Cherly", "Female", 98765432, "cherly1@gmail.com", "18/11/1995", "Malaysia", "password"));
 		memberList.add(new Member("Jack", "Male", 23456789, "jack99@gmail.com", "01/01/2000", "Singapore", "password"));
-		
+
 		categoryList.add(new CourseCategory("Information Technology", "we learn how to use computer"));
 		categoryList.add(new CourseCategory("Sport", "we learn how body works"));
 		categoryList.add(new CourseCategory("Engineering", "we learn everything"));
-		
+
 		courseList.add(new Course(1, "Mobile Software Development", "IT", "we learn coding", 70, "o-lvl score min 26"));
 		courseList.add(new Course(2, "Sport Science", "Sport", "we learn body health", 70, "o-lvl score min 26"));
-		courseList.add(new Course(3, "Electric Electronic Engineering", "Engineering", "we learn coding", 70, "o-lvl score min 26"));
+		courseList.add(new Course(3, "Electric Electronic Engineering", "Engineering", "we learn coding", 70,"o-lvl score min 26"));
 
 		scheduleList.add(new CourseSchedule(1, 1, 100, "19/05/2020", "10:00", "19/05/2020", "16:00", "W64H"));
 		scheduleList.add(new CourseSchedule(1, 2, 100, "20/05/2020", "10:00", "20/05/2020", "16:00", "W64H"));
 		scheduleList.add(new CourseSchedule(2, 3, 100, "19/05/2020", "10:00", "19/05/2020", "16:00", "W14G"));
-		
+
 		regiList.add(new Register(1, 1, 1, "john123@gmail.com", true, "08/03/2020"));
 		regiList.add(new Register(1, 1, 2, "cherly1@gmail.com", true, "08/03/2020"));
 		regiList.add(new Register(1, 2, 3, "jack99@gmail.com", false, "23/04/2020"));
-		
+
 		int option = 0;
 
 		while (option != -1) {
@@ -41,10 +41,12 @@ public class C206_CaseStudy {
 
 			menu(option);
 			option = Helper.readInt("Enter an Option (-1 to escape): ");
+			System.out.println();
 			menu(option);
-			
-			if (option == -1) break;
-			//Member
+
+			if (option == -1)
+				break;
+			// Member
 			else if (option == 1) {
 				choice = Helper.readInt("Enter a Choice: ");
 				switch (choice) {
@@ -55,22 +57,23 @@ public class C206_CaseStudy {
 					viewAllMember();
 					break;
 				case 3:
-					//updateMember();
+					// updateMember();
 					break;
 				case 4:
-					//searchMember();
+					// searchMember();
 					break;
 				case 5:
-					//listCourseMember();
+					// listCourseMember();
 					break;
 				case 6:
-					deleteMember();;
+					deleteMember();
+					;
 					break;
 				default:
 					System.out.println("Invalid option");
 				}
 			}
-			//CourseCategory
+			// CourseCategory
 			else if (option == 2) {
 				choice = Helper.readInt("Enter a Choice: ");
 				switch (choice) {
@@ -81,22 +84,23 @@ public class C206_CaseStudy {
 					viewCourseCategory();
 					break;
 				case 3:
-					//updateCourseCategory();
+					// updateCourseCategory();
 					break;
 				case 4:
-					//searchCourseCategory();
+					// searchCourseCategory();
 					break;
 				case 5:
-					//listCourseCategory();
+					// listCourseCategory();
 					break;
 				case 6:
-					deleteCourseCategory();;
+					deleteCourseCategory();
+					;
 					break;
 				default:
 					System.out.println("Invalid option");
 				}
 			}
-			//Course
+			// Course
 			else if (option == 3) {
 				choice = Helper.readInt("Enter a Choice: ");
 				switch (choice) {
@@ -107,22 +111,23 @@ public class C206_CaseStudy {
 					viewCourse();
 					break;
 				case 3:
-					//updateCourse();
+					// updateCourse();
 					break;
 				case 4:
-					//searchCourse();
+					// searchCourse();
 					break;
 				case 5:
-					//listScheduleCourse();
+					// listScheduleCourse();
 					break;
 				case 6:
-					deleteCourse();;
+					deleteCourse();
+					;
 					break;
 				default:
 					System.out.println("Invalid option");
 				}
 			}
-			//Course Schedule
+			// Course Schedule
 			else if (option == 4) {
 				choice = Helper.readInt("Enter a Choice: ");
 				switch (choice) {
@@ -133,13 +138,13 @@ public class C206_CaseStudy {
 					viewCourseSchedule();
 					break;
 				case 3:
-					//updateCourseSchedule();
+					// updateCourseSchedule();
 					break;
 				case 4:
-					//searchCourseSchedule();
+					// searchCourseSchedule();
 					break;
 				case 5:
-					//listScheduleMember();
+					// listScheduleMember();
 					break;
 				case 6:
 					deleteCourseSchedule();
@@ -148,7 +153,7 @@ public class C206_CaseStudy {
 					System.out.println("Invalid option");
 				}
 			}
-			//Regsitration
+			// Regsitration
 			else if (option == 5) {
 				choice = Helper.readInt("Enter a Choice: ");
 				switch (choice) {
@@ -159,13 +164,13 @@ public class C206_CaseStudy {
 					viewRegister(regiList);
 					break;
 				case 3:
-					//updateCourseSchedule();
+					// updateCourseSchedule();
 					break;
 				case 4:
-					//searchCourseSchedule();
+					// searchCourseSchedule();
 					break;
 				case 5:
-					//listScheduleMember();
+					// listScheduleMember();
 					break;
 				case 6:
 					deleRegi();
@@ -374,7 +379,7 @@ public class C206_CaseStudy {
 		System.out.println(String.format("%-50s, %s", "COURSE CATEGORY", "DESCRIPTION"));
 		System.out.println(doViewCourseCategory(categoryList));
 	}
-	
+
 	// LI SHUFANG
 	public static String doViewCourseCategory(ArrayList<CourseCategory> categoryList) {
 		String output = "";
@@ -418,7 +423,7 @@ public class C206_CaseStudy {
 		int duration = Helper.readInt("Enter Course Duration(Days): ");
 		String prerequisite = Helper.readString("Enter Course Condition: ");
 
-		Course course = new Course(courseList.size()+1, title, category, description, duration, prerequisite);
+		Course course = new Course(id, title, category, description, duration, prerequisite);
 		doAddCourse(courseList, course);
 	}
 
@@ -436,21 +441,21 @@ public class C206_CaseStudy {
 		if (!isRepeated) {
 			courseList.add(course);
 			System.out.println("Course has been added");
-		} else 
-			System.out.println("The Course Code have been repeated, please enter again!");	
+		} else
+			System.out.println("The Course Code have been repeated, please enter again!");
 	}
 
 	// Ju Long
 	public static void viewCourse() {
 		C206_CaseStudy.setHeader("VIEW COURSE");
 		String output = "";
-		output += String.format("%-10s %-30s %-20s %-50s %-15s %s\n", "Course ID", "Course Title",
-				"Course Category", "Course Description", "Course Duration", "Pre-requisite Course");
+		output += String.format("%-10s %-30s %-20s %-50s %-15s %s\n", "Course ID", "Course Title", "Course Category",
+				"Course Description", "Course Duration", "Pre-requisite Course");
 		output += doViewCourse(courseList);
 		System.out.println(output);
 	}
-	
-	//Ju Long 
+
+	// Ju Long
 	public static String doViewCourse(ArrayList<Course> courseList) {
 		String output = "";
 		if (!courseList.isEmpty()) {
@@ -501,22 +506,25 @@ public class C206_CaseStudy {
 		String endTime = Helper.readString("Enter End Time(HH:MM)AM/PM: ");
 		String location = Helper.readString("Enter Location: ");
 
-		CourseSchedule sch = new CourseSchedule(courseID, scheduleList.size()+1, price, startDate, startTime, endDate, endTime,
-				location);
+		CourseSchedule sch = new CourseSchedule(courseID, scheduleList.size() + 1, price, startDate, startTime, endDate,
+				endTime, location);
 		doAddCourseSchedule(scheduleList, sch);
 	}
-	
-	public static void doAddCourseSchedule(ArrayList<CourseSchedule> scheduleList, CourseSchedule schedule) {
+
+	public static String doAddCourseSchedule(ArrayList<CourseSchedule> scheduleList, CourseSchedule schedule) {
 		boolean isRepeat = false;
+		String output = "";
 		for (CourseSchedule i : scheduleList) {
-			if (schedule.getCSid() == i.getCSid()) isRepeat = true;
+			if (schedule.getCSid() == i.getCSid())
+				isRepeat = true;
 		}
 		if (!isRepeat) {
 			scheduleList.add(schedule);
-			System.out.println("Schedule added");
+			output = "Schedule added";
 		} else {
-			System.out.println("The Schedule id is being repeated. Please try again.");
+			output = "The Schedule id is being repeated. Please try again.";
 		}
+		return output;
 	}
 
 	// Alicia
@@ -524,23 +532,27 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("VIEW SCHEDULE");
 		String output = "";
 
-		if (scheduleList.size() == 0) {
-			output += "There are no schedules to display";
-		} else {
+		if (scheduleList.size() != 0) {
 			output += String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s\n", "Schedule ID", "Start Date",
 					"Start Time", "End Date", "End Time", "Price", "Location");
-			output += doViewCourseSchedule(scheduleList);
 		}
+		output += doViewCourseSchedule(scheduleList);
 		System.out.println(output);
 	}
-	
+
 	// Alicia
 	public static String doViewCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String output = "";
-		for (CourseSchedule i : scheduleList) {
-			output += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", i.getCSid(), i.getStartDate(),
-					i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());
+
+		if (scheduleList.size() == 0) {
+			output += "There are no schedules to display";
+		} else {
+			for (CourseSchedule i : scheduleList) {
+				output += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", i.getCSid(), i.getStartDate(),
+						i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());
+			}
 		}
+
 		return output;
 	}
 
@@ -615,7 +627,7 @@ public class C206_CaseStudy {
 
 	// Qikai
 	public static String retrieveRegiList(ArrayList<Register> regiList) {
-		
+
 		String output = "";
 		for (int i = 0; i < regiList.size(); i++) {
 			output += String.format("%-20s %-20s %-20s %-20s %-20s\n", regiList.get(i).getRegiID(),
