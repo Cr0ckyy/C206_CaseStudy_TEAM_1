@@ -11,7 +11,7 @@ public class C206_CaseStudyTest {
 	private Member m2;
 	private Member m3;
 	private ArrayList<Member> memberList;
-	
+
 	private ArrayList<CourseCategory> coursesCat;
 	private ArrayList<CourseCategory> categoryList;
 
@@ -36,8 +36,6 @@ public class C206_CaseStudyTest {
 		m3 = new Member("Jerry", "Male", 94567890, "sally456@email.com", "24/03/1994", "Singapore", "jr1234556");
 		memberList = new ArrayList<Member>();
 
-		
-		
 		// Course, Ju Long
 		course1 = new Course(1, "course1", "Sport", "its good", 30, "2 people min");
 		course2 = new Course(2, "course1", "Sport", "its good", 30, "2 people min");
@@ -60,113 +58,113 @@ public class C206_CaseStudyTest {
 		// fail("Not yet implemented");
 		assertTrue("C206_CaseStudy_SampleTest ", true);
 	}
-	
+
 	// Member
-		@Test
-		public void addMemberTest() { // HUIWEN
-			// Member list is not null, so that can add a new item - boundary
-			assertNotNull("Check if there is valid member arraylist to add to", memberList);
+	@Test
+	public void addMemberTest() { // HUIWEN
+		// Member list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid member arraylist to add to", memberList);
 
-			// Given an empty list, after adding 1 member, the size of the list is 1 -
-			// normal
-			// The item just added is as same as the first item of the list
-			C206_CaseStudy.addMember(memberList, m1);
-			assertEquals("Check that Camcorder arraylist size is 1", 1, memberList.size());
-			assertSame("Check that Camcorder is added", m1, memberList.get(0));
+		// Given an empty list, after adding 1 member, the size of the list is 1 -
+		// normal
+		// The item just added is as same as the first item of the list
+		C206_CaseStudy.addMember(memberList, m1);
+		assertEquals("Check that Camcorder arraylist size is 1", 1, memberList.size());
+		assertSame("Check that Camcorder is added", m1, memberList.get(0));
 
-			// Add another member. test The size of the list is 2? -normal
-			// The member just added is as same as the second member of the list
-			C206_CaseStudy.addMember(memberList, m2);
-			assertEquals("Check that Camcorder arraylist size is 2", 2, memberList.size());
-			assertSame("Check that Camcorder is added", m2, memberList.get(1));
+		// Add another member. test The size of the list is 2? -normal
+		// The member just added is as same as the second member of the list
+		C206_CaseStudy.addMember(memberList, m2);
+		assertEquals("Check that Camcorder arraylist size is 2", 2, memberList.size());
+		assertSame("Check that Camcorder is added", m2, memberList.get(1));
 
-			// Add another member. Test that email that is not unique cannot be added
-			C206_CaseStudy.addMember(memberList, m3);
-			String testoutput = "Email must be unique";
-			assertEquals("Test that member email that is not unique is NOT ok to add", testoutput);
-		}
+		// Add another member. Test that email that is not unique cannot be added
+		C206_CaseStudy.addMember(memberList, m3);
+		String testoutput = "Email must be unique";
+		assertEquals("Test that member email that is not unique is NOT ok to add", testoutput);
+	}
 
-		@Test
-		public void retrieveAllMemberTest() {// HUIWEN
+	@Test
+	public void retrieveAllMemberTest() {// HUIWEN
 
-			// Test if Member list is not null but empty - boundary
-			assertNotNull("Test if there is valid member arraylist to retrieve item", memberList);
+		// Test if Member list is not null but empty - boundary
+		assertNotNull("Test if there is valid member arraylist to retrieve item", memberList);
 
-			// test if the list of members retrieved from the Member is empty - boundary
-			String allMember = C206_CaseStudy.retreiveAllMember(memberList);
-			String testOutput = "";
-			assertEquals("Check that ViewAllMemberlist", testOutput, allMember);
+		// test if the list of members retrieved from the Member is empty - boundary
+		String allMember = C206_CaseStudy.retreiveAllMember(memberList);
+		String testOutput = "";
+		assertEquals("Check that ViewAllMemberlist", testOutput, allMember);
 
-			// Given an empty list, after adding 2 members, test if the size of the list is
-			// 2 - normal
-			C206_CaseStudy.addMember(memberList, m1);
-			C206_CaseStudy.addMember(memberList, m2);
-			assertEquals("Test that member arraylist size is 2", 2, memberList.size());
+		// Given an empty list, after adding 2 members, test if the size of the list is
+		// 2 - normal
+		C206_CaseStudy.addMember(memberList, m1);
+		C206_CaseStudy.addMember(memberList, m2);
+		assertEquals("Test that member arraylist size is 2", 2, memberList.size());
 
-			// test if the expected output string same as the list of members retrieved from
-			// the case study
-			allMember = C206_CaseStudy.retreiveAllMember(memberList);
-			testOutput = String.format("%-15s %-10s %-10d %-20s %-10s %-10s", "Lily", "Female", 81234567,
-					"lily123@email.com", "14/03/1998", "Singapore", "ly4567889");
-			testOutput += String.format("%-15s %-10s %-10d %-20s %-10s %-10s", "Sally", "Female", 92345678,
-					"sally456@email.com", "14/03/1994", "Singapore", "sy5678890");
+		// test if the expected output string same as the list of members retrieved from
+		// the case study
+		allMember = C206_CaseStudy.retreiveAllMember(memberList);
+		testOutput = String.format("%-15s %-10s %-10d %-20s %-10s %-10s", "Lily", "Female", 81234567,
+				"lily123@email.com", "14/03/1998", "Singapore", "ly4567889");
+		testOutput += String.format("%-15s %-10s %-10d %-20s %-10s %-10s", "Sally", "Female", 92345678,
+				"sally456@email.com", "14/03/1994", "Singapore", "sy5678890");
 
-			assertEquals("Test that ViewAllMemberlist", testOutput, allMember);
-		}
+		assertEquals("Test that ViewAllMemberlist", testOutput, allMember);
+	}
 
-		@Test
-		public void doDeleteMemberTest() { // HUIWEN
-			// Test if Member list is not null but empty - boundary
-			assertNotNull("test if there is valid member arraylist to delete from", memberList);
+	@Test
+	public void doDeleteMemberTest() { // HUIWEN
+		// Test if Member list is not null but empty - boundary
+		assertNotNull("test if there is valid member arraylist to delete from", memberList);
 
-			// given an empty list, after adding 1 member, test if able to delete - normal
-			C206_CaseStudy.addMember(memberList, m1);
-			Boolean ok = C206_CaseStudy.dodeleteMember(memberList, "lily123@email.com");
-			assertTrue("Test if an existing member is ok to delete?", ok);
+		// given an empty list, after adding 1 member, test if able to delete - normal
+		C206_CaseStudy.addMember(memberList, m1);
+		Boolean ok = C206_CaseStudy.dodeleteMember(memberList, "lily123@email.com");
+		assertTrue("Test if an existing member is ok to delete?", ok);
 
-			// test if that the same member cannot be deleted again - error
-			ok = C206_CaseStudy.dodeleteMember(memberList, "lily123@email.com");
-			assertFalse("Test if an same member is NOT ok to delete again?", ok);
+		// test if that the same member cannot be deleted again - error
+		ok = C206_CaseStudy.dodeleteMember(memberList, "lily123@email.com");
+		assertFalse("Test if an same member is NOT ok to delete again?", ok);
 
-			// test if that the non-existing member cannot be deleted again - error
-			ok = C206_CaseStudy.dodeleteMember(memberList, "sally456@email.com");
-			assertFalse("Test if an non-existing member is NOT ok to delete again?", ok);
-		}
-	
-	//CourseCategory
+		// test if that the non-existing member cannot be deleted again - error
+		ok = C206_CaseStudy.dodeleteMember(memberList, "sally456@email.com");
+		assertFalse("Test if an non-existing member is NOT ok to delete again?", ok);
+	}
+
+	// CourseCategory
 	// SHUFANG
-	  @Test
-	  public void addCourseCategory() {
-	    assertNotNull("Test whether there is a valid Arraylist category to add to ", categoryList);
-	    assertEquals("Test if the size of the arraylist category is 0?", 0, categoryList.size());
-	    categoryList.add(new CourseCategory("sport", "football practice"));
-	    assertEquals("Test if the size of the Arraylist category is 1?", 1, categoryList.size());
-	    assertEquals("Test if this Category Name is called sport?", "football practice",
-	        categoryList.get(0).getCategoryName());
-	  }
-	  // SHUFANG
-	  @Test
-	  public void deleteCourseCategory() {
-	    assertNotNull("Test if there is a valid category Arraylist to be added to", categoryList);
-	    coursesCat.add(new CourseCategory("sport", "football practice"));
-	    assertEquals("Test if the size of the Arraylist category is 1?", 1, categoryList.size());
-	    categoryList.remove(0);
-	    assertEquals("Test if the size of the Arraylist category is 0?", 0, categoryList.size());
+	@Test
+	public void addCourseCategory() {
+		assertNotNull("Test whether there is a valid Arraylist category to add to ", categoryList);
+		assertEquals("Test if the size of the arraylist category is 0?", 0, categoryList.size());
+		categoryList.add(new CourseCategory("sport", "football practice"));
+		assertEquals("Test if the size of the Arraylist category is 1?", 1, categoryList.size());
+		assertEquals("Test if this Category Name is called sport?", "football practice",
+				categoryList.get(0).getCategoryName());
+	}
 
-	  }
-	  
-	  // SHUFANG
-	  @Test
-	  public void viewCourseCategory() {
-	    assertNotNull("Test if there is a valid category in the Arraylist", categoryList);
-	    categoryList.add(new CourseCategory("sport", "football practice"));
-	    C206_CaseStudy.viewCourseCategory(categoryList);
+	// SHUFANG
+	@Test
+	public void deleteCourseCategory() {
+		assertNotNull("Test if there is a valid category Arraylist to be added to", categoryList);
+		coursesCat.add(new CourseCategory("sport", "football practice"));
+		assertEquals("Test if the size of the Arraylist category is 1?", 1, categoryList.size());
+		categoryList.remove(0);
+		assertEquals("Test if the size of the Arraylist category is 0?", 0, categoryList.size());
+
+	}
+
+	// SHUFANG
+	@Test
+	public void viewCourseCategory() {
+		assertNotNull("Test if there is a valid category in the Arraylist", categoryList);
+		categoryList.add(new CourseCategory("sport", "football practice"));
+		C206_CaseStudy.viewCourseCategory(categoryList);
 //	    assertEquals("-----------VIEW COURSE CATEGORY-----------------\r\n"
 //	        + "CATEGORY NAME      , CATEGORY DESCRIPTION                   \r\n"
 //	        + "sport                , football practice                \r\n" + "");
-	  }
+	}
 
-	
 	// Course
 	@Test
 	public void addCourseTest() {
@@ -219,63 +217,71 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that list equals to 1 after delete", 1, courseList.size());
 	}
 
-	//Alicia
+	// Alicia
 	@Test
 	public void addCourseScheduleTest() {
 		assertNotNull("Test if there is valid Course arraylist to add to", scheduleList);
-		
-		//normal
+
+		// normal
 		scheduleList.add(schedule1);
 		assertEquals("Test if schedule arraylist size is 1?", 1, scheduleList.size());
-		
-		//error
+
+		// error
 		scheduleList.add(schedule2);
 	}
-	
-	//Alicia
+
+	// Alicia
 	@Test
 	public void viewCourseScheduleTest() {
 		assertNotNull("Test if there is valid CourseSchedule arraylist to add to", scheduleList);
-		
-		//If there are no existing schedules to view (error)
+
+		// If there are no existing schedules to view (error)
 		assertSame("Check that list size is 0", 0, scheduleList.size());
 		String allSchedules = C206_CaseStudy.viewCourseSchedule(scheduleList);
 		String output = "There are no schedules to display";
-		assertEquals("Check that the list is empty", output, allSchedules);
+		assertEquals("Test that the correct error message is displayed", output, allSchedules);
 
 		// If there are schedules to display (normal)
 		scheduleList.add(schedule1);
-		assertSame("Test if scheduleList size is 1", 1, scheduleList.size());
-		
+		scheduleList.add(schedule2);
+		assertSame("Test if scheduleList size is 2", 2, scheduleList.size());
+
 		String test1 = C206_CaseStudy.viewCourseSchedule(scheduleList);
 		output = String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s", "Schedule ID", "Start Date", "Start Time",
 				"End Date", "End Time", "Price", "Location");
-		output += String.format("%5d %18s %11s %12s %8s %7.2f %14s", schedule1.getCSid(), schedule1.getStartDate(),
-				schedule1.getStartTime(), schedule1.getEndDate(), schedule1.getEndTime(), schedule1.getPrice(),
-				schedule1.getLocation());
+
+		for (int i = 0; i < scheduleList.size(); i++) {
+			output += String.format("%5d %18s %11s %12s %8s %7.2f %14s", scheduleList.get(i).getCSid(),
+					scheduleList.get(i).getStartDate(), scheduleList.get(i).getStartTime(),
+					scheduleList.get(i).getEndDate(), scheduleList.get(i).getEndTime(), scheduleList.get(i).getPrice(),
+					scheduleList.get(i).getLocation());
+		}
 		assertEquals("Check that the output is correct", test1, output);
-		
 
 	}
 
-	//Alicia
+	// Alicia
 	@Test
 	public void deleteCourseScheduleTest() {
 		assertNotNull("Test if there is valid CourseSchedule arraylist", scheduleList);
-		
-		//If there is no existing schedules to delete (error)
+
+		// If there is no existing schedules to delete (error)
 		assertSame("Test that list is empty", 0, scheduleList.size());
-		String msg = C206_CaseStudy.deleteCourseSchedule(scheduleList);
-		assertEquals("Test that error message is displayed", msg, "There are no Course Schedules to delete");
-		
+		String test1 = C206_CaseStudy.doDeleteCourseSchedule(scheduleList, -1);
+		assertEquals("Test that error message is displayed", test1, "There are no Course Schedules to delete");
+
 		scheduleList.add(schedule1);
 		scheduleList.add(schedule2);
 		assertSame("Test that list size is 2", 2, scheduleList.size());
-		
-		//Test that course schedule is deleted (normal)
-		String output = C206_CaseStudy.deleteCourseSchedule(scheduleList);
-		assertEquals("Test that course schedule is deleted", output, "Course Schedule has been deleted.");
-		
+
+		// Test that error message is displayed for invalid schedule id entered
+		String test2 = C206_CaseStudy.doDeleteCourseSchedule(scheduleList, 3);
+		assertEquals("Test that correct error message is displayed", test2, "Invalid Course Schedule ID");
+
+		// Test that course schedule is deleted (normal)
+		String test3 = C206_CaseStudy.doDeleteCourseSchedule(scheduleList, 1);
+		assertEquals("Test that course schedule is deleted", test3, "Course Schedule has been deleted");
+
 		assertSame("Test that list size is 1", 1, scheduleList.size());
 	}
 
