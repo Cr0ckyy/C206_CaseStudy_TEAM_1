@@ -15,10 +15,8 @@ public class C206_CaseStudy {
 
 	public static void main(String[] args) {
 		// adding info into list
-		memberList
-				.add(new Member("John", "Male", 12345678, "john123@gmail.com", "23/08/1999", "Singapore", "password"));
-		memberList.add(
-				new Member("Cherly", "Female", 98765432, "cherly1@gmail.com", "18/11/1995", "Malaysia", "password"));
+		memberList.add(new Member("John", "Male", 12345678, "john123@gmail.com", "23/08/1999", "Singapore", "password"));
+		memberList.add(new Member("Cherly", "Female", 98765432, "cherly1@gmail.com", "18/11/1995", "Malaysia", "password"));
 		memberList.add(new Member("Jack", "Male", 23456789, "jack99@gmail.com", "01/01/2000", "Singapore", "password"));
 
 		categoryList.add(new CourseCategory("Information Technology", "we learn how to use computer"));
@@ -27,8 +25,7 @@ public class C206_CaseStudy {
 
 		courseList.add(new Course(1, "Mobile Software Development", "IT", "we learn coding", 70, "o-lvl score min 26"));
 		courseList.add(new Course(2, "Sport Science", "Sport", "we learn body health", 70, "o-lvl score min 26"));
-		courseList.add(new Course(3, "Electric Electronic Engineering", "Engineering", "we learn coding", 70,
-				"o-lvl score min 26"));
+		courseList.add(new Course(3, "Electric Electronic Engineering", "Engineering", "we learn coding", 70, "o-lvl score min 26"));
 
 		scheduleList.add(new CourseSchedule(1, 1, 100, "19/05/2020", "10:00", "19/05/2020", "16:00", "W64H"));
 		scheduleList.add(new CourseSchedule(1, 2, 100, "20/05/2020", "10:00", "20/05/2020", "16:00", "W64H"));
