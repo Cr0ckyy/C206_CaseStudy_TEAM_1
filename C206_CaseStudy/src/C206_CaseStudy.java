@@ -583,8 +583,8 @@ public class C206_CaseStudy {
 		} else {
 			scheduleID = -1;
 		}
-		doDeleteCourseSchedule(scheduleList, scheduleID);
-		System.out.println();
+		String output = doDeleteCourseSchedule(scheduleList, scheduleID);
+		System.out.println(output);
 	}
 
 	// Alicia
