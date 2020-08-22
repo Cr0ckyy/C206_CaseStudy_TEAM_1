@@ -362,7 +362,7 @@ public class C206_CaseStudy {
 	// LI SHUFANG
 	public static void addCourseCategory() {
 		C206_CaseStudy.setHeader("ADD CATEGORY");
-		var courseCategoryName = Helper.readString("Enter Course Category: ");
+		var courseCategoryName = Helper.readString("Enter Course Category Name: ");
 		var courseCategoryDescription = Helper.readString("Enter Course Category Description: ");
 		var newCC = new CourseCategory(courseCategoryName, courseCategoryDescription);
 		doAddCategory(categoryList, newCC);
@@ -389,7 +389,7 @@ public class C206_CaseStudy {
 	// LI SHUFANG
 	public static void viewCourseCategory() {
 		C206_CaseStudy.setHeader("VIEW CATEGORY");
-		System.out.println(String.format("%-50s, %s", "COURSE CATEGORY", "DESCRIPTION"));
+		System.out.println(String.format("%-50s %s", "COURSE CATEGORY", "DESCRIPTION"));
 		System.out.println(doViewCourseCategory(categoryList));
 		System.out.println();
 	}
@@ -398,7 +398,7 @@ public class C206_CaseStudy {
 	public static String doViewCourseCategory(ArrayList<CourseCategory> categoryList) {
 		String output = "";
 		for (var i : categoryList) {
-			output += (String.format("%-50s, %s", i.getCategoryName(), i.getCategoryDescription()));
+			output += (String.format("%-50s %s", i.getCategoryName(), i.getCategoryDescription()));
 		}
 		return output;
 	}
@@ -439,26 +439,25 @@ public class C206_CaseStudy {
 		String prerequisite = Helper.readString("Enter Course Condition: ");
 
 		Course course = new Course(id, title, category, description, duration, prerequisite);
-		doAddCourse(courseList, course);
+		doAddCourse(courseList, course, categoryList);
 		System.out.println();
 	}
 
 	// Ju Long
-	public static void doAddCourse(ArrayList<Course> courseList, Course course) {
+	public static void doAddCourse(ArrayList<Course> courseList, Course course, ArrayList<CourseCategory> categoryList) {
 		boolean isRepeated = false;
-
-		for (Course i : courseList) {
-			if (i.getCourseCode() != course.getCourseCode()) {
+		
+		for (CourseCategory i : categoryList) {
+			if (i.getCategoryName() == course.getCourseCategory()) {
 				isRepeated = true;
-				break;
 			}
 		}
 
-		if (!isRepeated) {
+		if (isRepeated) {
 			courseList.add(course);
 			System.out.println("Course has been added");
 		} else
-			System.out.println("The Course Code have been repeated, please enter again!");
+			System.out.println("The Category Name is not contained in Category list!");
 	}
 
 	// Ju Long
