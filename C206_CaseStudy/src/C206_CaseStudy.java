@@ -787,8 +787,8 @@ public class C206_CaseStudy {
 					update = i;
 				}
 			}
-			
-			if(update != -1) {
+
+			if (update != -1) {
 				double price = Helper.readDouble("Enter Price: ");
 				String startDate = Helper.readString("Enter Start Date(DD/MM/YYYY): ");
 				String startTime = Helper.readString("Enter Start Time(HH:MM)AM/PM: ");
@@ -814,13 +814,13 @@ public class C206_CaseStudy {
 
 		String output = "";
 
-		if (update == -1 || update>scheduleList.size()) {
+		if (update == -1 || update > scheduleList.size()) {
 
 			output += "Invalid Course Schedule ID";
 
-		} else if(update == -2){
+		} else if (update == -2) {
 			output += "There are no course schedules to update";
-		}else {
+		} else {
 			output += "Course Schedule has been updated";
 		}
 
@@ -854,7 +854,7 @@ public class C206_CaseStudy {
 					"Start Time", "End Date", "End Time", "Price", "Location");
 
 			for (CourseSchedule i : scheduleList) {
-				if (i.getPrice() >= search-1 && i.getPrice() < (search + 1)) {
+				if (i.getPrice() >= search - 1 && i.getPrice() < (search + 1)) {
 					output += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", i.getCSid(),
 							i.getStartDate(), i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(),
 							i.getLocation());
@@ -871,60 +871,53 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("LIST MEMBER FOR THE SCHEDULE");
 
 		int check = 0;
+		ArrayList<String> email = new ArrayList<String>();
 
-		if (!(scheduleList.size() == 0 || regiList.size() == 0 || memberList.size() == 0 || courseList.size() == 0)) {
+		if (!(regiList.size() == 0 || memberList.size() == 0)) {
 			check = 1;
+
+			viewCourse();
+			int course = Helper.readInt("Enter Course ID: ");
+			int scheduleID = Helper.readInt("Enter Schedule ID: ");
+
+			
+
+			for (int i = 0; i < regiList.size(); i++) {
+				if (regiList.get(i).getCSid() == scheduleID && regiList.get(i).getCourseCode() == course) {
+					email.add(regiList.get(i).getMemEmail());
+				}
+			}
 		}
 
-		String output = doListScheduleMember(regiList, memberList, check);
+		String output = doListScheduleMember(regiList, memberList, email, check);
 		System.out.println(output);
 	}
 
 	// Alicia
-	public static String doListScheduleMember(ArrayList<Register> regiList, ArrayList<Member> memberList, int check) {
+	public static String doListScheduleMember(ArrayList<Register> regiList, ArrayList<Member> memberList,
+			ArrayList<String> email, int check) {
 
 		String output = "";
 
 		if (check == 0) {
-			if (scheduleList.size() == 0) {
-				output += "There are no available course schedules";
-			} else if (regiList.size() == 0) {
+			if (regiList.size() == 0) {
 				output += "There are no members in the registrants list";
 			} else if (memberList.size() == 0) {
 				output += "There are no members";
-			} else if (courseList.size() == 0) {
-				output += "There are no courses";
 			}
 		} else {
-			viewCourse();
-			int course = Helper.readInt("Enter Course ID: ");
 
-			int scheduleID = Helper.readInt("Enter Schedule ID: ");
-			boolean checkRegister = false;
-			ArrayList<String> email = new ArrayList<String>();
+			if (email.size() != 0) {
 
-			for (int i = 0; i < regiList.size(); i++) {
-				if (regiList.get(i).getCSid() == scheduleID && regiList.get(i).getCourseCode() == course) {
-					checkRegister = true;
-					email.add(regiList.get(i).getMemEmail());
-				}
-			}
+				output += String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile", "Email",
+						"DOB", "Country of Residence");
 
-			if (checkRegister == true) {
+				for (Member m : memberList) {
+					for (String e : email) {
+						if (m.getEmail().equals(e)) {
 
-				if (email.size() != 0) {
-
-					output += String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile",
-							"Email", "DOB", "Country of Residennce");
-
-					for (Member m : memberList) {
-						for (String e : email) {
-							if (m.getEmail().equals(e)) {
-
-								output += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", m.getName(),
-										m.getGender(), m.getMobile(), m.getEmail(), m.getDateOfbirth(),
-										m.getCountryOfresidence());
-							}
+							output += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", m.getName(), m.getGender(),
+									m.getMobile(), m.getEmail(), m.getDateOfbirth(), m.getCountryOfresidence());
 						}
 					}
 				}

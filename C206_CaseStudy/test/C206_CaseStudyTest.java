@@ -412,16 +412,27 @@ public class C206_CaseStudyTest {
 
 	}
 	
-//	@Test
-//	//Alicia
-//	public void listScheduleMemberTest(){
-//		//If there are no members that are registered for the schedule (error)
-//		regiList.add(regiCS1);
-//		String test1 = C206_CaseStudy.doListScheduleMember(regiList, memberList, 1);
-//		String msg1 = "There are no members";
-//		
-//		//If there are members that registered for the schedule (normal)
-//	}
+	@Test
+	//Alicia
+	public void listScheduleMemberTest(){
+		//If there are no members that are registered for the schedule (error)
+		regiList.add(regiCS1);
+		ArrayList<String> email = new ArrayList<String>();
+		String test1 = C206_CaseStudy.doListScheduleMember(regiList, memberList, email,0);
+		String msg1 = "There are no members";
+		assertEquals("Test that correct error message is displayed", msg1, test1);
+		
+		//If there are members that registered for the schedule (normal)
+		email.add("lily123@email.com");
+		memberList.add(m1);
+		
+		String test2 = C206_CaseStudy.doListScheduleMember(regiList, memberList, email, 1);
+		String msg2 = String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile", "Email",
+				"DOB", "Country of Residence");
+		msg2 += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", m1.getName(), m1.getGender(),
+				m1.getMobile(), m1.getEmail(), m1.getDateOfbirth(), m1.getCountryOfresidence());
+		assertEquals("Test that output is correct", msg2, test2);
+	}
 
 	
 	// Register
