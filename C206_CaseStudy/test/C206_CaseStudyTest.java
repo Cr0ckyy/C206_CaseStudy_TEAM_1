@@ -420,7 +420,7 @@ public class C206_CaseStudyTest {
 		// from the member registered course with a cancellation E-mail sent
 		// out.(Normal)
 		
-		assertNull("Test if the member has cancel the course", C206_CaseStudy.doDeleRegi(regiList, 1));
+		assertEquals("Test if the member has cancel the course", C206_CaseStudy.doDeleRegi(regiList, 1), "");
 		for (int i = 0; i < regiList.size(); i++) {
 			// The Member is still inside the registered course after the Member
 			// has confirm the cancellation of the course(Error)
