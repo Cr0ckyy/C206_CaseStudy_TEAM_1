@@ -155,7 +155,7 @@ public class C206_CaseStudy {
 					updateCourseSchedule();
 					break;
 				case 4:
-					// searchCourseSchedule();
+					 searchCourseSchedule();
 					break;
 				case 5:
 					// listScheduleMember();
@@ -679,11 +679,6 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("VIEW SCHEDULE");
 		String output = "";
 
-//		if (scheduleList.size() != 0) {
-//			output += String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s\n", "Schedule ID", "Start Date",
-//					"Start Time", "End Date", "End Time", "Price", "Location");
-//		}
-
 		if (scheduleList.size() != 0) {
 			output += String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s\n", "Schedule ID", "Start Date",
 					"Start Time", "End Date", "End Time", "Price", "Location");
@@ -811,6 +806,41 @@ public class C206_CaseStudy {
 
 		return output;
 
+	}
+	
+	//Alicia
+	public static void searchCourseSchedule() {
+		double search = 0.00;
+		
+		if(scheduleList.size()!=0) {
+			
+			search = Helper.readDouble("Enter Price to Search: ");
+			
+		}
+		String output = doSearchCourseSchedule(scheduleList, search);
+		System.out.println(output);
+	}
+	
+	//Alicia
+	public static String doSearchCourseSchedule(ArrayList<CourseSchedule> scheduleList, double search) {
+		
+		String output = "";
+		
+		if(search==0.00) {
+			output += "There are no available course schedules";
+		}else {
+			output += String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s\n", "Schedule ID", "Start Date",
+					"Start Time", "End Date", "End Time", "Price", "Location");
+			
+			for(CourseSchedule i : scheduleList) {
+				if(i.getPrice()>=search && i.getPrice()<(search+1)) {
+					output += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", i.getCSid(), i.getStartDate(),
+							i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());;
+				}
+			}
+		}
+		
+		return output;
 	}
 
 	// Qi Kai
