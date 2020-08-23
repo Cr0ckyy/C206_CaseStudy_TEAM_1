@@ -412,6 +412,18 @@ public class C206_CaseStudyTest {
 
 	}
 	
+//	@Test
+//	//Alicia
+//	public void listScheduleMemberTest(){
+//		//If there are no members that are registered for the schedule (error)
+//		regiList.add(regiCS1);
+//		String test1 = C206_CaseStudy.doListScheduleMember(regiList, memberList, 1);
+//		String msg1 = "There are no members";
+//		
+//		//If there are members that registered for the schedule (normal)
+//	}
+
+	
 	// Register
 	// Qikai 5.1
 	@Test
