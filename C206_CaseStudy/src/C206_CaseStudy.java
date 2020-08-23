@@ -717,12 +717,12 @@ public class C206_CaseStudy {
 			viewCourseSchedule();
 			scheduleID = Helper.readInt("Enter Schedule ID: ");
 		}
-		String output = doDeleteCourseSchedule(scheduleList, scheduleID);
+		String output = doDeleteCourseSchedule(scheduleList, regiList, scheduleID);
 		System.out.println(output);
 	}
 
 	// Alicia
-	public static String doDeleteCourseSchedule(ArrayList<CourseSchedule> scheduleList, int scheduleID) {
+	public static String doDeleteCourseSchedule(ArrayList<CourseSchedule> scheduleList, ArrayList<Register> regiList, int scheduleID) {
 
 		String output = "";
 
@@ -737,9 +737,20 @@ public class C206_CaseStudy {
 					deleteIdx = i;
 				}
 			}
+			
+			for(Register i : regiList) {
+				if(i.getCSid()==scheduleID) {
+					deleteIdx = -2;
+				}
+			}
 
-			if (deleteIdx == -1) {
-				output += "Invalid Course Schedule ID";
+			if (deleteIdx == -1 || deleteIdx == -2) {
+				if(deleteIdx == -1) {
+					output += "Invalid Course Schedule ID";
+				}else if(deleteIdx == -2) {
+					output += "Unable to delete! Course Schedule has registered member!";
+				}
+				
 			} else {
 				scheduleList.remove(deleteIdx);
 				output += "Course Schedule has been deleted";

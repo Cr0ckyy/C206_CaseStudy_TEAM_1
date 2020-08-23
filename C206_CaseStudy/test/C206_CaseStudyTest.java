@@ -328,7 +328,7 @@ public class C206_CaseStudyTest {
 
 		// If there is no existing schedules to delete (error)
 		assertSame("Test that list is empty", 0, scheduleList.size());
-		String test1 = C206_CaseStudy.doDeleteCourseSchedule(scheduleList, -1);
+		String test1 = C206_CaseStudy.doDeleteCourseSchedule(scheduleList, regiList, -1);
 		assertEquals("Test that error message is displayed", test1, "There are no Course Schedules to delete");
 
 		scheduleList.add(schedule1);
@@ -336,11 +336,11 @@ public class C206_CaseStudyTest {
 		assertSame("Test that list size is 2", 2, scheduleList.size());
 
 		// Test that error message is displayed for invalid schedule id entered
-		String test2 = C206_CaseStudy.doDeleteCourseSchedule(scheduleList, 3);
+		String test2 = C206_CaseStudy.doDeleteCourseSchedule(scheduleList, regiList, 3);
 		assertEquals("Test that correct error message is displayed", test2, "Invalid Course Schedule ID");
 
 		// Test that course schedule is deleted (normal)
-		String test3 = C206_CaseStudy.doDeleteCourseSchedule(scheduleList, 1);
+		String test3 = C206_CaseStudy.doDeleteCourseSchedule(scheduleList, regiList, 1);
 		assertEquals("Test that course schedule is deleted", test3, "Course Schedule has been deleted");
 
 		assertSame("Test that list size is 1", 1, scheduleList.size());
