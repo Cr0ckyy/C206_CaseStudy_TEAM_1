@@ -152,7 +152,7 @@ public class C206_CaseStudy {
 					viewCourseSchedule();
 					break;
 				case 3:
-					// updateCourseSchedule();
+					updateCourseSchedule();
 					break;
 				case 4:
 					// searchCourseSchedule();
@@ -698,7 +698,7 @@ public class C206_CaseStudy {
 	public static String doViewCourseSchedule(ArrayList<CourseSchedule> scheduleList) {
 		String output = "";
 
-		if (scheduleList.size()==0) {
+		if (scheduleList.size() == 0) {
 			output += "There are no schedules to display";
 		} else {
 			for (CourseSchedule i : scheduleList) {
@@ -755,71 +755,62 @@ public class C206_CaseStudy {
 		return output;
 
 	}
-	
-	//Alicia
+
+	// Alicia
 	public static void updateCourseSchedule() {
-		
-		if(scheduleList.size()!=0) {
-			
-			int scheduleID = Helper.readInt("Enter Schedule ID to update");
-			
-			int update = -1;
-			String output = "";
-			
-			for(int i=0;i<scheduleList.size();i++) {
-				if(scheduleList.get(i).getCSid()==scheduleID) {
-//					double price = Helper.readDouble("Enter Price: ");
-//					String startDate = Helper.readString("Enter Start Date(DD/MM/YYYY): ");
-//					String startTime = Helper.readString("Enter Start Time(HH:MM)AM/PM: ");
-//					String endDate = Helper.readString("Enter End Date(DD/MM/YYYY): ");
-//					String endTime = Helper.readString("Enter End Time(HH:MM)AM/PM: ");
-//					String location = Helper.readString("Enter Location: ");
-//					
-//					scheduleList.get(i).setPrice(price);
-//					scheduleList.get(i).setStartDate(startDate);
-//					scheduleList.get(i).setStartTime(startTime);
-//					scheduleList.get(i).setEndDate(endDate);
-//					scheduleList.get(i).setEndTime(endTime);
-//					scheduleList.get(i).setLocation(location);
+
+		int update = -1;
+		String output = "";
+
+		if (scheduleList.size() != 0) {
+			viewCourseSchedule();
+			int scheduleID = Helper.readInt("Enter Schedule ID to update: ");
+
+			for (int i = 0; i < scheduleList.size(); i++) {
+				if (scheduleList.get(i).getCSid() == scheduleID) {
 					
 					update = i;
-					output += doUpdateCourseSchedule(scheduleList, update);
 				}
 			}
-			
-			System.out.println(output);
+
 		}
-		
+
+		output += doUpdateCourseSchedule(scheduleList, update);
+		System.out.println(output);
+
 	}
-	
-	//Alicia
+
+	// Alicia
 	public static String doUpdateCourseSchedule(ArrayList<CourseSchedule> scheduleList, int update) {
-	
+
 		String output = "";
-		
-		if(update!=-1) {
-			double price = Helper.readDouble("Enter Price: ");
-			String startDate = Helper.readString("Enter Start Date(DD/MM/YYYY): ");
-			String startTime = Helper.readString("Enter Start Time(HH:MM)AM/PM: ");
-			String endDate = Helper.readString("Enter End Date(DD/MM/YYYY): ");
-			String endTime = Helper.readString("Enter End Time(HH:MM)AM/PM: ");
-			String location = Helper.readString("Enter Location: ");
-			
-			scheduleList.get(update).setPrice(price);
-			scheduleList.get(update).setStartDate(startDate);
-			scheduleList.get(update).setStartTime(startTime);
-			scheduleList.get(update).setEndDate(endDate);
-			scheduleList.get(update).setEndTime(endTime);
-			scheduleList.get(update).setLocation(location);
-			
-			
-			output += "Course Schedule has been updated";
-		}else {
-			output += "Unable to update course schedule";
+
+		if (scheduleList.size() == 0) {
+			output += "There are no course schedules to update";
+		} else {
+			if (update != -1) {
+				double price = Helper.readDouble("Enter Price: ");
+				String startDate = Helper.readString("Enter Start Date(DD/MM/YYYY): ");
+				String startTime = Helper.readString("Enter Start Time(HH:MM)AM/PM: ");
+				String endDate = Helper.readString("Enter End Date(DD/MM/YYYY): ");
+				String endTime = Helper.readString("Enter End Time(HH:MM)AM/PM: ");
+				String location = Helper.readString("Enter Location: ");
+
+				scheduleList.get(update).setPrice(price);
+				scheduleList.get(update).setStartDate(startDate);
+				scheduleList.get(update).setStartTime(startTime);
+				scheduleList.get(update).setEndDate(endDate);
+				scheduleList.get(update).setEndTime(endTime);
+				scheduleList.get(update).setLocation(location);
+
+				output += "Course Schedule has been updated";
+			} else {
+				output += "Invalid Course Schedule ID";
+			}
 		}
-		
+
 		return output;
-		
+
 	}
 
 	// Qi Kai
