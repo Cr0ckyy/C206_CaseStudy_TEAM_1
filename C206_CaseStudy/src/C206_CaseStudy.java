@@ -814,7 +814,7 @@ public class C206_CaseStudy {
 
 		String output = "";
 
-		if (update == -1) {
+		if (update == -1 || update>scheduleList.size()) {
 
 			output += "Invalid Course Schedule ID";
 

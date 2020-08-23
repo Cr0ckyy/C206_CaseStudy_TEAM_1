@@ -360,27 +360,27 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that correct error message is displayed", msg4, test4);
 	}
 
-//	//Alicia
-//	@Test
-//	public void updateCourseScheduleTest(){
-//		assertNotNull("Test if there is valid list to update to", scheduleList);
-//		
-//		//If there are no course schedules to edit(error)
-//	String test1 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, -2);
-//		String msg1 = "There are no course schedules to update";
-//		assertEquals("Test that the correct error message is displayed", msg1, test1);
-//
-//		//If there are existing schedules to edit, and details are entered(normal)
-//		scheduleList.add(schedule1);
-//		String test2 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, 1);
-//		String msg2 = "Course Schedule has been updated";
-//		assertEquals("Test that schedule is updated successfully", msg2, test2);
-//
-//		//If course schedule id entered does not exist
-//		String test3 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, 5);
-//		String msg3 = "Invalid Course Schedule ID";
-//		assertEquals("Test that correct error message is displayed", msg3, test3);
-//	}
+	//Alicia
+	@Test
+	public void updateCourseScheduleTest(){
+		assertNotNull("Test if there is valid list to update to", scheduleList);
+		
+		//If there are no course schedules to edit(error)
+	String test1 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, -2);
+		String msg1 = "There are no course schedules to update";
+		assertEquals("Test that the correct error message is displayed", msg1, test1);
+
+		//If there are existing schedules to edit, and details are entered(normal)
+		scheduleList.add(schedule1);
+		String test2 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, 1);
+		String msg2 = "Course Schedule has been updated";
+		assertEquals("Test that schedule is updated successfully", msg2, test2);
+
+		//If course schedule id entered does not exist
+		String test3 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, 5);
+		String msg3 = "Invalid Course Schedule ID";
+		assertEquals("Test that correct error message is displayed", msg3, test3);
+	}
 
 	@Test
 	// Alicia
