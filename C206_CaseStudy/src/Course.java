@@ -12,6 +12,7 @@ public class Course {
 			int courseDuration, String prerequisiteCourse) {
 		this.courseCode = courseCode;
 		this.courseTitle = courseTitle;
+		this.courseCategory = courseCategory;
 		this.courseDescription = courseDescription;
 		this.courseDuration = courseDuration;
 		this.prerequisiteCourse = prerequisiteCourse;
