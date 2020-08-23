@@ -469,6 +469,7 @@ public class C206_CaseStudyTest {
 		regiCS1 = null;
 		regiCS2 = null;
 		regiList = null;
+		
 
 	}
 }
