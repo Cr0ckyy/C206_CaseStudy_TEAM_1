@@ -528,7 +528,7 @@ public class C206_CaseStudy {
 	public static void searchCourse() {
 		String search = Helper.readString("Enter course category name: ");
 		String output = "";
-		output += String.format("%-10s %-30s %-20s %-50s %-15s %s\n", 
+		output += String.format("%-10s %-35s %-20s %-50s %-15s %s\n", 
 				 "Course ID", "Course Title", "Course Category", "Course Description", "Course Duration", "Pre-requisite Course");
 		output += doSearchCourse(courseList, search);
 		System.out.println(output);
@@ -540,7 +540,7 @@ public class C206_CaseStudy {
 		
 		for (Course i : courseList) {
 			if (i.getCourseCategory().equalsIgnoreCase(name))
-				output += String.format("%-10d %-30s %-20s %-50s %-15d %s\n", 
+				output += String.format("%-10d %-35s %-20s %-50s %-15d %s\n", 
 						i.getCourseCode(), i.getCourseTitle(), i.getCourseCategory(), i.getCourseDescription(), i.getCourseDuration(), i.getPrerequisiteCourse());
 		}
 		return output;
@@ -550,22 +550,13 @@ public class C206_CaseStudy {
 	public static void updateCourse() {
 		viewCourse();
 		int id = Helper.readInt("Enter course id: ");
-		
-		System.out.println(doUpdateCourse(courseList, id, categoryList));
-	}
-	
-	// Ju Long
-	public static String doUpdateCourse(ArrayList<Course> courseList, int id, ArrayList<CourseCategory> categoryList) {
 		boolean proceed = false;
-		boolean proceed2 = false;
-		String output = "";
 		
 		for (Course  i : courseList) {
 			if (i.getCourseCode() == id) {
 				proceed = true;
 			}
 		}
-		
 		if (proceed) {
 			String title = Helper.readString("Enter Course Name: ");
 			String category = Helper.readString("Enter Course Category Name: ");
@@ -573,23 +564,35 @@ public class C206_CaseStudy {
 			int duration = Helper.readInt("Enter Course Duration(Days): ");
 			String prerequisite = Helper.readString("Enter Course Condition: ");
 			
-			for (CourseCategory i : categoryList) {
-				if (i.getCategoryName().equalsIgnoreCase(category) && description.length() < 50) {
-					proceed2 = true;
-				}
-			}
-			
-			if (proceed2) {
-				courseList.set(id - 1, new Course(id, title, category, description, duration, prerequisite));
-				output += "Course has been updated";
-			} else 
-				output += "The category name does not match the category list or your description length is more than 50";
+			Course course = new Course(id, title, category, description, duration, prerequisite);
+			System.out.println(doUpdateCourse(courseList, course, categoryList));
 		} else 
-			output += "The entered id does not exist in the course list";
+			System.out.println("The entered id does not exist in the course list");
+	}
+
+	// Ju Long
+	public static String doUpdateCourse(ArrayList<Course> courseList, Course course,
+			ArrayList<CourseCategory> categoryList) {
+		boolean proceed = false;
+		String output = "";
+
+		for (CourseCategory i : categoryList) {
+			if (i.getCategoryName().equalsIgnoreCase(course.getCourseCategory())
+					&& course.getCourseDescription().length() < 50) {
+				proceed = true;
+			}
+		}
+
+		if (proceed) {
+			courseList.set(course.getCourseCode() - 1, course);
+			output += "Course has been updated";
+		} else
+			output += "The category name does not match the category list or your description length is more than 50";
 
 		return output;
 	}
 	
+	// Ju Long
 	public static void listScheduleCourse() {
 		viewCourse();
 		int id = Helper.readInt("Enter Course id: ");
@@ -597,6 +600,7 @@ public class C206_CaseStudy {
 		System.out.println(doListScheduleCourse(courseList, id, scheduleList));
 	}
 	
+	// Ju Long
 	public static String doListScheduleCourse(ArrayList<Course> courseList, int id, ArrayList<CourseSchedule> scheduleList) {
 		String output = "";
 		boolean proceed = false;

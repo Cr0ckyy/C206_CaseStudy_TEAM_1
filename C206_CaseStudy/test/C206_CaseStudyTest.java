@@ -18,6 +18,7 @@ public class C206_CaseStudyTest {
 
 	private Course course1;
 	private Course course2;
+	private Course course3;
 	private ArrayList<Course> courseList;
 
 	private Register regiCS1;
@@ -45,7 +46,8 @@ public class C206_CaseStudyTest {
 
 		// Course, Ju Long
 		course1 = new Course(1, "course1", "Sport", "its good", 30, "2 people min");
-		course2 = new Course(2, "course1", "Sport", "its good", 30, "2 people min");
+		course2 = new Course(1, "course2", "IT", "its good", 50, "2 people min");
+		course3 =  new Course(2, "course3", "IT", "its good", 50, "2 people min");
 		courseList = new ArrayList<Course>();
 
 		// Register for course schedule, Qi Kai
@@ -171,7 +173,7 @@ public class C206_CaseStudyTest {
 		String output = C206_CaseStudy.doViewCourseCategory(categoryList);
 		String testoutput = "";
 		for (CourseCategory i : categoryList) {
-			testoutput += String.format("%-50s %s", i.getCategoryName(), i.getCategoryDescription());
+			testoutput += String.format("%-50s %s\n", i.getCategoryName(), i.getCategoryDescription());
 		}
 	    assertEquals("Test if it equals to what was added", testoutput, output);
 	}
@@ -201,7 +203,7 @@ public class C206_CaseStudyTest {
 	@Test
 	public void viewCourseTest() {
 		// check whether is there a list to add to
-		assertNotNull("Test if there is a valid Course arraylist to add to", courseList);
+		assertNotNull("Test if there is a valid Course arraylist to view", courseList);
 
 		// check whether it will display only the title
 		String output1 = C206_CaseStudy.doViewCourse(courseList);
@@ -214,27 +216,71 @@ public class C206_CaseStudyTest {
 		String testoutput = "";
 		testoutput += String.format("%-10d %-35s %-20s %-50s %-15d %s\n", 1, "course1", "Sport", "its good",
 				30, "2 people min");
-		assertEquals("Test that ViewCourse function works after adding", testoutput, output2);
+		assertEquals("Test that ViewCourse function display out the correct information", testoutput, output2);
 	}
 
 	// Ju Long
 	@Test
 	public void deleteCourseTest() {
 		// check whether is there a list to delete from
-		assertNotNull("Test if there is a valid Course arraylist to add to", courseList);
+		assertNotNull("Test if there is a valid Course arraylist to delete", courseList);
 
 		courseList.add(course1);
-		courseList.add(course2);
 		// check whether can it delete
-		assertEquals("Test that course list is 2 before delete", 2, courseList.size());
-		
 		String message = C206_CaseStudy.doDeleteCourse(courseList, 1, scheduleList);
-		assertEquals("Test that list equals to 1 after delete", 1, courseList.size());
+		assertEquals("Test that list equals to 1 after delete", 0, courseList.size());
 		
 		//check whether did the delete message is correct
 		assertEquals("Test that the current list is correct after delete", "Course has been removed", message);
 	}
+	
+	@Test
+	public void updateCourseTest() {
+		//check whether is there a list to update from
+		assertNotNull("Test if there is a valid Course arraylist to update", courseList);
+		
+		courseList.add(course1);
+		categoryList.add(cc1);
+		categoryList.add(cc2);
+		//check whether it can update
+		String update = C206_CaseStudy.doUpdateCourse(courseList, course2, categoryList);
+		assertEquals("Test that update message is correct", "Course has been updated", update);
+		
+		//check whether did it update to the correct one
+		assertEquals("Test that its being updated to the correct one", course2, courseList.get(0));
+	}
+	
+	@Test
+	public void searchCourseTest() {
+		//check whether is there a list to search from
+		assertNotNull("Test if there is a valid Course arraylist to search", courseList);
+		
+		courseList.add(course1);
+		courseList.add(course3);
+		String search = "IT";
+		//check that it display out the correct search
+		String output = C206_CaseStudy.doSearchCourse(courseList, search);
+		String testoutput = String.format("%-10d %-35s %-20s %-50s %-15d %s\n", 2, "course3", "IT", "its good", 50, "2 people min");
+		assertEquals("Test that the result of search is correct", testoutput, output);
+	}
 
+	@Test
+	public void listScheduleCourseTest() {
+		//check whether is there a list to search from
+		assertNotNull("Test if there is a valid Course arraylist to search", courseList);
+		assertNotNull("Test if there is a valid CourseSchedule arraylist to search", scheduleList);
+		
+		courseList.add(course1);
+		courseList.add(course3);
+		scheduleList.add(schedule1);
+		scheduleList.add(schedule2);
+		
+		//check that it display out the correct schedule
+		String output = C206_CaseStudy.doListScheduleCourse(courseList, 1, scheduleList);
+		String testoutput = String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", 1, "12/05/2020", "12:30PM", "12/06/2020", "3:00PM", 15.00, "Library");
+		assertEquals("Test that the correct message will be displayed out", testoutput, output);
+	}
+	
 	// Alicia
 	@Test
 	public void addCourseScheduleTest() {
