@@ -719,10 +719,36 @@ public class C206_CaseStudy {
 		}
 		String output = doDeleteCourseSchedule(scheduleList, regiList, scheduleID);
 		System.out.println(output);
+
+//		String output = "";
+//
+//		if (scheduleList.size() == 0) {
+//			output += "There are no Course Schedules to delete";
+//		} else {
+//			viewCourseSchedule();
+//			int deleteIdx = -1;
+//			int scheduleID = Helper.readInt("Enter Schedule ID: ");
+//
+//			for (int i = 0; i < scheduleList.size(); i++) {
+//				if (scheduleList.get(i).getCSid() == scheduleID) {
+//					deleteIdx = i;
+//				}
+//			}
+//
+//			for (Register i : regiList) {
+//				if (i.getCSid() == scheduleID) {
+//					deleteIdx = -2;
+//				}
+//			}
+//			
+//			output += doDeleteCourseSchedule(scheduleList, regiList, deleteIdx);
+//			
+//		}
 	}
 
 	// Alicia
-	public static String doDeleteCourseSchedule(ArrayList<CourseSchedule> scheduleList, ArrayList<Register> regiList, int scheduleID) {
+	public static String doDeleteCourseSchedule(ArrayList<CourseSchedule> scheduleList, ArrayList<Register> regiList,
+			int scheduleID) {
 
 		String output = "";
 
@@ -886,7 +912,7 @@ public class C206_CaseStudy {
 		} else {
 			viewCourse();
 			int course = Helper.readInt("Enter Course ID: ");
-			
+
 			int scheduleID = Helper.readInt("Enter Schedule ID: ");
 			boolean checkRegister = false;
 			ArrayList<String> email = new ArrayList<String>();
