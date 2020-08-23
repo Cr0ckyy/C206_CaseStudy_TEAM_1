@@ -495,19 +495,30 @@ public class C206_CaseStudy {
 		viewCourse();
 		int id = Helper.readInt("Enter Course ID: ");
 
-		System.out.println(doDeleteCourse(courseList, id));
+		System.out.println(doDeleteCourse(courseList, id, scheduleList));
 		System.out.println();
 	}
 
 	// Ju Long
-	public static String doDeleteCourse(ArrayList<Course> courseList, int courseID) {
+	public static String doDeleteCourse(ArrayList<Course> courseList, int courseID, ArrayList<CourseSchedule> scheduleList) {
 		String output = "";
-		for (int i = 0; i < courseList.size(); i++) {
-			if (courseList.get(i).getCourseCode() == courseID) {
-				courseList.remove(i);
-				output += "Course has been removed";
-			} else {
-				output += "Error remove course";
+		boolean isThere = false;
+		for (CourseSchedule i : scheduleList) {
+			if (courseID == i.getCourseCode()) {
+				isThere = true;
+			}
+		}
+		
+		if (isThere) {
+			output += "There is schedule inside the course";
+		} else {
+			for (int i = 0; i < courseList.size(); i++) {
+				if (courseList.get(i).getCourseCode() == courseID) {
+					courseList.remove(i);
+					output += "Course has been removed";
+				} else {
+					output += "Error remove course";
+				}
 			}
 		}
 		return output;

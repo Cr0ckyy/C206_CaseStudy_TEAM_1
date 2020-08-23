@@ -77,14 +77,14 @@ public class C206_CaseStudyTest {
 		// normal
 		// The item just added is as same as the first item of the list
 		C206_CaseStudy.addMember(memberList, m1);
-		assertEquals("Check that Camcorder arraylist size is 1", 1, memberList.size());
-		assertSame("Check that Camcorder is added", m1, memberList.get(0));
+		assertEquals("Check that Member arraylist size is 1", 1, memberList.size());
+		assertSame("Check that Member is added", m1, memberList.get(0));
 
 		// Add another member. test The size of the list is 2? -normal
 		// The member just added is as same as the second member of the list
 		C206_CaseStudy.addMember(memberList, m2);
-		assertEquals("Check that Camcorder arraylist size is 2", 2, memberList.size());
-		assertSame("Check that Camcorder is added", m2, memberList.get(1));
+		assertEquals("Check that Member arraylist size is 2", 2, memberList.size());
+		assertSame("Check that Member is added", m2, memberList.get(1));
 
 		   // Add another member. Test that email that is not unique cannot be added
         String addMember = C206_CaseStudy.addMember(memberList, m3);
@@ -177,23 +177,27 @@ public class C206_CaseStudyTest {
 	}
 
 	// Course
+	// Ju Long
 	@Test
 	public void addCourseTest() {
+		categoryList.add(cc1);
+		categoryList.add(cc2);
 		// check if there is a list available to add to
 		assertNotNull("Test if there is valid Course arraylist to add to", courseList);
 
-		// check if its added
-		courseList.add(course1);
-		assertEquals("Test if that Course arraylist size is 1", 1, courseList.size());
+		// check if the messagge after adding is correct
+		String isadded = C206_CaseStudy.doAddCourse(courseList, course1, categoryList);
+		assertEquals("Test if that Course arraylist size is 1", "Course has been added", isadded);
 
 		// check whether is the value the same as added just now
 		assertSame("Test that Course is added same as 1st item of the list", course1, courseList.get(0));
 
 		// check if the size will increase
-		courseList.add(course2);
+		C206_CaseStudy.doAddCourse(courseList, course2, categoryList);
 		assertEquals("Test that course list size is 2", 2, courseList.size());
 	}
 
+	// Ju Long
 	@Test
 	public void viewCourseTest() {
 		// check whether is there a list to add to
@@ -208,11 +212,12 @@ public class C206_CaseStudyTest {
 		courseList.add(course1);
 		String output2 = C206_CaseStudy.doViewCourse(courseList);
 		String testoutput = "";
-		testoutput += String.format("%-10d %-30s %-20s %-50s %-15d %s\n", 1, "course1", "Sport", "its good",
+		testoutput += String.format("%-10d %-35s %-20s %-50s %-15d %s\n", 1, "course1", "Sport", "its good",
 				30, "2 people min");
 		assertEquals("Test that ViewCourse function works after adding", testoutput, output2);
 	}
 
+	// Ju Long
 	@Test
 	public void deleteCourseTest() {
 		// check whether is there a list to delete from
@@ -222,8 +227,12 @@ public class C206_CaseStudyTest {
 		courseList.add(course2);
 		// check whether can it delete
 		assertEquals("Test that course list is 2 before delete", 2, courseList.size());
-		C206_CaseStudy.doDeleteCourse(courseList, 1);
+		
+		String message = C206_CaseStudy.doDeleteCourse(courseList, 1, scheduleList);
 		assertEquals("Test that list equals to 1 after delete", 1, courseList.size());
+		
+		//check whether did the delete message is correct
+		assertEquals("Test that the current list is correct after delete", "Course has been removed", message);
 	}
 
 	// Alicia
