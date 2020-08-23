@@ -68,7 +68,7 @@ public class C206_CaseStudyTest {
 		// fail("Not yet implemented");
 		assertTrue("C206_CaseStudy_SampleTest ", true);
 	}
-
+	
 	// Member
 	@Test
 	public void addMemberTest() { // HUIWEN
