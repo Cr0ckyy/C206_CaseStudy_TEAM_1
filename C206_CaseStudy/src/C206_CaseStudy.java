@@ -36,9 +36,9 @@ public class C206_CaseStudy {
 		courseList.add(new Course(3, "Electric Electronic Engineering", "Engineering", "we learn coding", 70,
 				"o-lvl score min 26"));
 
-		scheduleList.add(new CourseSchedule(1, 1, 100, "19/05/2020", "10:00", "19/05/2020", "16:00", "W64H"));
+		scheduleList.add(new CourseSchedule(1, 1, 50, "19/05/2020", "10:00", "19/05/2020", "16:00", "W64H"));
 		scheduleList.add(new CourseSchedule(1, 2, 100, "20/05/2020", "10:00", "20/05/2020", "16:00", "W64H"));
-		scheduleList.add(new CourseSchedule(2, 3, 100, "19/05/2020", "10:00", "19/05/2020", "16:00", "W14G"));
+		scheduleList.add(new CourseSchedule(2, 3, 150, "19/05/2020", "10:00", "19/05/2020", "16:00", "W14G"));
 
 		regiList.add(new Register(1, 1, 1, "john123@gmail.com", true, "08/03/2020"));
 		regiList.add(new Register(1, 1, 2, "cherly1@gmail.com", true, "08/03/2020"));
@@ -155,10 +155,10 @@ public class C206_CaseStudy {
 					updateCourseSchedule();
 					break;
 				case 4:
-					 searchCourseSchedule();
+					searchCourseSchedule();
 					break;
 				case 5:
-					// listScheduleMember();
+					listScheduleMember();
 					break;
 				case 6:
 					deleteCourseSchedule();
@@ -729,7 +729,6 @@ public class C206_CaseStudy {
 		if (scheduleID == -1) {
 			output = "There are no Course Schedules to delete";
 		} else {
-			viewCourseSchedule();
 
 			int deleteIdx = -1;
 
@@ -763,7 +762,7 @@ public class C206_CaseStudy {
 
 			for (int i = 0; i < scheduleList.size(); i++) {
 				if (scheduleList.get(i).getCSid() == scheduleID) {
-					
+
 					update = i;
 				}
 			}
@@ -807,39 +806,111 @@ public class C206_CaseStudy {
 		return output;
 
 	}
-	
-	//Alicia
+
+	// Alicia
 	public static void searchCourseSchedule() {
 		double search = 0.00;
-		
-		if(scheduleList.size()!=0) {
-			
+
+		if (scheduleList.size() != 0) {
+
 			search = Helper.readDouble("Enter Price to Search: ");
-			
+
 		}
 		String output = doSearchCourseSchedule(scheduleList, search);
 		System.out.println(output);
 	}
-	
-	//Alicia
+
+	// Alicia
 	public static String doSearchCourseSchedule(ArrayList<CourseSchedule> scheduleList, double search) {
-		
+
 		String output = "";
-		
-		if(search==0.00) {
+
+		if (search == 0.00) {
 			output += "There are no available course schedules";
-		}else {
+		} else {
 			output += String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s\n", "Schedule ID", "Start Date",
 					"Start Time", "End Date", "End Time", "Price", "Location");
-			
-			for(CourseSchedule i : scheduleList) {
-				if(i.getPrice()>=search && i.getPrice()<(search+1)) {
-					output += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", i.getCSid(), i.getStartDate(),
-							i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());;
+
+			for (CourseSchedule i : scheduleList) {
+				if (i.getPrice() >= search && i.getPrice() < (search + 1)) {
+					output += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", i.getCSid(),
+							i.getStartDate(), i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(),
+							i.getLocation());
+					;
 				}
 			}
 		}
-		
+
+		return output;
+	}
+
+	// Alicia
+	public static void listScheduleMember() {
+
+		int check = 0;
+
+		if (!(scheduleList.size() == 0 || regiList.size() == 0 || memberList.size() == 0 || courseList.size() == 0)) {
+			check = 1;
+		}
+
+		String output = doListScheduleMember(regiList, memberList, check);
+		System.out.println(output);
+	}
+
+	// Alicia
+	public static String doListScheduleMember(ArrayList<Register> regiList, ArrayList<Member> memberList, int check) {
+
+		String output = "";
+
+		if (check == 0) {
+			if (scheduleList.size() == 0) {
+				output += "There are no available course schedules";
+			} else if (regiList.size() == 0) {
+				output += "There are no members in the registrants list";
+			} else if (memberList.size() == 0) {
+				output += "There are no members";
+			} else if (courseList.size() == 0) {
+				output += "There are no courses";
+			}
+		} else {
+			viewCourse();
+			int course = Helper.readInt("Enter Course ID: ");
+			
+			int scheduleID = Helper.readInt("Enter Schedule ID: ");
+			boolean checkRegister = false;
+			ArrayList<String> email = new ArrayList<String>();
+
+			for (int i = 0; i < regiList.size(); i++) {
+				if (regiList.get(i).getCSid() == scheduleID && regiList.get(i).getCourseCode() == course) {
+					checkRegister = true;
+					email.add(regiList.get(i).getMemEmail());
+				}
+			}
+
+			if (checkRegister == true) {
+
+				if (email.size() != 0) {
+
+					output += String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile",
+							"Email", "DOB", "Country of Residennce");
+
+					for (Member m : memberList) {
+						for (String e : email) {
+							if (m.getEmail().equals(e)) {
+
+								output += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", m.getName(),
+										m.getGender(), m.getMobile(), m.getEmail(), m.getDateOfbirth(),
+										m.getCountryOfresidence());
+							}
+						}
+					}
+				}
+
+			} else {
+				output += "There are no registered members for this course schedule";
+			}
+		}
+
 		return output;
 	}
 
