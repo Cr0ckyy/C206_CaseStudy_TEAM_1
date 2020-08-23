@@ -745,20 +745,20 @@ public class C206_CaseStudy {
 					deleteIdx = i;
 				}
 			}
-			
-			for(Register i : regiList) {
-				if(i.getCSid()==scheduleID) {
+
+			for (Register i : regiList) {
+				if (i.getCSid() == scheduleID) {
 					deleteIdx = -2;
 				}
 			}
 
 			if (deleteIdx == -1 || deleteIdx == -2) {
-				if(deleteIdx == -1) {
+				if (deleteIdx == -1) {
 					output += "Invalid Course Schedule ID";
-				}else if(deleteIdx == -2) {
+				} else if (deleteIdx == -2) {
 					output += "Unable to delete! Course Schedule has registered member!";
 				}
-				
+
 			} else {
 				scheduleList.remove(deleteIdx);
 				output += "Course Schedule has been deleted";
@@ -776,33 +776,19 @@ public class C206_CaseStudy {
 		int update = -1;
 		String output = "";
 
-		if (scheduleList.size() != 0) {
+		if (scheduleList.size() == 0) {
+			update = -2;
+		} else {
 			viewCourseSchedule();
 			int scheduleID = Helper.readInt("Enter Schedule ID to update: ");
 
 			for (int i = 0; i < scheduleList.size(); i++) {
 				if (scheduleList.get(i).getCSid() == scheduleID) {
-
 					update = i;
 				}
 			}
-
-		}
-
-		output += doUpdateCourseSchedule(scheduleList, update);
-		System.out.println(output);
-
-	}
-
-	// Alicia
-	public static String doUpdateCourseSchedule(ArrayList<CourseSchedule> scheduleList, int update) {
-
-		String output = "";
-
-		if (scheduleList.size() == 0) {
-			output += "There are no course schedules to update";
-		} else {
-			if (update != -1) {
+			
+			if(update != -1) {
 				double price = Helper.readDouble("Enter Price: ");
 				String startDate = Helper.readString("Enter Start Date(DD/MM/YYYY): ");
 				String startTime = Helper.readString("Enter Start Time(HH:MM)AM/PM: ");
@@ -816,11 +802,26 @@ public class C206_CaseStudy {
 				scheduleList.get(update).setEndDate(endDate);
 				scheduleList.get(update).setEndTime(endTime);
 				scheduleList.get(update).setLocation(location);
-
-				output += "Course Schedule has been updated";
-			} else {
-				output += "Invalid Course Schedule ID";
 			}
+		}
+
+		output += doUpdateCourseSchedule(scheduleList, update);
+		System.out.println(output);
+	}
+
+	// Alicia
+	public static String doUpdateCourseSchedule(ArrayList<CourseSchedule> scheduleList, int update) {
+
+		String output = "";
+
+		if (update == -1) {
+
+			output += "Invalid Course Schedule ID";
+
+		} else if(update == -2){
+			output += "There are no course schedules to update";
+		}else {
+			output += "Course Schedule has been updated";
 		}
 
 		return output;
