@@ -38,8 +38,8 @@ public class C206_CaseStudyTest {
 		m2 = new Member("Sally", "Female", 92345678, "sally456@email.com", "12/04/1994", "Singapore", "sy5678890");
 		m3 = new Member("Jerry", "Male", 94567890, "sally456@email.com", "24/03/1994", "Singapore", "jr1234556");
 		memberList = new ArrayList<Member>();
-		
-		//Course Category, Shu Fang
+
+		// Course Category, Shu Fang
 		cc1 = new CourseCategory("Sport", "Physical Exercise");
 		cc2 = new CourseCategory("IT", "Computer");
 		categoryList = new ArrayList<CourseCategory>();
@@ -47,7 +47,7 @@ public class C206_CaseStudyTest {
 		// Course, Ju Long
 		course1 = new Course(1, "course1", "Sport", "its good", 30, "2 people min");
 		course2 = new Course(1, "course2", "IT", "its good", 50, "2 people min");
-		course3 =  new Course(2, "course3", "IT", "its good", 50, "2 people min");
+		course3 = new Course(2, "course3", "IT", "its good", 50, "2 people min");
 		courseList = new ArrayList<Course>();
 
 		// Register for course schedule, Qi Kai
@@ -68,7 +68,7 @@ public class C206_CaseStudyTest {
 		// fail("Not yet implemented");
 		assertTrue("C206_CaseStudy_SampleTest ", true);
 	}
-	
+
 	// Member
 	@Test
 	public void addMemberTest() { // HUIWEN
@@ -88,10 +88,10 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that Member arraylist size is 2", 2, memberList.size());
 		assertSame("Check that Member is added", m2, memberList.get(1));
 
-		   // Add another member. Test that email that is not unique cannot be added
-        String addMember = C206_CaseStudy.addMember(memberList, m3);
-        String testoutput = "Email must be unique";
-        assertEquals("Test that member email that is not unique is NOT ok to add",addMember, testoutput);
+		// Add another member. Test that email that is not unique cannot be added
+		String addMember = C206_CaseStudy.addMember(memberList, m3);
+		String testoutput = "Email must be unique";
+		assertEquals("Test that member email that is not unique is NOT ok to add", addMember, testoutput);
 	}
 
 	@Test
@@ -149,8 +149,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test if the size of the arraylist category is 0?", 0, categoryList.size());
 		categoryList.add(cc1);
 		assertEquals("Test if the size of the Arraylist category is 1?", 1, categoryList.size());
-		assertEquals("Test if this Category Name is called sport?", "Sport",
-				categoryList.get(0).getCategoryName());
+		assertEquals("Test if this Category Name is called sport?", "Sport", categoryList.get(0).getCategoryName());
 	}
 
 	// SHUFANG
@@ -175,7 +174,7 @@ public class C206_CaseStudyTest {
 		for (CourseCategory i : categoryList) {
 			testoutput += String.format("%-50s %s\n", i.getCategoryName(), i.getCategoryDescription());
 		}
-	    assertEquals("Test if it equals to what was added", testoutput, output);
+		assertEquals("Test if it equals to what was added", testoutput, output);
 	}
 
 	// Course
@@ -214,8 +213,8 @@ public class C206_CaseStudyTest {
 		courseList.add(course1);
 		String output2 = C206_CaseStudy.doViewCourse(courseList);
 		String testoutput = "";
-		testoutput += String.format("%-10d %-35s %-20s %-50s %-15d %s\n", 1, "course1", "Sport", "its good",
-				30, "2 people min");
+		testoutput += String.format("%-10d %-35s %-20s %-50s %-15d %s\n", 1, "course1", "Sport", "its good", 30,
+				"2 people min");
 		assertEquals("Test that ViewCourse function display out the correct information", testoutput, output2);
 	}
 
@@ -229,58 +228,60 @@ public class C206_CaseStudyTest {
 		// check whether can it delete
 		String message = C206_CaseStudy.doDeleteCourse(courseList, 1, scheduleList);
 		assertEquals("Test that list equals to 1 after delete", 0, courseList.size());
-		
-		//check whether did the delete message is correct
+
+		// check whether did the delete message is correct
 		assertEquals("Test that the current list is correct after delete", "Course has been removed", message);
 	}
-	
+
 	@Test
 	public void updateCourseTest() {
-		//check whether is there a list to update from
+		// check whether is there a list to update from
 		assertNotNull("Test if there is a valid Course arraylist to update", courseList);
-		
+
 		courseList.add(course1);
 		categoryList.add(cc1);
 		categoryList.add(cc2);
-		//check whether it can update
+		// check whether it can update
 		String update = C206_CaseStudy.doUpdateCourse(courseList, course2, categoryList);
 		assertEquals("Test that update message is correct", "Course has been updated", update);
-		
-		//check whether did it update to the correct one
+
+		// check whether did it update to the correct one
 		assertEquals("Test that its being updated to the correct one", course2, courseList.get(0));
 	}
-	
+
 	@Test
 	public void searchCourseTest() {
-		//check whether is there a list to search from
+		// check whether is there a list to search from
 		assertNotNull("Test if there is a valid Course arraylist to search", courseList);
-		
+
 		courseList.add(course1);
 		courseList.add(course3);
 		String search = "IT";
-		//check that it display out the correct search
+		// check that it display out the correct search
 		String output = C206_CaseStudy.doSearchCourse(courseList, search);
-		String testoutput = String.format("%-10d %-35s %-20s %-50s %-15d %s\n", 2, "course3", "IT", "its good", 50, "2 people min");
+		String testoutput = String.format("%-10d %-35s %-20s %-50s %-15d %s\n", 2, "course3", "IT", "its good", 50,
+				"2 people min");
 		assertEquals("Test that the result of search is correct", testoutput, output);
 	}
 
 	@Test
 	public void listScheduleCourseTest() {
-		//check whether is there a list to search from
+		// check whether is there a list to search from
 		assertNotNull("Test if there is a valid Course arraylist to search", courseList);
 		assertNotNull("Test if there is a valid CourseSchedule arraylist to search", scheduleList);
-		
+
 		courseList.add(course1);
 		courseList.add(course3);
 		scheduleList.add(schedule1);
 		scheduleList.add(schedule2);
-		
-		//check that it display out the correct schedule
+
+		// check that it display out the correct schedule
 		String output = C206_CaseStudy.doListScheduleCourse(courseList, 1, scheduleList);
-		String testoutput = String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", 1, "12/05/2020", "12:30PM", "12/06/2020", "3:00PM", 15.00, "Library");
+		String testoutput = String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", 1, "12/05/2020", "12:30PM",
+				"12/06/2020", "3:00PM", 15.00, "Library");
 		assertEquals("Test that the correct message will be displayed out", testoutput, output);
 	}
-	
+
 	// Alicia
 	@Test
 	public void addCourseScheduleTest() {
@@ -292,10 +293,10 @@ public class C206_CaseStudyTest {
 
 		// Adding schedule with duplicate schedule id(error)
 		String test1 = C206_CaseStudy.doAddCourseSchedule(scheduleList, schedule3);
-		assertEquals("Test if correct error message is displayed", test1, "The Schedule id is being repeated. Please try again.");
+		assertEquals("Test if correct error message is displayed", test1,
+				"The Schedule id is being repeated. Please try again.");
 	}
 
-	
 	// Alicia
 	@Test
 	public void viewCourseScheduleTest() {
@@ -315,8 +316,8 @@ public class C206_CaseStudyTest {
 		String test1 = C206_CaseStudy.doViewCourseSchedule(scheduleList);
 		output = "";
 		for (CourseSchedule i : scheduleList) {
-			output += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", 
-					i.getCSid(), i.getStartDate(), i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());
+			output += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", i.getCSid(), i.getStartDate(),
+					i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(), i.getLocation());
 		}
 		assertEquals("Check that the output is correct", test1, output);
 	}
@@ -347,18 +348,70 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that course schedule is deleted", test3, msg3);
 
 		assertSame("Test that list size is 1", 1, scheduleList.size());
-		
-		//Test that cannot delete schedules with registered members
+
+		// Test that cannot delete schedules with registered members
 		schedule3 = new CourseSchedule(2, 5, 56.00, "12/08/2020", "12:00PM", "20/12/2020", "5:00PM", "Library");
 		regiCS2 = new Register(2, 5, 6, "321@mail.com", true, "20-08-2020 21:38");
 		scheduleList.add(schedule3);
 		regiList.add(regiCS2);
-		
+
 		String test4 = C206_CaseStudy.doDeleteCourseSchedule(scheduleList, regiList, 5);
 		String msg4 = "Unable to delete! Course Schedule has registered member!";
 		assertEquals("Test that correct error message is displayed", msg4, test4);
 	}
 
+//	//Alicia
+//	@Test
+//	public void updateCourseScheduleTest(){
+//		assertNotNull("Test if there is valid list to update to", scheduleList);
+//		
+//		//If there are no course schedules to edit(error)
+//	String test1 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, -2);
+//		String msg1 = "There are no course schedules to update";
+//		assertEquals("Test that the correct error message is displayed", msg1, test1);
+//
+//		//If there are existing schedules to edit, and details are entered(normal)
+//		scheduleList.add(schedule1);
+//		String test2 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, 1);
+//		String msg2 = "Course Schedule has been updated";
+//		assertEquals("Test that schedule is updated successfully", msg2, test2);
+//
+//		//If course schedule id entered does not exist
+//		String test3 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, 5);
+//		String msg3 = "Invalid Course Schedule ID";
+//		assertEquals("Test that correct error message is displayed", msg3, test3);
+//	}
+
+	@Test
+	// Alicia
+	public void searchCourseScheduleTest() {
+
+		// If there are no schedules in the list (error)
+		String test1 = C206_CaseStudy.doSearchCourseSchedule(scheduleList, 0);
+		String msg1 = "There are no available course schedules";
+		assertEquals("Test that correct error message is displayed", msg1, test1);
+
+		scheduleList.add(schedule1);
+
+		// If there are course schedule that matches the information entered (normal)
+		String test2 = C206_CaseStudy.doSearchCourseSchedule(scheduleList, 15);
+		String msg2 = String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s\n", "Schedule ID", "Start Date",
+				"Start Time", "End Date", "End Time", "Price", "Location");
+		msg2 += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", 1, "12/05/2020", "12:30PM", "12/06/2020",
+				"3:00PM", 15.00, "Library");
+		assertEquals("Test that the output is correct", msg2, test2);
+
+		// If the user searches for schedules that costs $15.99, system displays
+		// schedules that are $15 (boundary)
+		String test3 = C206_CaseStudy.doSearchCourseSchedule(scheduleList, 15.99);
+		String msg3 = String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s\n", "Schedule ID", "Start Date",
+				"Start Time", "End Date", "End Time", "Price", "Location");
+		msg3 += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", 1, "12/05/2020", "12:30PM", "12/06/2020",
+				"3:00PM", 15.00, "Library");
+		assertEquals("Test that the output is correct", msg3, test3);
+
+	}
+	
 	// Register
 	// Qikai 5.1
 	@Test
@@ -391,7 +444,8 @@ public class C206_CaseStudyTest {
 	public void viewEntryStatus() {
 		// The system shows the entry status for the Members chosen as Pending
 		// even the Member has not yet to make the payment (Boundary)
-		assertNotNull("Test if the entry status for the Member as 'pending'", C206_CaseStudy.retrieveRegiList(regiList));
+		assertNotNull("Test if the entry status for the Member as 'pending'",
+				C206_CaseStudy.retrieveRegiList(regiList));
 		// System display all entry status as cancelled (Error)
 		for (int i = 0; i < regiList.size(); i++) {
 			assertFalse("Test if the entry status as cancelled" + regiList.get(i).getStatus(), false);
@@ -432,7 +486,7 @@ public class C206_CaseStudyTest {
 		// The course will no longer showing up the name and details
 		// from the member registered course with a cancellation E-mail sent
 		// out.(Normal)
-		
+
 		assertEquals("Test if the member has cancel the course", C206_CaseStudy.doDeleRegi(regiList, 1), "");
 //		for (int i = 0; i < regiList.size(); i++) {
 //			// The Member is still inside the registered course after the Member
@@ -441,7 +495,8 @@ public class C206_CaseStudyTest {
 //		}
 		// Member has successfully cancelled the registered form,
 		// but no cancellation E-mail received (Boundary)
-		assertNotNull("Test if the member has received the cancellation E-mail", C206_CaseStudy.doDeleRegi(regiList, 1));
+		assertNotNull("Test if the member has received the cancellation E-mail",
+				C206_CaseStudy.doDeleRegi(regiList, 1));
 	}
 
 	// Qikai 5.5
@@ -482,7 +537,6 @@ public class C206_CaseStudyTest {
 		regiCS1 = null;
 		regiCS2 = null;
 		regiList = null;
-		
 
 	}
 }

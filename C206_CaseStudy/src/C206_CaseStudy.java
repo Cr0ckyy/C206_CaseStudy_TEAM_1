@@ -854,7 +854,7 @@ public class C206_CaseStudy {
 					"Start Time", "End Date", "End Time", "Price", "Location");
 
 			for (CourseSchedule i : scheduleList) {
-				if (i.getPrice() >= search && i.getPrice() < (search + 1)) {
+				if (i.getPrice() >= search-1 && i.getPrice() < (search + 1)) {
 					output += String.format("%-13d %-12s %-11s %-11s %-10s $%-9.2f %-10s\n", i.getCSid(),
 							i.getStartDate(), i.getStartTime(), i.getEndDate(), i.getEndTime(), i.getPrice(),
 							i.getLocation());
