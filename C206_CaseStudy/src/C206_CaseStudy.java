@@ -497,6 +497,7 @@ public class C206_CaseStudy {
 
 	// Ju Long
 	public static void deleteCourse() {
+		C206_CaseStudy.setHeader("DELETE COURSE");
 		viewCourse();
 		int id = Helper.readInt("Enter Course ID: ");
 
@@ -532,12 +533,14 @@ public class C206_CaseStudy {
 
 	// Ju Long
 	public static void searchCourse() {
+		C206_CaseStudy.setHeader("SEARCH COURSE");
 		String search = Helper.readString("Enter course category name: ");
 		String output = "";
 		output += String.format("%-10s %-35s %-20s %-50s %-15s %s\n", "Course ID", "Course Title", "Course Category",
 				"Course Description", "Course Duration", "Pre-requisite Course");
 		output += doSearchCourse(courseList, search);
 		System.out.println(output);
+		System.out.println();
 	}
 
 	// Ju Long
@@ -555,6 +558,7 @@ public class C206_CaseStudy {
 
 	// Ju Long
 	public static void updateCourse() {
+		C206_CaseStudy.setHeader("UPDATE COURSE");
 		viewCourse();
 		int id = Helper.readInt("Enter course id: ");
 		boolean proceed = false;
@@ -575,6 +579,7 @@ public class C206_CaseStudy {
 			System.out.println(doUpdateCourse(courseList, course, categoryList));
 		} else
 			System.out.println("The entered id does not exist in the course list");
+		System.out.println();
 	}
 
 	// Ju Long
@@ -601,10 +606,12 @@ public class C206_CaseStudy {
 
 	// Ju Long
 	public static void listScheduleCourse() {
+		C206_CaseStudy.setHeader("LIST COURSE SCHEDULE");
 		viewCourse();
 		int id = Helper.readInt("Enter Course id: ");
 
 		System.out.println(doListScheduleCourse(courseList, id, scheduleList));
+		System.out.println();
 	}
 
 	// Ju Long
@@ -789,6 +796,7 @@ public class C206_CaseStudy {
 
 	// Alicia
 	public static void updateCourseSchedule() {
+		C206_CaseStudy.setHeader("UPDATE SCHEDULE");
 
 		int update = -1;
 		String output = "";
@@ -846,6 +854,7 @@ public class C206_CaseStudy {
 
 	// Alicia
 	public static void searchCourseSchedule() {
+		C206_CaseStudy.setHeader("SEARCH SCHEDULE");
 		double search = 0.00;
 
 		if (scheduleList.size() != 0) {
@@ -883,6 +892,7 @@ public class C206_CaseStudy {
 
 	// Alicia
 	public static void listScheduleMember() {
+		C206_CaseStudy.setHeader("LIST MEMBER FOR THE SCHEDULE");
 
 		int check = 0;
 
