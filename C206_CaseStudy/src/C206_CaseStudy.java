@@ -755,6 +755,72 @@ public class C206_CaseStudy {
 		return output;
 
 	}
+	
+	//Alicia
+	public static void updateCourseSchedule() {
+		
+		if(scheduleList.size()!=0) {
+			
+			int scheduleID = Helper.readInt("Enter Schedule ID to update");
+			
+			int update = -1;
+			String output = "";
+			
+			for(int i=0;i<scheduleList.size();i++) {
+				if(scheduleList.get(i).getCSid()==scheduleID) {
+//					double price = Helper.readDouble("Enter Price: ");
+//					String startDate = Helper.readString("Enter Start Date(DD/MM/YYYY): ");
+//					String startTime = Helper.readString("Enter Start Time(HH:MM)AM/PM: ");
+//					String endDate = Helper.readString("Enter End Date(DD/MM/YYYY): ");
+//					String endTime = Helper.readString("Enter End Time(HH:MM)AM/PM: ");
+//					String location = Helper.readString("Enter Location: ");
+//					
+//					scheduleList.get(i).setPrice(price);
+//					scheduleList.get(i).setStartDate(startDate);
+//					scheduleList.get(i).setStartTime(startTime);
+//					scheduleList.get(i).setEndDate(endDate);
+//					scheduleList.get(i).setEndTime(endTime);
+//					scheduleList.get(i).setLocation(location);
+					
+					update = i;
+					output += doUpdateCourseSchedule(scheduleList, update);
+				}
+			}
+			
+			System.out.println(output);
+		}
+		
+	}
+	
+	//Alicia
+	public static String doUpdateCourseSchedule(ArrayList<CourseSchedule> scheduleList, int update) {
+	
+		String output = "";
+		
+		if(update!=-1) {
+			double price = Helper.readDouble("Enter Price: ");
+			String startDate = Helper.readString("Enter Start Date(DD/MM/YYYY): ");
+			String startTime = Helper.readString("Enter Start Time(HH:MM)AM/PM: ");
+			String endDate = Helper.readString("Enter End Date(DD/MM/YYYY): ");
+			String endTime = Helper.readString("Enter End Time(HH:MM)AM/PM: ");
+			String location = Helper.readString("Enter Location: ");
+			
+			scheduleList.get(update).setPrice(price);
+			scheduleList.get(update).setStartDate(startDate);
+			scheduleList.get(update).setStartTime(startTime);
+			scheduleList.get(update).setEndDate(endDate);
+			scheduleList.get(update).setEndTime(endTime);
+			scheduleList.get(update).setLocation(location);
+			
+			
+			output += "Course Schedule has been updated";
+		}else {
+			output += "Unable to update course schedule";
+		}
+		
+		return output;
+		
+	}
 
 	// Qi Kai
 	public static void registerCS() {
