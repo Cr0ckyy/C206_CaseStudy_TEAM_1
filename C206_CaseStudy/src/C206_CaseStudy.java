@@ -1008,5 +1008,84 @@ public class C206_CaseStudy {
 		}
 		return output;
 	}
+	// Qi kai
+	public static String updateRegiStatus() {
+		String output = "";
+		int update = Helper.readInt("Enter the registration ID you want to update > ");
+		for (int i = 0; i < regiList.size(); i++) {
+			if (regiList.get(i).getRegiID() == update) {
+				String update22 = Helper.readString("You want to update the Member as?(Accepted/Cancelled) > ");
+				if (update22.equals("accepted")) {
+					regiList.get(i).setStatuscancel(false);
+					System.out.println("Member has successfully updated as " + regiList.get(i).isStatuscancel());
+				} else {
+					regiList.get(i).setStatus(false);
+					System.out.println("Member has successfully updated as " + regiList.get(i).getStatus());
+				}
+			}
+		}
+		return output;
+	}
+
+	// Qi kai
+	public static void CS_idSearch() {
+		C206_CaseStudy.setHeader("SEARCH COURSE SCHEDULE");
+		int cSid = 0;
+		if (regiList.size() != 0) {
+			cSid = Helper.readInt("Enter the course register id >");
+		}
+		String output = retrieveRegiListID(regiList, cSid);
+		System.out.println(output);
+	}
+
+	private static String retrieveRegiListID(ArrayList<Register> regiList, int cSid) {
+		String output = "";
+		String output2 = "";
+		output += String.format("%-20s %-20s %-20s %-20s %-20s\n", "Registration ID", "Course Schedule ID",
+				"Member Email", "Status", "Registration Date & time");
+		for (Register i : regiList) {
+			if (i.getRegiID() == cSid) {
+				output2 += String.format("%-20s %-20s %-20s %-20s %-20s\n", i.getRegiID(), i.getCSid(), i.getMemEmail(),
+						i.getStatus(), i.getRegiDate());
+			} 
+		}
+		output += output2;
+		if (output2.isEmpty()) 
+			output += "There is no ID exist in the list";
+		return output;
+
+	}
+
+	// Qi kai
+	public static void searchPartiMember() {
+		C206_CaseStudy.setHeader("LIST MEMBERS");
+		viewRegister();
+		String email = Helper.readString("Enter Member Email address > ");
+		System.out.println(doSearchPartiMember(regiList, email));
+	}
+
+	public static String doSearchPartiMember(ArrayList<Register> regiList, String search) {
+		String output = "";
+		boolean go = false;
+		for (Register i : regiList) {
+			if (i.getMemEmail().equals(search)) {
+				go = true;
+			}
+		}
+		if (go) {
+			for (Register i : regiList) {
+				if (i.getMemEmail().equals(search)) {
+					C206_CaseStudy.setHeader("MEMBER REGISTERED COURSE");
+					output += String.format("%-20s %-20s %-20s %-20s %-20s\n", "Registration ID", "Course Schedule ID",
+							"Member Email", "Status", "Registration Date & time");
+					output += String.format("%-20s %-20s %-20s %-20s %-20s\n", i.getRegiID(), i.getCSid(),
+							i.getMemEmail(), i.getStatus(), i.getRegiDate());
+				}
+			}
+		} else {
+			output += "The Member's E-mail does not exist in the list!";
+		}
+		return output;
+	}
 
 }

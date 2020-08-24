@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>220</y>
+      <w>325</w>
+      <h>470</h>
+    </coordinates>
+    <panel_attributes>C206_CaseStudy
+--
+- memberList : ArrayList&lt;Member&gt;
+- categoryList : ArrayList&lt;CourseCategory&gt;
+- courseList : ArrayList&lt;Course&gt;
+- scheduleList : ArrayList&lt;CourseSchedule&gt;
+- regiList : ArrayList&lt;Register&gt;
+- LINES : final int
+--
++ main(String[]) : void
++ menu(int) : void
++ setHeader(String) : void
+
++ viewAllMember() : void
++ retreieveAllMember(ArrayList&lt;Member&gt;) : String
++ inputMember() : void
++ addMember(ArrayList&lt;Member&gt;, mb) : String
++ deleteMember() : void
++ doDeleteMember(ArrayList&lt;Member&gt;, String) : boolean
+
++ addCourseCategory() : void
++ doAddCourseCategory(ArrayList&lt;CourseCategory&gt;, CourseCategory) : void
++ viewCourseCategory() : void
++ doViewCourseCategory(ArrayList&lt;CourseCategory&gt;) : String
++ deleteCourseCategory() : void
++ doDeleteCourseCategory() : void
+
++ addCourse() : void
++ doAddCourse(ArrayList&lt;Course&gt;, Course, ArrayList&lt;CourseCategory&gt;) : String
++ viewCourse() : void
++ doViewCourse(ArrayList&lt;Course&gt;) : String
++ deleteCourse() : void
++ doDeleteCourse(ArrayList&lt;Course&gt;, int, ArrayList&lt;CourseSchedule&gt;) : String
++ searchCourse() : void
++ doSearchCourse(ArrayList&lt;Course&gt;, String) : String 
++ updateCourse() : void
++ doUpdateCourse(ArrayList&lt;Course&gt;, Course, ArrayList&lt;CourseCategory) : String
++ listScheduleCourse() : void
++ doListScheduleCourse(ArrayList&lt;Course&gt;, int, ArrayList&lt;CourseSchedule&gt;) : String
+
++ addCourseSchedule() : void
++ doAddCourseSchedule(ArrayList&lt;CourseSchedule&gt;, CourseSchedule) : String
++ viewCourseSchedule() : void
++ doViewCourseSchedule(ArrayList&lt;CourseSchedule&gt;) : String
++ deleteCourseSchedule() : void
++ doDeleteCourseSchedule(ArrayList&lt;CourseSchedule&gt;, ArrayList&lt;Register&gt;, int) : String
++ updateCourseSchedule() : void
++ doUpdateCourseSchedule(ArrayList&lt;CourseSchedule&gt;, int) : String
++ searchCourseSchedule() : void
++ doSearchCourseSchedule(ArrayList&lt;CourseSchedule&gt;, double) : String
++ listScheduleMember() : void
++ doListScheduleMember(ArrayList&lt;Register&gt;, ArrayList&lt;Member&gt;, ArrayList&lt;String&gt;, int) : String
+
++ registerCS() : void
++ doRegisterCS(ArrayList&lt;Register&gt;, Register, ArrayList&lt;Member&gt;) : void
++ viewRegister() : void
++ retrieveRegiList(ArrayList&lt;Register&gt;) : String
++ deleRegi() : void
++ doDeleRegi(ArrayList&lt;Register&gt;, int) : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>30</y>
+      <w>150</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>Course
+--
+- courseCode : int
+- courseTitle : String
+- courseCategory : String
+- courseDescription : String
+- courseDuration : int
+- prerequisiteCourse : String
+--
++ Course (int, String, String, String, int, String)
++ Course (int)
++ getCourseCode() : int
++ getCourseTitle() : String
++ getCourseCategory() : String
++ getCourseDescription() : String
++ getCourseDuration() : int
++ getPrerequisiteCourse() : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>255</y>
+      <w>200</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>CourseCategory
+--
+- categoryName : String
+- categoryDescription : String
+--
++ CourseCategory(String, String)
++ getCategoryName() : String
++ getCategoryDescription() : String
++ setCategoryName(String categoryName) : void
++ setCategoryDescription(String categoryDescription) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>165</y>
+      <w>225</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>CourseSchedule
+--
+- CSid : int
+- price : double
+- startDate : String
+- startTime : String
+- endDate : String
+- endTime : String
+- location : String
+--
++ CourseSchedule(int, int, double, String, String, String, String, String)
++ CourseSchedule(int, int)
++ getCSid() : int
++ getPrice() : int
++ getStartDate() : String
++ getStartTime() : String
++ getEndDate() : String
++ getEndTime() : String
++ getLocation() : String
++ setPrice(double) : void
++ setStartDate(String) : void
++ setStartTime(String) : void
++ setEndDate(String) : void
++ setEndTime(String) : void
++ setLocation(String) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>795</x>
+      <y>425</y>
+      <w>190</w>
+      <h>205</h>
+    </coordinates>
+    <panel_attributes>Member
+--
+- name : String
+- gender : String
+- mobile : int
+- email : String
+- dateOfBirth : String
+- countryOfresidence : String
+- password : String
+--
++ Member(String, String, int, String, String, String, String)
++ getName() : String
++ getGemder() : String
++ getMobile() : int
++ getEmail() : String
++ getDateOfBirth() : String
++ getCountryOfresidence() : String
++ getPassword() : String
++ setName(String) : void
++ setGemder(String) : void
++ setMobile(int) : void
++ setEmail(String) : void
++ setDateOfBirth(String) : void
++ setCountryOfresidence(String) : void
++ setPassword(String) : void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>460</y>
+      <w>160</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>Register
+--
+- regiID : int
+- status : boolean
+- regiDate : String
+- memEmail : String
+-- 
++ Register(int, int, int, String, boolean, String)
++ getRegiID() : int
++ getStatus() : String
++ getRegiDate() : String
++ getMemberEmail() : String
++ setRegiID(int) : void
++ setStatus(String) : void
++ setRegiDate(String) : void
++ setMemberEmail(String) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>860</x>
+      <y>80</y>
+      <w>115</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Helper
+--
+
+--
++ readString(String) : String
++ readInt(String) : int
++ readDouble(String) : double
++ readFloat(String) : float
++ readLong(String) : long
++ readChar(String) : char
++ readBoolean(String) : boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>160</y>
+      <w>15</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>290</y>
+      <w>110</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>470</y>
+      <w>115</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;210.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>655</x>
+      <y>130</y>
+      <w>215</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>410.0;10.0;10.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>255</y>
+      <w>140</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>260.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>215</x>
+      <y>530</y>
+      <w>165</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>310.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>140</x>
+      <y>85</y>
+      <w>340</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>660.0;10.0;10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>135</x>
+      <y>360</y>
+      <w>15</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0</additional_attributes>
+  </element>
+</diagram>
