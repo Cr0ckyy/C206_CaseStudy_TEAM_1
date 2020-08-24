@@ -43,6 +43,8 @@ public class C206_CaseStudy {
 		regiList.add(new Register(1, 1, 1, "john123@gmail.com", true, "08/03/2020"));
 		regiList.add(new Register(1, 1, 2, "cherly1@gmail.com", true, "08/03/2020"));
 		regiList.add(new Register(1, 2, 3, "jack99@gmail.com", false, "23/04/2020"));
+		regiList.add(new Register(2, 3, 4, "123@123.com", false, "28/04/2020"));
+		regiList.add(new Register(3, 3, 5, "111@111.com", true, "28/04/2020"));
 
 		int option = 0;
 
@@ -880,8 +882,6 @@ public class C206_CaseStudy {
 			int course = Helper.readInt("Enter Course ID: ");
 			int scheduleID = Helper.readInt("Enter Schedule ID: ");
 
-			
-
 			for (int i = 0; i < regiList.size(); i++) {
 				if (regiList.get(i).getCSid() == scheduleID && regiList.get(i).getCourseCode() == course) {
 					email.add(regiList.get(i).getMemEmail());
@@ -1001,13 +1001,23 @@ public class C206_CaseStudy {
 		String output = "";
 		for (int i = 0; i < regiList.size(); i++) {
 			if (regiList.get(i).getRegiID() == deleRegi) {
-				regiList.remove(i);
-				output += ("Registration has been deleted\n");
-				output += ("An Email has been sent to your mailbox");
+				char dele = Helper.readChar("Confirm deletion?(Y/N)");
+				if (dele == 'Y') {
+					regiList.remove(i);
+					output += ("Registration has been deleted\n");
+					output += ("An Email has been sent to your mailbox");
+				} else if (dele == 'N') {
+					output += ("Unable to delete!");
+					output += ("The course schedule has passed today's date!");
+				} else {
+					output += ("Wrong input!Please try again");
+				}
+
 			}
 		}
 		return output;
 	}
+
 	// Qi kai
 	public static String updateRegiStatus() {
 		String output = "";
@@ -1038,7 +1048,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	private static String retrieveRegiListID(ArrayList<Register> regiList, int cSid) {
+	public static String retrieveRegiListID(ArrayList<Register> regiList, int cSid) {
 		String output = "";
 		String output2 = "";
 		output += String.format("%-20s %-20s %-20s %-20s %-20s\n", "Registration ID", "Course Schedule ID",
@@ -1047,10 +1057,10 @@ public class C206_CaseStudy {
 			if (i.getRegiID() == cSid) {
 				output2 += String.format("%-20s %-20s %-20s %-20s %-20s\n", i.getRegiID(), i.getCSid(), i.getMemEmail(),
 						i.getStatus(), i.getRegiDate());
-			} 
+			}
 		}
 		output += output2;
-		if (output2.isEmpty()) 
+		if (output2.isEmpty())
 			output += "There is no ID exist in the list";
 		return output;
 

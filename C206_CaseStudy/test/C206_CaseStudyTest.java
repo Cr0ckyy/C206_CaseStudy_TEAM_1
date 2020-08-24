@@ -23,6 +23,7 @@ public class C206_CaseStudyTest {
 
 	private Register regiCS1;
 	private Register regiCS2;
+	private Register regiCS3;
 	private ArrayList<Register> regiList;
 
 	private CourseSchedule schedule1;
@@ -53,6 +54,7 @@ public class C206_CaseStudyTest {
 		// Register for course schedule, Qi Kai
 		regiCS1 = new Register(1, 3, 4, "123@mail.com", false, "20-08-2020 20:38");
 		regiCS2 = new Register(2, 5, 6, "321@mail.com", true, "20-08-2020 21:38");
+		regiCS3 = new Register(3, 4, 3, "221@mail.com", true, "20-08-2020");
 		regiList = new ArrayList<Register>();
 
 		// Course Schedule, Alicia
@@ -360,23 +362,23 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that correct error message is displayed", msg4, test4);
 	}
 
-	//Alicia
+	// Alicia
 	@Test
-	public void updateCourseScheduleTest(){
+	public void updateCourseScheduleTest() {
 		assertNotNull("Test if there is valid list to update to", scheduleList);
-		
-		//If there are no course schedules to edit(error)
-	String test1 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, -2);
+
+		// If there are no course schedules to edit(error)
+		String test1 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, -2);
 		String msg1 = "There are no course schedules to update";
 		assertEquals("Test that the correct error message is displayed", msg1, test1);
 
-		//If there are existing schedules to edit, and details are entered(normal)
+		// If there are existing schedules to edit, and details are entered(normal)
 		scheduleList.add(schedule1);
 		String test2 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, 1);
 		String msg2 = "Course Schedule has been updated";
 		assertEquals("Test that schedule is updated successfully", msg2, test2);
 
-		//If course schedule id entered does not exist
+		// If course schedule id entered does not exist
 		String test3 = C206_CaseStudy.doUpdateCourseSchedule(scheduleList, 5);
 		String msg3 = "Invalid Course Schedule ID";
 		assertEquals("Test that correct error message is displayed", msg3, test3);
@@ -411,30 +413,29 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that the output is correct", msg3, test3);
 
 	}
-	
+
 	@Test
-	//Alicia
-	public void listScheduleMemberTest(){
-		//If there are no members that are registered for the schedule (error)
+	// Alicia
+	public void listScheduleMemberTest() {
+		// If there are no members that are registered for the schedule (error)
 		regiList.add(regiCS1);
 		ArrayList<String> email = new ArrayList<String>();
-		String test1 = C206_CaseStudy.doListScheduleMember(regiList, memberList, email,0);
+		String test1 = C206_CaseStudy.doListScheduleMember(regiList, memberList, email, 0);
 		String msg1 = "There are no members";
 		assertEquals("Test that correct error message is displayed", msg1, test1);
-		
-		//If there are members that registered for the schedule (normal)
+
+		// If there are members that registered for the schedule (normal)
 		email.add("lily123@email.com");
 		memberList.add(m1);
-		
+
 		String test2 = C206_CaseStudy.doListScheduleMember(regiList, memberList, email, 1);
-		String msg2 = String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile", "Email",
-				"DOB", "Country of Residence");
-		msg2 += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", m1.getName(), m1.getGender(),
-				m1.getMobile(), m1.getEmail(), m1.getDateOfbirth(), m1.getCountryOfresidence());
+		String msg2 = String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile", "Email", "DOB",
+				"Country of Residence");
+		msg2 += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", m1.getName(), m1.getGender(), m1.getMobile(),
+				m1.getEmail(), m1.getDateOfbirth(), m1.getCountryOfresidence());
 		assertEquals("Test that output is correct", msg2, test2);
 	}
 
-	
 	// Register
 	// Qikai 5.1
 	@Test
@@ -511,11 +512,7 @@ public class C206_CaseStudyTest {
 		// out.(Normal)
 
 		assertEquals("Test if the member has cancel the course", C206_CaseStudy.doDeleRegi(regiList, 1), "");
-//		for (int i = 0; i < regiList.size(); i++) {
-//			// The Member is still inside the registered course after the Member
-//			// has confirm the cancellation of the course(Error)
-//			assertFalse("Test if the member still inside the registered course" + regiList, true);
-//		}
+
 		// Member has successfully cancelled the registered form,
 		// but no cancellation E-mail received (Boundary)
 		assertNotNull("Test if the member has received the cancellation E-mail",
@@ -546,6 +543,97 @@ public class C206_CaseStudyTest {
 			assertNotNull("Test if the refund email has been sent to the Member" + regiList.get(i).getMemEmail(), true);
 		}
 
+	}
+
+	// Qi kai 5.6
+	@Test
+	public void updateRegiStat() {
+
+		for (int i = 0; i < regiList.size(); i++) {
+			// Admin able to update the course registration
+			// schedule status accordingly(It will display ‘Accepted’). (Normal)
+			assertEquals("Test if the status will display as 'Accepted'" + regiList.get(i).isStatuscancel(), true);
+
+			// Admin unable to update the course registration schedule status.(Error)
+			assertFalse("Test if the course registration can be updated or not" + regiList.get(i).getStatus(), false);
+
+			// Admin able to update the status but Member side
+			// did not see the updated status. (Boundary)
+			assertNotNull("Test if the Member can see the updated status" + regiList.get(i).getStatus(), false);
+		}
+
+	}
+
+	// Qi kai 5.7
+	@Test
+	public void searchRegiCSid() {
+		regiList.add(regiCS1);
+		regiList.add(regiCS2);
+		regiList.add(regiCS3);
+		// System displays all the registration by
+		// searching through the course schedule_id. (Normal)
+//		regiCS3 = new Register(3, 4, 3, "221@mail.com", true, "20-08-2020");
+				String test1=C206_CaseStudy.retrieveRegiListID(regiList, 3);
+				String msg2 = String.format("%-20s %-20s %-20s %-20s %-20s\n", "Registration ID", "Course Schedule ID",
+						"Member Email", "Status", "Registration Date & time");
+				msg2 += String.format("%-20s %-20s %-20s %-20s %-20s\n", 3,4,"221@mail.com","Pending","20-08-2020");
+				assertEquals("Test if the registration can be displayed by searching through the course id",test1,msg2);
+
+		// System displays all the registrations
+		// for all the courses after admin search through the course schedule_id.(Error)
+				String test2=C206_CaseStudy.retrieveRegiListID(regiList, 1);
+				assertFalse("Test if the system display the schedule_id for all courses"+test2,false);
+		// System display a message ‘No member registered for this course schedule!’
+		// after searching through
+		// by course schdule_id and none of the Members registered for this course.
+		// (Normal)
+				String test3=C206_CaseStudy.retrieveRegiListID(regiList, 0);
+				assertFalse("Test if the message will be displayed"+test3,false);
+
+	}
+
+	// Qikai 5.8
+	@Test
+	public void deleteCourseRegi() {
+		// The course registration cannot be delete after passing the start
+		// date.(Normal)
+		regiList.add(regiCS1);
+		regiList.add(regiCS2);
+		String dele1 = C206_CaseStudy.doDeleRegi(regiList, 1);
+		for (int i = 0; i < regiList.size(); i++) {
+			assertFalse("Test the registration cannot be deleted" + dele1, false);
+		// Admin able to delete the course registration after it has passed the schedule
+		// start date. (Error)
+		String dele2=C206_CaseStudy.doDeleRegi(regiList, 1);
+		assertFalse("Test if the course registration can be deleted"+dele2,false);
+		}
+		// Admin unable to delete the course registration when the status is
+		// ‘pending’.(Error)
+		String test1=C206_CaseStudy.doDeleRegi(regiList, 3);
+		String msg2 = String.format("%-20s %-20s %-20s %-20s %-20s\n", "Registration ID", "Course Schedule ID",
+				"Member Email", "Status", "Registration Date & time");
+		msg2 += String.format("%-20s %-20s %-20s %-20s %-20s\n", 3,4,"221@mail.com","Pending","20-08-2020");
+		assertFalse("Test if the admin able to delete the resistration when status set as 'pending'"+test1+msg2,false);
+	}
+
+	// Qikai 5.9
+	@Test
+	public void listPartiMem() {
+		// Test the list is not empty
+		regiList.add(regiCS1);
+		regiList.add(regiCS2);
+		regiList.add(regiCS3);
+		assertNotNull("Test the list is not empty", regiList);
+		// System display all the course schedule that the Member has registered
+		// after searching through that member. (Normal)
+		String list1 = C206_CaseStudy.doSearchPartiMember(regiList, "221@mail.com");
+		assertNotNull("Test if all the course schedule has been load out", list1);
+
+		// System only display one course schedule registered by the member. (Boundary)
+		assertFalse("Test that only one course schedule has displayed" + list1.isEmpty(), false);
+
+		// System did not display the list of course schedule.(Error)
+		assertFalse("Test if the list of course schedule sucessfully displayed or not" + list1, false);
 	}
 
 	@After
