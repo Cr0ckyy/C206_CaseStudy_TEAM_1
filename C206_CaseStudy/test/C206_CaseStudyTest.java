@@ -234,6 +234,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that the current list is correct after delete", "Course has been removed", message);
 	}
 
+	//Ju Long
 	@Test
 	public void updateCourseTest() {
 		// check whether is there a list to update from
@@ -250,6 +251,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that its being updated to the correct one", course2, courseList.get(0));
 	}
 
+	//Ju Long
 	@Test
 	public void searchCourseTest() {
 		// check whether is there a list to search from
@@ -264,6 +266,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that the result of search is correct", testoutput, output);
 	}
 
+	//Ju Long
 	@Test
 	public void listScheduleCourseTest() {
 		// check whether is there a list to search from
