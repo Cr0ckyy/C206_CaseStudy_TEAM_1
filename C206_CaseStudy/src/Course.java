@@ -5,16 +5,18 @@ public class Course {
 	private String courseTitle;
 	private String courseCategory;
 	private String courseDescription;
-	private int courseDuration;
+	private String courseStartDate;
+	private String courseEndDate;
 	private String prerequisiteCourse;
 
 	public Course (int courseCode, String courseTitle, String courseCategory, String courseDescription,
-			int courseDuration, String prerequisiteCourse) {
+			String courseStartDate, String courseEndDate, String prerequisiteCourse) {
 		this.courseCode = courseCode;
 		this.courseTitle = courseTitle;
 		this.courseCategory = courseCategory;
 		this.courseDescription = courseDescription;
-		this.courseDuration = courseDuration;
+		this.courseStartDate = courseStartDate;
+		this.courseEndDate = courseEndDate;
 		this.prerequisiteCourse = prerequisiteCourse;
 	}
 	
@@ -38,8 +40,12 @@ public class Course {
 		return courseDescription;
 	}
 
-	public int getCourseDuration() {
-		return courseDuration;
+	public String getCourseStartDate() {
+		return courseStartDate;
+	}
+
+	public String getCourseEndDate() {
+		return courseEndDate;
 	}
 
 	public String getPrerequisiteCourse() {
