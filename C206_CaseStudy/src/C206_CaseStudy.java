@@ -1,7 +1,8 @@
-import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import javax.naming.directory.SearchResult;
 
 public class C206_CaseStudy {
 
@@ -98,13 +99,13 @@ public class C206_CaseStudy {
 					viewCourseCategory();
 					break;
 				case 3:
-					// updateCourseCategory();
+					updateCourseCategory();
 					break;
 				case 4:
-					// searchCourseCategory();
+					searchCourseCategory();
 					break;
 				case 5:
-					// listCourseCategory();
+					listCourseCategory();
 					break;
 				case 6:
 					deleteCourseCategory();
@@ -181,13 +182,13 @@ public class C206_CaseStudy {
 					viewRegister();
 					break;
 				case 3:
-					// updateCourseSchedule();
+					updateRegiStatus();
 					break;
 				case 4:
-					// searchCourseSchedule();
+					CS_idSearch();
 					break;
 				case 5:
-					// listScheduleMember();
+					searchPartiMember();
 					break;
 				case 6:
 					deleRegi();
@@ -378,7 +379,8 @@ public class C206_CaseStudy {
 	}
 
 	// LI SHUFANG
-	public static void doAddCategory(ArrayList<CourseCategory> categoryList, CourseCategory category) {
+	public static String doAddCategory(ArrayList<CourseCategory> categoryList, CourseCategory category) {
+		String output = "";
 		boolean isunique = true;
 		for (CourseCategory i : categoryList) {
 			if (i.getCategoryName() == category.getCategoryName()) {
@@ -388,10 +390,11 @@ public class C206_CaseStudy {
 
 		if (isunique) {
 			categoryList.add(category);
-			System.out.println("Category added");
+			output += ("Category added");
 		} else {
-			System.out.println("Name must be unique");
+			output += ("Name must be unique");
 		}
+		return output;
 	}
 
 	// LI SHUFANG
@@ -420,20 +423,108 @@ public class C206_CaseStudy {
 	}
 
 	// LI SHUFANG
-	public static void doDeleteCourseCategory(ArrayList<CourseCategory> categoryList, String categoryName) {
+	public static String doDeleteCourseCategory(ArrayList<CourseCategory> categoryList, String categoryName) {
+		String output = "";
 
 		for (int i = 0; i < categoryList.size(); i++) {
 			if (categoryList.get(i).getCategoryName().equalsIgnoreCase(categoryName)) {
 				var deletion = Helper.readString("Are you sure that you want to delete this category? (Y/N) > ");
 				if (deletion.equalsIgnoreCase("Y")) {
 					categoryList.remove(i);
-					System.out.println("Category have been deleted");
+					output += ("Category have been deleted");
 				} else {
-					System.out.println("Error in category deletion.");
+					output += ("Error in category deletion.");
 				}
 			}
 		}
+		return output;
+	}
 
+	public static void updateCourseCategory() {
+		String name = Helper.readString("Enter Category Name: ");
+		boolean proceed = false;
+		for (CourseCategory i : categoryList) {
+			if (name.equals(i.getCategoryName())) {
+				proceed = true;
+			}
+		}
+		if (proceed) {
+			String description = Helper.readString("Enter updated description: ");
+			CourseCategory category = new CourseCategory(name, description);
+			System.out.println(doUpdateCourseCategory(categoryList, category));
+		}
+	}
+
+	public static String doUpdateCourseCategory(ArrayList<CourseCategory> categoryList, CourseCategory category) {
+		String output = "";
+		for (int i = 0; i < categoryList.size(); i++) {
+			if (categoryList.get(i).getCategoryName().equals(category.getCategoryName())) {
+				categoryList.set(i, category);
+				output += "Category has been updated";
+			}
+		}
+		return output;
+	}
+
+	public static void searchCourseCategory() {
+		String name = Helper.readString("Enter Category Name: ");
+
+		System.out.println(String.format("%-50s %s\n", "COURSE CATEGORY", "DESCRIPTION"));
+		System.out.println(doSearchCourseCategory(categoryList, name));
+	}
+
+	public static String doSearchCourseCategory(ArrayList<CourseCategory> categoryList, String name) {
+		String output = "";
+		boolean proceed = false;
+		CourseCategory category = null;
+
+		for (CourseCategory i : categoryList) {
+			if (i.getCategoryName().equals(name)) {
+				proceed = true;
+				category = new CourseCategory(i.getCategoryName(), i.getCategoryDescription());
+			}
+		}
+		if (proceed) {
+			output += (String.format("%-50s %s\n", category.getCategoryName(), category.getCategoryDescription()));
+		} else {
+			output += "There is no category available";
+		}
+		return output;
+	}
+
+	public static void listCourseCategory() {
+		String name = Helper.readString("Enter Category Name: ");
+		boolean proceed = false;
+		String output = "";
+
+		for (CourseCategory i : categoryList) {
+			if (i.getCategoryName().equals(name)) {
+				proceed = true;
+			}
+		}
+
+		if (proceed) {
+			output += String.format("%-10s %-35s %-20s %-50s %-15s %s\n", "Course ID", "Course Title",
+					"Course Category", "Course Description", "Course Duration", "Pre-requisite Course");
+			output += doListCourseCategory(courseList, name);
+		} else {
+			output += "Category does not exist in the category list";
+		}
+		System.out.println(output);
+	}
+
+	public static String doListCourseCategory(ArrayList<Course> courseList, String name) {
+		String output = "";
+		boolean proceed = false;
+
+		for (Course i : courseList) {
+			if (i.getCourseCategory().equals(name)) {
+				output += String.format("%-10d %-35s %-20s %-50s %-15d %s\n", i.getCourseCode(), i.getCourseTitle(),
+						i.getCourseCategory(), i.getCourseDescription(), i.getCourseDuration(),
+						i.getPrerequisiteCourse());
+			}
+		}
+		return output;
 	}
 
 	// Ju Long
