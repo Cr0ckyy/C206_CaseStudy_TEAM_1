@@ -32,7 +32,7 @@ public class C206_CaseStudy {
 		categoryList.add(new CourseCategory("Sport", "we learn how body works"));
 		categoryList.add(new CourseCategory("Engineering", "we learn everything"));
 
-		courseList.add(new Course(1, "Mobile Software Development", "IT", "we learn coding", "01/05/2021", "01/11/2021", "o-lvl score min 26"));
+		courseList.add(new Course(1, "Mobile Software Development", "Information Technology", "we learn coding", "01/05/2021", "01/11/2021", "o-lvl score min 26"));
 		courseList.add(new Course(2, "Sport Science", "Sport", "we learn body health", "01/05/2021", "01/11/2021", "o-lvl score min 26"));
 		courseList.add(new Course(3, "Electric Electronic Engineering", "Engineering", "we learn coding", "01/05/2021", "01/11/2021", "o-lvl score min 26"));
 
@@ -70,17 +70,16 @@ public class C206_CaseStudy {
 					viewAllMember();
 					break;
 				case 3:
-					// updateMember();
+					updateMember();
 					break;
 				case 4:
-					// searchMember();
+					searchMember();
 					break;
 				case 5:
-					// listCourseMember();
+					listCourseMember();
 					break;
 				case 6:
 					deleteMember();
-					;
 					break;
 				default:
 					System.out.println("Invalid option");
@@ -108,7 +107,6 @@ public class C206_CaseStudy {
 					break;
 				case 6:
 					deleteCourseCategory();
-					;
 					break;
 				default:
 					System.out.println("Invalid option");
@@ -136,7 +134,6 @@ public class C206_CaseStudy {
 					break;
 				case 6:
 					deleteCourse();
-					;
 					break;
 				default:
 					System.out.println("Invalid option");
@@ -375,8 +372,8 @@ public class C206_CaseStudy {
 
 		}
 		if (!isValid) {
+			output += "Member " + memberList.get(i).getEmail() + " deleted";
 			memberList.remove(i);
-			output += "Member " + memberList.get(i).getEmail() + "  deleted";
 		}else {
 			output += "Member that has registered with a course cannot be deleted";
 		}
@@ -386,69 +383,81 @@ public class C206_CaseStudy {
 	public static void updateMember() { 
 		
 		boolean exist = false;
-		
+		String output ="";
 		C206_CaseStudy.setHeader("UPDATE MEMBER ACCOUNT");
 		viewAllMember();
+		int i = 0;
 		String email = Helper.readString("Enter member's email: ");
-		for (int i = 0; i<memberList.size(); i++) {
+		for (; i<memberList.size(); i++) {
 			if (memberList.get(i).getEmail().equals(email)) {
 				exist = true;
+				break;
 			}
 		}if (!exist) {
-			System.out.println("Please enter the correct email");
-			System.out.println();
+			output += "Please enter the correct email";
+			
 		}else {
 			String password = Helper.readString("Enter new password> ");
 			String cor = Helper.readString("Enter new country of residence> ");
 			int mobile = Helper.readInt("Enter new moblie> ");
-			System.out.println(doUpdateMember(memberList, email,password,cor,mobile));
+			output += doUpdateMember(memberList, i,password,cor,mobile);
 		}
+		System.out.println(output);
+		System.out.println();
 	}
 	//Hui Wen
-	private static String doUpdateMember(ArrayList<Member> memeberList, String email, String password, String cor,
+	public static String doUpdateMember(ArrayList<Member> memeberList, int i, String password, String cor,
 			int mobile) { 
 		
 		boolean isUpdated = false;
 		String output = "";
-		for (int i = 0; i<memberList.size(); i++) {
-			if (memberList.get(i).getEmail().equals(email)) {
-				memberList.get(i).setPassword(password);
-				memberList.get(i).setCountryOfresidence(cor);
-				memberList.get(i).setMobile(mobile);
-				isUpdated = true;
-			}
-		}if(isUpdated == true) {
+
+		if (memberList.isEmpty()) {
+			output += "List is empty";
+			return output;
+		} else {
+			memberList.get(i).setPassword(password);
+			memberList.get(i).setCountryOfresidence(cor);
+			memberList.get(i).setMobile(mobile);
+
 			output += "Member Account updated";
 		}
+
+
 		return output;
 	}
 	// Hui wen
-	private static void searchMember() { 
+	public static void searchMember() { 
 		
 		C206_CaseStudy.setHeader("SERACH MEMBER BY COUNTRY OF RESIDENCE");
-		boolean exist = false;
-		
+	
+		String output = "";
 		String cor = Helper.readString("Enter country of residence to search> ");
+		
+		output = String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile", "Email",
+				"DOB", "Country of Residennce");
+		output += doSearchMember(memberList,cor);
+	
+		
+		System.out.println(output);
+		System.out.println();
+		
+	}public static String doSearchMember(ArrayList<Member> memberList, String cor) { // Hui wen
+		String output = "";
+		boolean exist = false;
 		
 		for (int i = 0; i< memberList.size();i++) {
 			if (memberList.get(i).getCountryOfresidence().equalsIgnoreCase(cor)) {
 				exist = true;
 			}
 		}if (exist) {
-		String output = String.format("%-15s %-10s %-10s %-20s %-10s %-10s\n", "Name", "Gender", "Mobile", "Email",
-				"DOB", "Country of Residennce");
-		output += doSearchMember(memberList);
-		System.out.println(output);
-		System.out.println();
+			for (Member i : memberList) {
+				output += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", i.getName(), i.getGender(), i.getMobile(),
+						i.getEmail(), i.getDateOfbirth(), i.getCountryOfresidence());
+			}
 		} else {
-			System.out.println("Country of residencse searched does not exist");
-		}
-		
-	}public static String doSearchMember(ArrayList<Member> memberList) { // Hui wen
-		String output = "";
-		for (Member i : memberList) {
-			output += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", i.getName(), i.getGender(), i.getMobile(),
-					i.getEmail(), i.getDateOfbirth(), i.getCountryOfresidence());
+			output += "Country of residencse searched does not exist";
+			
 		}
 		return output;
 	}
@@ -514,7 +523,7 @@ public class C206_CaseStudy {
 		var courseCategoryName = Helper.readString("Enter Course Category Name: ");
 		var courseCategoryDescription = Helper.readString("Enter Course Category Description: ");
 		var newCC = new CourseCategory(courseCategoryName, courseCategoryDescription);
-		doAddCategory(categoryList, newCC);
+		System.out.println(doAddCategory(categoryList, newCC));
 		System.out.println();
 	}
 
@@ -523,7 +532,7 @@ public class C206_CaseStudy {
 		String output = "";
 		boolean isunique = true;
 		for (CourseCategory i : categoryList) {
-			if (i.getCategoryName() == category.getCategoryName()) {
+			if (i.getCategoryName().equals(category.getCategoryName())) {
 				isunique = false;
 			}
 		}
@@ -540,8 +549,10 @@ public class C206_CaseStudy {
 	// LI SHUFANG
 	public static void viewCourseCategory() {
 		C206_CaseStudy.setHeader("VIEW CATEGORY");
-		System.out.println(String.format("%-50s %s\n", "COURSE CATEGORY", "DESCRIPTION"));
-		System.out.println(doViewCourseCategory(categoryList));
+		String output = "";
+		output += String.format("%-50s %s\n", "COURSE CATEGORY", "DESCRIPTION");
+		output += doViewCourseCategory(categoryList);
+		System.out.println(output);
 		System.out.println();
 	}
 
@@ -558,7 +569,7 @@ public class C206_CaseStudy {
 	public static void deleteCourseCategory() {
 		C206_CaseStudy.setHeader("DELETE CATEGORY");
 		var searchCategory = Helper.readString("Enter the name of the category you want to delete: ");
-		doDeleteCourseCategory(categoryList, searchCategory);
+		System.out.println(doDeleteCourseCategory(categoryList, searchCategory));
 		System.out.println();
 	}
 
@@ -582,6 +593,7 @@ public class C206_CaseStudy {
 
 	//LI SHUFANG
 	public static void updateCourseCategory() {
+		C206_CaseStudy.setHeader("UPDATE CATEGORY");
 		String name = Helper.readString("Enter Category Name: ");
 		boolean proceed = false;
 		for (CourseCategory i : categoryList) {
@@ -594,6 +606,7 @@ public class C206_CaseStudy {
 			CourseCategory category = new CourseCategory(name, description);
 			System.out.println(doUpdateCourseCategory(categoryList, category));
 		}
+		System.out.println();
 	}
 
 	//LI SHUFANG
@@ -610,10 +623,12 @@ public class C206_CaseStudy {
 
 	//LI SHUFANG
 	public static void searchCourseCategory() {
+		C206_CaseStudy.setHeader("SEARCH COURSE");
 		String name = Helper.readString("Enter Category Name: ");
 
 		System.out.println(String.format("%-50s %s\n", "COURSE CATEGORY", "DESCRIPTION"));
 		System.out.println(doSearchCourseCategory(categoryList, name));
+		System.out.println();
 	}
 
 	//LI SHUFANG
@@ -638,6 +653,7 @@ public class C206_CaseStudy {
 
 	//LI SHUFANG
 	public static void listCourseCategory() {
+		C206_CaseStudy.setHeader("LIST COURSE CATEGORY");
 		String name = Helper.readString("Enter Category Name: ");
 		boolean proceed = false;
 		String output = "";
@@ -656,6 +672,7 @@ public class C206_CaseStudy {
 			output += "Category does not exist in the category list";
 		}
 		System.out.println(output);
+		System.out.println();
 	}
 
 	//LI SHUFANG
@@ -766,10 +783,11 @@ public class C206_CaseStudy {
 						courseList.remove(i);
 						output += "Course has been removed";
 					} 
-				} else {
-					output += "Error remove course";
-				}
+				} 
 			}
+		}
+		if (output.isEmpty()) {
+			output += "Error removing Course";
 		}
 		return output;
 	}
@@ -852,9 +870,12 @@ public class C206_CaseStudy {
 	public static void listScheduleCourse() {
 		C206_CaseStudy.setHeader("LIST COURSE SCHEDULE");
 		viewCourse();
+		String output = "";
 		int id = Helper.readInt("Enter Course id: ");
 
-		System.out.println(doListScheduleCourse(courseList, id, scheduleList));
+		output += String.format("%-13s %-12s %-11s %-11s %-10s %-9s %-10s\n", "Schedule ID", "Start Date",
+				"Start Time", "End Date", "End Time", "Price", "Location");
+		output += (doListScheduleCourse(courseList, id, scheduleList));
 		System.out.println();
 	}
 
@@ -905,7 +926,7 @@ public class C206_CaseStudy {
 
 		CourseSchedule sch = new CourseSchedule(courseID, scheduleList.size() + 1, price, startDate, startTime, endDate,
 				endTime, location);
-		doAddCourseSchedule(scheduleList, sch);
+		System.out.println(doAddCourseSchedule(scheduleList, sch));
 		System.out.println();
 	}
 
@@ -971,6 +992,7 @@ public class C206_CaseStudy {
 		}
 		String output = doDeleteCourseSchedule(scheduleList, regiList, scheduleID);
 		System.out.println(output);
+		System.out.println();
 	}
 
 	// Alicia
@@ -1052,6 +1074,7 @@ public class C206_CaseStudy {
 
 		output += doUpdateCourseSchedule(scheduleList, update);
 		System.out.println(output);
+		System.out.println();
 	}
 
 	// Alicia
@@ -1085,6 +1108,7 @@ public class C206_CaseStudy {
 		}
 		String output = doSearchCourseSchedule(scheduleList, search);
 		System.out.println(output);
+		System.out.println();
 	}
 
 	// Alicia
@@ -1134,6 +1158,7 @@ public class C206_CaseStudy {
 
 		String output = doListScheduleMember(regiList, memberList, email, check);
 		System.out.println(output);
+		System.out.println();
 	}
 
 	// Alicia
@@ -1233,6 +1258,7 @@ public class C206_CaseStudy {
 	// Qi kai
 	public static void deleRegi() {
 		C206_CaseStudy.setHeader("DELETE REGISTRATION");
+		viewRegister();
 		int deleRegi = Helper.readInt("Enter your registration ID: ");
 
 		System.out.println(doDeleRegi(regiList, deleRegi));
@@ -1244,7 +1270,7 @@ public class C206_CaseStudy {
 		String output = "";
 		for (int i = 0; i < regiList.size(); i++) {
 			if (regiList.get(i).getRegiID() == deleRegi) {
-				char dele = Helper.readChar("Confirm deletion?(Y/N)");
+				char dele = Helper.readChar("Confirm deletion?(Y/N): ");
 				if (dele == 'Y') {
 					regiList.remove(i);
 					output += ("Registration has been deleted\n");
@@ -1263,6 +1289,8 @@ public class C206_CaseStudy {
 
 	// Qi kai
 	public static void updateRegiStatus() {
+		C206_CaseStudy.setHeader("UPDATE REGISTER");
+		viewRegister();
 		int update = Helper.readInt("Enter the registration ID you want to update > ");
 		for (int i = 0; i < regiList.size(); i++) {
 			if (regiList.get(i).getRegiID() == update) {
@@ -1276,17 +1304,20 @@ public class C206_CaseStudy {
 				}
 			}
 		}
+		System.out.println();
 	}
 
 	// Qi kai
 	public static void CS_idSearch() {
 		C206_CaseStudy.setHeader("SEARCH COURSE SCHEDULE");
+		viewRegister();
 		int cSid = 0;
 		if (regiList.size() != 0) {
 			cSid = Helper.readInt("Enter the course register id >");
 		}
 		String output = retrieveRegiListID(regiList, cSid);
 		System.out.println(output);
+		System.out.println();
 	}
 
 	//Qi Kai
@@ -1314,6 +1345,7 @@ public class C206_CaseStudy {
 		viewRegister();
 		String email = Helper.readString("Enter Member Email address > ");
 		System.out.println(doSearchPartiMember(regiList, email));
+		System.out.println();
 	}
 
 	//Qi Kai

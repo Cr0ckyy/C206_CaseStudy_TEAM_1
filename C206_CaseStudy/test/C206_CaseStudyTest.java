@@ -10,6 +10,7 @@ public class C206_CaseStudyTest {
 	private Member m1;
 	private Member m2;
 	private Member m3;
+	private Member m4;
 	private ArrayList<Member> memberList;
 
 	private CourseCategory cc1;
@@ -38,6 +39,7 @@ public class C206_CaseStudyTest {
 		m1 = new Member("Lily", "Female", 81234567, "lily123@email.com", "14/03/1998", "Singapore", "ly4567889");
 		m2 = new Member("Sally", "Female", 92345678, "sally456@email.com", "12/04/1994", "Singapore", "sy5678890");
 		m3 = new Member("Jerry", "Male", 94567890, "sally456@email.com", "24/03/1994", "Singapore", "jr1234556");
+		m4 = new Member("Tom", "Male",93456789,"123@mail.com","21/04/1997","Malaysia","tm345678");
 		memberList = new ArrayList<Member>();
 
 		// Course Category, Shu Fang
@@ -71,78 +73,148 @@ public class C206_CaseStudyTest {
 		assertTrue("C206_CaseStudy_SampleTest ", true);
 	}
 
-	// Member
-	@Test
-	public void addMemberTest() { // HUIWEN
-		// Member list is not null, so that can add a new item - boundary
-		assertNotNull("Check if there is valid member arraylist to add to", memberList);
+	// HUIWEN
+		// Member
+		@Test
+		public void addMemberTest() { 
+			// Member list is not null, so that can add a new item - boundary
+			assertNotNull("Check if there is valid member arraylist to add to", memberList);
 
-		// Given an empty list, after adding 1 member, the size of the list is 1 -
-		// normal
-		// The item just added is as same as the first item of the list
-		C206_CaseStudy.addMember(memberList, m1);
-		assertEquals("Check that Member arraylist size is 1", 1, memberList.size());
-		assertSame("Check that Member is added", m1, memberList.get(0));
+			// Given an empty list, after adding 1 member, the size of the list is 1 -
+			// normal
+			// The item just added is as same as the first item of the list
+			C206_CaseStudy.addMember(memberList, m1);
+			assertEquals("Check that Member arraylist size is 1", 1, memberList.size());
+			assertSame("Check that Member is added", m1, memberList.get(0));
 
-		// Add another member. test The size of the list is 2? -normal
-		// The member just added is as same as the second member of the list
-		C206_CaseStudy.addMember(memberList, m2);
-		assertEquals("Check that Member arraylist size is 2", 2, memberList.size());
-		assertSame("Check that Member is added", m2, memberList.get(1));
+			// Add another member. test The size of the list is 2? -normal
+			// The member just added is as same as the second member of the list
+			C206_CaseStudy.addMember(memberList, m2);
+			assertEquals("Check that Member arraylist size is 2", 2, memberList.size());
+			assertSame("Check that Member is added", m2, memberList.get(1));
 
-		// Add another member. Test that email that is not unique cannot be added
-		String addMember = C206_CaseStudy.addMember(memberList, m3);
-		String testoutput = "Email must be unique";
-		assertEquals("Test that member email that is not unique is NOT ok to add", addMember, testoutput);
-	}
+			// Add another member. Test that email that is not unique cannot be added
+			String addMember = C206_CaseStudy.addMember(memberList, m3);
+			String testoutput = "Email must be unique";
+			assertEquals("Test that member email that is not unique is cannot be added", addMember, testoutput);
+		}
+		
+		// HUIWEN
+		@Test
+		public void viewAllMemberTest() {
 
-	@Test
-	public void retrieveAllMemberTest() {// HUIWEN
+			// Test if Member list is not null but empty - boundary
+			assertNotNull("Test if there is valid member arraylist to retrieve item", memberList);
 
-		// Test if Member list is not null but empty - boundary
-		assertNotNull("Test if there is valid member arraylist to retrieve item", memberList);
+			// test if the list of members retrieved from the Member is empty - boundary
+			String allMember = C206_CaseStudy.retreiveAllMember(memberList);
+			String testOutput = "";
+			assertEquals("Check that ViewAllMemberlist", testOutput, allMember);
 
-		// test if the list of members retrieved from the Member is empty - boundary
-		String allMember = C206_CaseStudy.retreiveAllMember(memberList);
-		String testOutput = "";
-		assertEquals("Check that ViewAllMemberlist", testOutput, allMember);
+			// Given an empty list, after adding 2 members, test if the size of the list is
+			// 2 - normal
+			C206_CaseStudy.addMember(memberList, m1);
+			C206_CaseStudy.addMember(memberList, m2);
+			assertEquals("Test that member arraylist size is 2", 2, memberList.size());
 
-		// Given an empty list, after adding 2 members, test if the size of the list is
-		// 2 - normal
-		C206_CaseStudy.addMember(memberList, m1);
-		C206_CaseStudy.addMember(memberList, m2);
-		assertEquals("Test that member arraylist size is 2", 2, memberList.size());
+			// test if the expected output string same as the list of members retrieved from
+			// the case study
+			allMember = C206_CaseStudy.retreiveAllMember(memberList);
+			testOutput = String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", "Lily", "Female", 81234567,
+					"lily123@email.com", "14/03/1998", "Singapore", "ly4567889");
+			testOutput += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", "Sally", "Female", 92345678,
+					"sally456@email.com", "12/04/1994", "Singapore", "sy5678890");
 
-		// test if the expected output string same as the list of members retrieved from
-		// the case study
-		allMember = C206_CaseStudy.retreiveAllMember(memberList);
-		testOutput = String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", "Lily", "Female", 81234567,
-				"lily123@email.com", "14/03/1998", "Singapore", "ly4567889");
-		testOutput += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", "Sally", "Female", 92345678,
-				"sally456@email.com", "12/04/1994", "Singapore", "sy5678890");
+			assertEquals("Test that ViewAllMemberlist", testOutput, allMember);
+		}
 
-		assertEquals("Test that ViewAllMemberlist", testOutput, allMember);
-	}
+		@Test
+		public void deleteMemberTest() { // HUIWEN
+			// Test if Member list is not null but empty - boundary
+			assertNotNull("test if there is valid member arraylist to delete from", memberList);
+			
+			// Test if register list is not null but empty - boundary
+			assertNotNull("test if there is valid register arraylist to check from", regiList);
 
-//	@Test
-//	public void doDeleteMemberTest() { // HUIWEN
-//		// Test if Member list is not null but empty - boundary
-//		assertNotNull("test if there is valid member arraylist to delete from", memberList);
+			// given an empty list, after adding 1 member that is not registered can be deleted - normal
+			C206_CaseStudy.addMember(memberList, m1);
+			String testoutput = "Member " + m1.getEmail() + " deleted";
+			String delMember = C206_CaseStudy.dodeleteMember(memberList,regiList, 0);
+
+			assertEquals("Test if a member that is not registered is can be deleted?", testoutput, delMember);
+
+			// test if that the same member cannot be deleted again - error
+			String delMem1 = C206_CaseStudy.dodeleteMember(memberList,regiList, 0);
+			String  testoutput1 = "Invalid email";
+			assertEquals("Test if an same member is cannot be deleted again?", testoutput1,delMem1);
+
+			// test if that the non-existing member cannot be deleted again - error
+//			C206_CaseStudy.addMember(memberList, m4);
+//			String delMem2 = C206_CaseStudy.dodeleteMember(memberList,regiList, 0);
+//			String testoutput2 = "Member that has registered with a course cannot be deleted";
+//			assertEquals("Test if a resgistered member is cannot be deleted ?", testoutput2,delMem2);
+		}
+		
+		//Hui Wen
+		@Test
+		public void doUpdateMemberTest() {
+			// Test if Member list is not null but empty - boundary
+			assertNotNull("test if there is valid member arraylist to update from", memberList);
+			
+			// Test if member does not exist cannot be updated - error 
+//			String updatemem = C206_CaseStudy.doUpdateMember(memberList, 0, "password", "Singapore", 12345678);
+//			String testoutput = "List is empty";
+//			assertEquals("Test if an same member is cannot be deleted again?", testoutput, updatemem);
+
+			//Test if member exist can be updated - normal
+//			memberList.add(m1);
+//			String updatemem2 = C206_CaseStudy.doUpdateMember(memberList, 0, "password", "Singapore", 12345678);
 //
-//		// given an empty list, after adding 1 member, test if able to delete - normal
-//		C206_CaseStudy.addMember(memberList, m1);
-//		String ok = C206_CaseStudy.dodeleteMember(memberList, regiList, 0);
-//		assertTrue("Test if an existing member is ok to delete?", ok);
-//
-//		// test if that the same member cannot be deleted again - error
-//		ok = C206_CaseStudy.dodeleteMember(memberList, "lily123@email.com");
-//		assertFalse("Test if an same member is NOT ok to delete again?", ok);
-//
-//		// test if that the non-existing member cannot be deleted again - error
-//		ok = C206_CaseStudy.dodeleteMember(memberList, "sally456@email.com");
-//		assertFalse("Test if an non-existing member is NOT ok to delete again?", ok);
-//	}
-
+//			String testoutput2 = "Member Account updated";
+//			assertEquals("Test if an same member's email does not exist cannot be updated ?", testoutput2, updatemem2);
+			
+		}
+		
+		//Hui Wen
+		@Test
+		public void doSerachMember() {
+			// Test if Member list is not null but empty - boundary
+			assertNotNull("test if there is valid member arraylist to search from", memberList);
+			
+			//Test if country does not exist member cannot be shown 
+			String testoutput = "Country of residencse searched does not exist";
+			String serachmem = C206_CaseStudy.doSearchMember(memberList, "Australia");
+			assertEquals("Test if the country does not exist searched cannot show any member ?", testoutput,serachmem);
+		
+			//Test if an existing country searched, member can be shown - normal
+			C206_CaseStudy.addMember(memberList,m1);
+			String searchmem1 = C206_CaseStudy.doSearchMember(memberList, "Singapore");
+			String testoutput1 = "";
+			testoutput1 += String.format("%-15s %-10s %-10d %-20s %-10s %-10s\n", "Lily", "Female", 81234567,
+					"lily123@email.com", "14/03/1998", "Singapore", "ly4567889");
+			assertEquals("Test if the country that exists searched can show member ?", testoutput1,searchmem1);
+		}
+		
+		// Hui Wen
+		@Test
+		public void doListCourseMember() {
+			// Test if course list is not null but empty - boundary
+			assertNotNull("test if there is valid register arraylist to view from", courseList);
+			
+			//Test if there is no upcoming courses to be shown, if there is no course that is later than today
+			String upcoming = C206_CaseStudy.doListCourseMember(courseList);
+			String testoutput = "There is no upcoming course available";
+			assertEquals("Test if the country that exists searched can show member ?", testoutput,upcoming);
+			
+			//Test if there is course for that the startdate year is more than current year, course will be shown 
+			C206_CaseStudy.doAddCourse(courseList,course1,categoryList);
+			String upcoming1 = C206_CaseStudy.doListCourseMember(courseList);
+			String testoutput1 = String.format("%-10s %-35s %-20s %-50s %-20s %-20s %s\n", 2, "course3", "IT", "its good", "01/02/2021", "05/10/2021", "2 people min");
+			assertEquals("Test if the country that exists searched can show member ?", testoutput,upcoming);
+			
+			
+		}
+		
 	// CourseCategory
 	// SHUFANG
 	@Test
@@ -177,6 +249,28 @@ public class C206_CaseStudyTest {
 			testoutput += String.format("%-50s %s\n", i.getCategoryName(), i.getCategoryDescription());
 		}
 		assertEquals("Test if it equals to what was added", testoutput, output);
+	}
+	
+	// Shufang
+	public void retrieveAllCategoryTest() {
+		// Test if Registration list is not null but empty -boundary
+		assertNotNull("Test if there is valid CategoryList arraylist to retrieve the catgory list", categoryList);
+
+		// Given an empty list, after adding 2 items, test if the size of the list is 2
+		// - normal
+		categoryList.add(cc1);
+		categoryList.add(cc2);
+		assertEquals("Test that Registration arraylist size is 2", 2, categoryList.size());
+		
+		courseList.add(course1);
+		courseList.add(course3);
+		// test if the expected output string same as the list of Registration retrieved
+		// from the SourceCentre
+		String orignalOutput = C206_CaseStudy.doListCourseCategory(courseList, cc1.getCategoryName());
+		String testOutput = String.format("%-20s %-30s\n", "1234", "DBIS");
+		testOutput += String.format("%-20s %-30s\n", "4321", "DBA");
+
+		assertEquals("Test that ViewAllRegistrations", testOutput, orignalOutput);
 	}
 
 	// Course
