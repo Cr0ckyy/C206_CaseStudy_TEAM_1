@@ -580,6 +580,7 @@ public class C206_CaseStudy {
 		return output;
 	}
 
+	//LI SHUFANG
 	public static void updateCourseCategory() {
 		String name = Helper.readString("Enter Category Name: ");
 		boolean proceed = false;
@@ -595,6 +596,7 @@ public class C206_CaseStudy {
 		}
 	}
 
+	//LI SHUFANG
 	public static String doUpdateCourseCategory(ArrayList<CourseCategory> categoryList, CourseCategory category) {
 		String output = "";
 		for (int i = 0; i < categoryList.size(); i++) {
@@ -606,6 +608,7 @@ public class C206_CaseStudy {
 		return output;
 	}
 
+	//LI SHUFANG
 	public static void searchCourseCategory() {
 		String name = Helper.readString("Enter Category Name: ");
 
@@ -613,6 +616,7 @@ public class C206_CaseStudy {
 		System.out.println(doSearchCourseCategory(categoryList, name));
 	}
 
+	//LI SHUFANG
 	public static String doSearchCourseCategory(ArrayList<CourseCategory> categoryList, String name) {
 		String output = "";
 		boolean proceed = false;
@@ -632,6 +636,7 @@ public class C206_CaseStudy {
 		return output;
 	}
 
+	//LI SHUFANG
 	public static void listCourseCategory() {
 		String name = Helper.readString("Enter Category Name: ");
 		boolean proceed = false;
@@ -653,6 +658,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
+	//LI SHUFANG
 	public static String doListCourseCategory(ArrayList<Course> courseList, String name) {
 		String output = "";
 		boolean proceed = false;
@@ -903,6 +909,7 @@ public class C206_CaseStudy {
 		System.out.println();
 	}
 
+	//Alicia
 	public static String doAddCourseSchedule(ArrayList<CourseSchedule> scheduleList, CourseSchedule schedule) {
 		boolean isRepeat = false;
 		String output = "";
@@ -1282,6 +1289,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
+	//Qi Kai
 	public static String retrieveRegiListID(ArrayList<Register> regiList, int cSid) {
 		String output = "";
 		String output2 = "";
@@ -1308,6 +1316,7 @@ public class C206_CaseStudy {
 		System.out.println(doSearchPartiMember(regiList, email));
 	}
 
+	//Qi Kai
 	public static String doSearchPartiMember(ArrayList<Register> regiList, String search) {
 		String output = "";
 		boolean go = false;
