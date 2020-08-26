@@ -15,6 +15,7 @@ public class C206_CaseStudyTest {
 
 	private CourseCategory cc1;
 	private CourseCategory cc2;
+	private CourseCategory cc3;
 	private ArrayList<CourseCategory> categoryList;
 
 	private Course course1;
@@ -45,6 +46,7 @@ public class C206_CaseStudyTest {
 		// Course Category, Shu Fang
 		cc1 = new CourseCategory("Sport", "Physical Exercise");
 		cc2 = new CourseCategory("IT", "Computer");
+		cc3 = new CourseCategory("Sport", "Physical Exercise and Knowledge of exercising");
 		categoryList = new ArrayList<CourseCategory>();
 
 		// Course, Ju Long
@@ -208,71 +210,133 @@ public class C206_CaseStudyTest {
 			
 			
 		}
-		
-	// CourseCategory
-	// SHUFANG
-	@Test
-	public void addCourseCategory() {
-		assertNotNull("Test whether there is a valid Arraylist category to add to ", categoryList);
-		assertEquals("Test if the size of the arraylist category is 0?", 0, categoryList.size());
-		categoryList.add(cc1);
-		assertEquals("Test if the size of the Arraylist category is 1?", 1, categoryList.size());
-		assertEquals("Test if this Category Name is called sport?", "Sport", categoryList.get(0).getCategoryName());
-	}
 
-	// SHUFANG
-	@Test
-	public void deleteCourseCategory() {
-		assertNotNull("Test if there is a valid category Arraylist to be added to", categoryList);
-		categoryList.add(cc1);
-		assertEquals("Test if the size of the Arraylist category is 1?", 1, categoryList.size());
-		categoryList.remove(0);
-		assertEquals("Test if the size of the Arraylist category is 0?", 0, categoryList.size());
+		// CourseCategory
+		// SHUFANG
+		@Test
+		public void addCourseCategory() {
+			assertNotNull("Test if there is a valid category of arraylist to be added to ", categoryList);
 
-	}
+			// If the names and descriptions of the category is empty,
+			// an error message would appear,
+			// as the names and descriptions of the category must not be blank. (error)
+			assertEquals("Test if the size of the arraylist is 0?", 0, categoryList.size());
+			categoryList.add(cc1);
 
-	// SHUFANG
-	@Test
-	public void viewCourseCategory() {
-		assertNotNull("Test if there is a valid category in the Arraylist", categoryList);
-		categoryList.add(cc1);
-		categoryList.add(cc2);
-		String output = C206_CaseStudy.doViewCourseCategory(categoryList);
-		String testoutput = "";
-		for (CourseCategory i : categoryList) {
-			testoutput += String.format("%-50s %s\n", i.getCategoryName(), i.getCategoryDescription());
+			// If the name & description of the category is completed,
+			// they will be stored in the database. (Normal)
+
+			assertEquals("Test to see if the size of the arraylist category is 1?", 1, categoryList.size());
+
+			// The name of the category is not unique, as there is a duplicate of names,
+			// an error message would occur. (error)
+			assertEquals("Testing if the name of this category is called sports?", "Sport",
+					categoryList.get(0).getCategoryName());
 		}
-		assertEquals("Test if it equals to what was added", testoutput, output);
-	}
-	
-	// Shufang
-	public void retrieveAllCategoryTest() {
-		// Test if Registration list is not null but empty -boundary
-		assertNotNull("Test if there is valid CategoryList arraylist to retrieve the catgory list", categoryList);
 
-		// Given an empty list, after adding 2 items, test if the size of the list is 2
-		// - normal
-		categoryList.add(cc1);
-		categoryList.add(cc2);
-		assertEquals("Test that Registration arraylist size is 2", 2, categoryList.size());
-		
-		courseList.add(course1);
-		courseList.add(course3);
-		// test if the expected output string same as the list of Registration retrieved
-		// from the SourceCentre
-		String orignalOutput = C206_CaseStudy.doListCourseCategory(courseList, cc1.getCategoryName());
-		String testOutput = String.format("%-20s %-30s\n", "1234", "DBIS");
-		testOutput += String.format("%-20s %-30s\n", "4321", "DBA");
+		// SHUFANG
+		@Test
+		public void deleteCourseCategory() {
+			assertNotNull("Test to see if there is a valid category arraylist to be deleted to ", categoryList);
+			categoryList.add(cc1);
 
-		assertEquals("Test that ViewAllRegistrations", testOutput, orignalOutput);
-	}
-	
-	 // Shufang
-    public void updateCategoryTest() {
-    		categoryList.add(cc1);
-            String output = C206_CaseStudy.doUpdateCourseCategory(categoryList, cc2);
-            assertEquals("Test if the description have change", "Category has been updated", output);
-    }
+			// All the names and descriptions of the category should be deleted normally
+			// (Normal)
+			assertEquals("Test to see if the size of the Arraylist category is 1?", 1, categoryList.size());
+			categoryList.remove(0);
+
+			// System errors occur in which descriptions and names of categories are not
+			// able to be deleted properly. (Error)
+			assertEquals("Testing if the size of the Arraylist category is 0?", 0, categoryList.size());
+
+		}
+
+		// SHUFANG
+		@Test
+		public void viewCourseCategory() {
+			// All the name & description of the category in the database should be
+			// displayed as normal (Normal)
+			assertNotNull("Test if the category in the arraylist is valid ", categoryList);
+			categoryList.add(cc1);
+			categoryList.add(cc2);
+			String output = C206_CaseStudy.doViewCourseCategory(categoryList);
+			String testoutput = "";
+			for (CourseCategory i : categoryList) {
+				testoutput += String.format("%-50s %s\n", i.getCategoryName(), i.getCategoryDescription());
+			}
+			// System errors occur in which the names and descriptions of the category will
+			// not normally be displayed. (Error)
+			assertEquals("Test if it is equal to what has been added ", testoutput, output);
+		}
+
+		// Shufang
+		@Test
+		public void listcategoryCourse() {
+			// If all the courses under a category can be listed (Normal).
+			assertNotNull("Test if the CategoryList arraylist is valid to retrieve a list of categories ",
+					categoryList);
+
+			// If all the courses under a category cannot be listed (error)
+			categoryList.add(cc1);
+			categoryList.add(cc2);
+			assertEquals("Test that Category arraylist size is 2", 2, categoryList.size());
+
+			courseList.add(course1);
+			courseList.add(course3);
+			// All the name & description of the category in the database should be
+			// displayed as normal (Normal)
+			String orignalOutput = C206_CaseStudy.doListCourseCategory(courseList, cc1.getCategoryName());
+			String testOutput = String.format("%-10s %-35s %-20s %-50s %-20s %-20s %s\n", 1, "course1", "Sport", "its good", "01/01/2021", "05/11/2021", "2 people min");
+
+			assertEquals("Test that retrieveAllCategoryTest", testOutput, orignalOutput);
+		}
+
+		// Shufang
+		@Test
+		  public void searchCourseCategory() {
+			// If all the courses under a category can be listed (Normal).
+			assertNotNull("Test if the CategoryList arraylist is valid to retrieve a list of categories ",
+					categoryList);
+			
+		    categoryList.add(cc1);
+		    categoryList.add(cc2);
+		    String output = C206_CaseStudy.doSearchCourseCategory(categoryList, "Sport");
+		    String testoutput = (String.format("%-50s %s\n", cc1.getCategoryName(), cc1.getCategoryDescription()));
+		    assertEquals("Test that if it retrieve the correct information", testoutput, output);
+		  }
+
+		// Shufang
+		@Test
+		public void advanceDeleteCourseCategory() {
+			// If all the courses under a category can be listed (Normal).
+			assertNotNull("Test if the CategoryList arraylist is valid to retrieve a list of categories ",
+					categoryList);
+			// check whether is there a list to add to
+			assertNotNull("Test if there is a valid Course arraylist to view", courseList);
+			
+			categoryList.add(cc1);
+			categoryList.add(cc2);
+			courseList.add(course1);
+			courseList.add(course3);
+			
+			String output = C206_CaseStudy.doDeleteCourseCategory(categoryList, courseList, "Sport");
+			String testoutput = "The Category is being used.";
+			assertEquals("Test that if it produce the correct message", testoutput, output);
+		}
+
+		// Shufang
+		@Test
+		public void updateCategoryTest() {
+			categoryList.add(cc1);
+			String output = C206_CaseStudy.doUpdateCourseCategory(categoryList, cc3);
+
+			// If the category list is empty, a system error message will appear. (error)
+			assertEquals("Test to see if the size of the Arraylist category is 1?", 1, categoryList.size());
+
+			// If a category exists in the category list, the descriptions can be updated.
+			// (normal)
+			assertEquals("Test if the description of the category has changed", "Category has been updated", output);
+		}
 
 	// Course
 	// Ju Long

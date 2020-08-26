@@ -573,24 +573,38 @@ public class C206_CaseStudy {
 	public static void deleteCourseCategory() {
 		C206_CaseStudy.setHeader("DELETE CATEGORY");
 		var searchCategory = Helper.readString("Enter the name of the category you want to delete: ");
-		System.out.println(doDeleteCourseCategory(categoryList, searchCategory));
+		System.out.println(doDeleteCourseCategory(categoryList, courseList, searchCategory));
 		System.out.println();
 	}
 
 	// LI SHUFANG
-	public static String doDeleteCourseCategory(ArrayList<CourseCategory> categoryList, String categoryName) {
+	public static String doDeleteCourseCategory(ArrayList<CourseCategory> categoryList, ArrayList<Course> courseList, String categoryName) {
 		String output = "";
-
-		for (int i = 0; i < categoryList.size(); i++) {
-			if (categoryList.get(i).getCategoryName().equalsIgnoreCase(categoryName)) {
-				var deletion = Helper.readString("Are you sure that you want to delete this category? (Y/N) > ");
-				if (deletion.equalsIgnoreCase("Y")) {
-					categoryList.remove(i);
-					output += ("Category have been deleted");
-				} else {
-					output += ("Error in category deletion.");
+		boolean proceed = true;
+		
+		for (Course i : courseList) {
+			for (CourseCategory n : categoryList) {
+				if (i.getCourseCategory().equals(n.getCategoryName())) {
+					proceed = false;
 				}
 			}
+		}
+		if (proceed) {
+			
+			for (int i = 0; i < categoryList.size(); i++) {
+				if (categoryList.get(i).getCategoryName().equalsIgnoreCase(categoryName)) {
+					var deletion = Helper.readString("Are you sure that you want to delete this category? (Y/N) > ");
+					if (deletion.equalsIgnoreCase("Y")) {
+						categoryList.remove(i);
+						output += ("Category have been deleted");
+					} else {
+						output += ("Error in category deletion.");
+					}
+				}
+			}
+			
+		} else {
+			output += "The Category is being used.";
 		}
 		return output;
 	}
@@ -616,12 +630,19 @@ public class C206_CaseStudy {
 	//LI SHUFANG
 	public static String doUpdateCourseCategory(ArrayList<CourseCategory> categoryList, CourseCategory category) {
 		String output = "";
+		boolean updated = false;
+		
 		for (int i = 0; i < categoryList.size(); i++) {
 			if (categoryList.get(i).getCategoryName().equals(category.getCategoryName())) {
 				categoryList.set(i, category);
-				output += "Category has been updated";
+				updated = true;
 			}
 		}
+		if (updated)
+			output += "Category has been updated";
+		else 
+			output += "Update Error";
+		
 		return output;
 	}
 
