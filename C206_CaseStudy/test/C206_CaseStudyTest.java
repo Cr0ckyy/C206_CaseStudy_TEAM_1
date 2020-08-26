@@ -143,16 +143,10 @@ public class C206_CaseStudyTest {
 
 			assertEquals("Test if a member that is not registered is can be deleted?", testoutput, delMember);
 
-			// test if that the same member cannot be deleted again - error
+			// test if that the empty list cannot deleted - error
 			String delMem1 = C206_CaseStudy.dodeleteMember(memberList,regiList, 0);
-			String  testoutput1 = "Invalid email";
+			String  testoutput1 = "Empty Member List";
 			assertEquals("Test if an same member is cannot be deleted again?", testoutput1,delMem1);
-
-			// test if that the non-existing member cannot be deleted again - error
-//			C206_CaseStudy.addMember(memberList, m4);
-//			String delMem2 = C206_CaseStudy.dodeleteMember(memberList,regiList, 0);
-//			String testoutput2 = "Member that has registered with a course cannot be deleted";
-//			assertEquals("Test if a resgistered member is cannot be deleted ?", testoutput2,delMem2);
 		}
 		
 		//Hui Wen
@@ -162,16 +156,16 @@ public class C206_CaseStudyTest {
 			assertNotNull("test if there is valid member arraylist to update from", memberList);
 			
 			// Test if member does not exist cannot be updated - error 
-//			String updatemem = C206_CaseStudy.doUpdateMember(memberList, 0, "password", "Singapore", 12345678);
-//			String testoutput = "List is empty";
-//			assertEquals("Test if an same member is cannot be deleted again?", testoutput, updatemem);
+			String updatemem = C206_CaseStudy.doUpdateMember(memberList, 0, "password", "Singapore", 12345678);
+			String testoutput = "List is empty";
+			assertEquals("Test if an same member is cannot be deleted again?", testoutput, updatemem);
 
 			//Test if member exist can be updated - normal
-//			memberList.add(m1);
-//			String updatemem2 = C206_CaseStudy.doUpdateMember(memberList, 0, "password", "Singapore", 12345678);
-//
-//			String testoutput2 = "Member Account updated";
-//			assertEquals("Test if an same member's email does not exist cannot be updated ?", testoutput2, updatemem2);
+			memberList.add(m1);
+			String updatemem2 = C206_CaseStudy.doUpdateMember(memberList, 0, "password", "Singapore", 12345678);
+
+			String testoutput2 = "Member Account updated";
+			assertEquals("Test if an same member's email does not exist cannot be updated ?", testoutput2, updatemem2);
 			
 		}
 		

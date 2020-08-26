@@ -275,7 +275,6 @@ public class C206_CaseStudy {
 	}
 
 	private static void setHeader(String header) {
-		// TODO Auto-generated method stub
 		Helper.line(LINES, "-");
 		System.out.println(header);
 		Helper.line(LINES, "-");
@@ -365,12 +364,17 @@ public class C206_CaseStudy {
 		String output ="";
 		boolean isValid = false;
 		
+		if (memberList.isEmpty()) {
+			output += "Empty Member List";
+			return output;
+		}
+		
 		for (Register r : regiList) {
 			if (r.getMemEmail().contentEquals(memberList.get(i).getEmail())) {
 				isValid = true;
 			}
-
 		}
+		
 		if (!isValid) {
 			output += "Member " + memberList.get(i).getEmail() + " deleted";
 			memberList.remove(i);
@@ -406,7 +410,7 @@ public class C206_CaseStudy {
 		System.out.println();
 	}
 	//Hui Wen
-	public static String doUpdateMember(ArrayList<Member> memeberList, int i, String password, String cor,
+	public static String doUpdateMember(ArrayList<Member> memberList, int i, String password, String cor,
 			int mobile) { 
 		
 		boolean isUpdated = false;
