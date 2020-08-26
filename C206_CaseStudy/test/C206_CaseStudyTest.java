@@ -77,12 +77,12 @@ public class C206_CaseStudyTest {
 		// Member
 		@Test
 		public void addMemberTest() { 
-			// Member list is not null, so that can add a new item - boundary
+			// Member list is not null, so that can add a new member - boundary
 			assertNotNull("Check if there is valid member arraylist to add to", memberList);
 
 			// Given an empty list, after adding 1 member, the size of the list is 1 -
 			// normal
-			// The item just added is as same as the first item of the list
+			// The member just added is as same as the first member of the list
 			C206_CaseStudy.addMember(memberList, m1);
 			assertEquals("Check that Member arraylist size is 1", 1, memberList.size());
 			assertSame("Check that Member is added", m1, memberList.get(0));
@@ -198,13 +198,13 @@ public class C206_CaseStudyTest {
 			//Test if there is no upcoming courses to be shown, if there is no course that is later than today
 			String upcoming = C206_CaseStudy.doListCourseMember(courseList);
 			String testoutput = "There is no upcoming course available";
-			assertEquals("Test if the country that exists searched can show member ?", testoutput,upcoming);
+			assertEquals("Test if there is no upcoming courses, courses cannot be list ?", testoutput,upcoming);
 			
 			//Test if there is course for that the startdate year is more than current year, course will be shown 
 			C206_CaseStudy.doAddCourse(courseList,course1,categoryList);
 			String upcoming1 = C206_CaseStudy.doListCourseMember(courseList);
 			String testoutput1 = String.format("%-10s %-35s %-20s %-50s %-20s %-20s %s\n", 2, "course3", "IT", "its good", "01/02/2021", "05/10/2021", "2 people min");
-			assertEquals("Test if the country that exists searched can show member ?", testoutput,upcoming);
+			assertEquals("Test if the start date of the course is in the future of the current date, upcoming courses can be list  ?", testoutput,upcoming);
 			
 			
 		}
@@ -266,6 +266,13 @@ public class C206_CaseStudyTest {
 
 		assertEquals("Test that ViewAllRegistrations", testOutput, orignalOutput);
 	}
+	
+	 // Shufang
+    public void updateCategoryTest() {
+    		categoryList.add(cc1);
+            String output = C206_CaseStudy.doUpdateCourseCategory(categoryList, cc2);
+            assertEquals("Test if the description have change", "Category has been updated", output);
+    }
 
 	// Course
 	// Ju Long
@@ -546,8 +553,6 @@ public class C206_CaseStudyTest {
 			// did not receive the registration E-mail. (Error)
 			assertFalse("Test if the e-mail will be sending out or not" + regiList.get(i).getMemEmail(), false);
 
-			// Member register the course that has ended. (Boundary)
-//			assertNotNull("Test if the member register the course has ended", regiList.get(i).getCourseDuration());
 		}
 
 	}
