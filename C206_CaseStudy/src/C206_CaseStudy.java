@@ -1251,10 +1251,16 @@ public class C206_CaseStudy {
 	public static String retrieveRegiList(ArrayList<Register> regiList) {
 
 		String output = "";
-		for (int i = 0; i < regiList.size(); i++) {
-			output += String.format("%-20s %-20s %-20s %-20s %-20s\n", regiList.get(i).getRegiID(),
-					regiList.get(i).getCSid(), regiList.get(i).getMemEmail(), regiList.get(i).getStatus(),
-					regiList.get(i).getRegiDate());
+		for (Register i : regiList) {
+			if (!i.isStatuscancel().equals("Accepted")) {
+				output += String.format("%-20s %-20s %-20s %-20s %-20s\n", i.getRegiID(),
+						i.getCSid(), i.getMemEmail(), i.isStatuscancel(),
+						i.getRegiDate());	
+			} else {
+				output += String.format("%-20s %-20s %-20s %-20s %-20s\n", i.getRegiID(),
+						i.getCSid(), i.getMemEmail(), i.getStatus(),
+						i.getRegiDate());	
+			}
 		}
 		return output;
 	}
